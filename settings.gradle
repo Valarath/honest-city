@@ -1,3 +1,6 @@
 rootProject.name = 'bachalor-work'
 include 'model'
+include 'endpoints'
+include 'database'
+include 'service'
 

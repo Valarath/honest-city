@@ -1,4 +1,4 @@
-package cz.exchange.demo;
+package cz.exchange;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

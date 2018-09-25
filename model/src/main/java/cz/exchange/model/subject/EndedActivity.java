@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Accessors(chain = true)
-public class EndedActivity extends Activity{
+public class EndedActivity extends Activity {
     private LocalDateTime watchedTo;
 }

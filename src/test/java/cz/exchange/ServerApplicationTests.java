@@ -1,4 +1,4 @@
-package cz.exchange.demo;
+package cz.exchange;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class ImmobileWatchedSubject extends WatchedSubject{
+public class ImmobileWatchedSubject extends WatchedSubject {
     private double longitude;
     private double latitude;
 }
