@@ -5,11 +5,23 @@ plugins {
 }
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 10
 
 repositories {
     mavenCentral()
     maven { url 'https://projectlombok.org/edge-releases' }
+}
+
+ext.moduleName = 'model'
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
 }
 
 dependencies {

@@ -1,6 +1,6 @@
-package cz.exchange.model.exchange;
+package cz.honestcity.model.exchange;
 
-import cz.exchange.model.subject.ImmobileWatchedSubject;
+import cz.honestcity.model.subject.ImmobileWatchedSubject;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

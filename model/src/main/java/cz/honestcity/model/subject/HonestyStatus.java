@@ -1,4 +1,4 @@
-package cz.exchange.model.subject;
+package cz.honestcity.model.subject;
 
 public enum HonestyStatus {
     HONEST,

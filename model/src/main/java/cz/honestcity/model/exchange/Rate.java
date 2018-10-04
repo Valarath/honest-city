@@ -1,9 +1,7 @@
-package cz.exchange.model.exchange;
+package cz.honestcity.model.exchange;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import java.util.Currency;
 
 @Data
 @Accessors(chain = true)
