@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-ext.moduleName = 'service'
+ext.moduleName = 'cz.honestcity.service'
 
 compileJava {
     inputs.property("moduleName", moduleName)

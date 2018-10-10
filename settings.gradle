@@ -1,6 +1,9 @@
-rootProject.name = 'bachalor-work'
+rootProject.name = 'honest-city'
 include 'model'
 include 'endpoints'
 include 'database'
 include 'service'
+
+project(':database').projectDir = "$rootDir/database" as File
+project(':endpoints').projectDir = "$rootDir/endpoints" as File
 

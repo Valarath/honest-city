@@ -1,5 +1,6 @@
-package cz.honestcity.service.exchange;
+package cz.honestcity.endpoints.exchange;
 
+import cz.honestcity.service.exchange.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

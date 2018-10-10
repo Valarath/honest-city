@@ -1,4 +1,4 @@
-package cz.honestcity.service.exchange;
+package cz.honestcity.endpoints.exchange;
 
 import cz.honestcity.model.subject.Position;
 import lombok.Data;

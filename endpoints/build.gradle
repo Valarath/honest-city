@@ -12,7 +12,7 @@ repositories {
     maven { url 'https://projectlombok.org/edge-releases' }
 }
 
-ext.moduleName = 'endpoints'
+ext.moduleName = 'cz.honestcity.endpoints'
 
 compileJava {
     inputs.property("moduleName", moduleName)
