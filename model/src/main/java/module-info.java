@@ -3,5 +3,6 @@ module model {
 	exports cz.honestcity.model.subject;
 
 	requires static lombok;
+	requires java.desktop;
 
 }

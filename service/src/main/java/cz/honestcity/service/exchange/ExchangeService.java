@@ -12,10 +12,14 @@ import java.util.stream.Collectors;
 @Service
 public class ExchangeService {
 
-	private static final int areaRange = 5;
+	private static final double areaRange = 5.0;
 
 	@Autowired
 	private ExchangeGateway exchangeGateway;
+
+	public void createExchange(Exchange newExchange) {
+		exchangeGateway.createExchange(newExchange);
+	}
 
 	public List<Exchange> getExchangesInArea(Position userPosition){
 		return exchangeGateway.getAllExchanges().stream()
@@ -23,11 +27,20 @@ public class ExchangeService {
 				.collect(Collectors.toList());
 	}
 
-	private boolean isInArea(Position center, Position exchange){
-		return true;
+	private boolean isInArea(Position userPosition, Position exchangePosition){
+		return getDistanceFromUser(userPosition,exchangePosition)<=areaRange;
 	}
 
-	public void createExchange(Exchange newExchange) {
-		exchangeGateway.createExchange(newExchange);
+	private double getDistanceFromUser(Position userPosition, Position exchangePosition){
+		return Math.sqrt(getRoundedSumInPositions(userPosition,exchangePosition));
+	}
+
+	private double getRoundedSumInPositions(Position userPosition, Position exchangePosition){
+		return Math.pow(calculateDifference(userPosition.getLatitude(),exchangePosition.getLatitude()),2)
+				+ Math.pow(calculateDifference(userPosition.getLongitude(),exchangePosition.getLongitude()),2);
+	}
+
+	private double calculateDifference(double userPosition, double exchangePosition) {
+		return userPosition-exchangePosition;
 	}
 }
