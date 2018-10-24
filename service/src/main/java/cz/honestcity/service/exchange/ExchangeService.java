@@ -40,21 +40,21 @@ public class ExchangeService {
 		return getEarthRadiusInMeters()* calculateGreatDistanceCircle(calculateChordLength(userPosition,exchangePosition));
 	}
 
-	private double calculateGreatDistanceCircle(Double a) {
-		return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	private double calculateGreatDistanceCircle(Double chordLength) {
+		return 2 * Math.atan2(Math.sqrt(chordLength), Math.sqrt(1-chordLength));
 	}
 
 	private double calculateChordLength(Position userPosition,Position exchangePosition) {
-		return calculate(userPosition.getLatitude(),exchangePosition.getLongitude()) +
+		return calculateHaversin(userPosition.getLatitude(),exchangePosition.getLongitude()) +
 				getCosOfPositionInRadians(userPosition) * getCosOfPositionInRadians(exchangePosition) *
-						calculate(userPosition.getLongitude(),exchangePosition.getLongitude());
+						calculateHaversin(userPosition.getLongitude(),exchangePosition.getLongitude());
 	}
 
 	private double getCosOfPositionInRadians(Position exchangePosition) {
 		return Math.cos(toRadians(exchangePosition.getLatitude()));
 	}
 
-	private double calculate(double position1,double position2){
+	private double calculateHaversin(double position1, double position2){
 		return Math.pow(Math.sin(getDifferenceInRad(position1,position2) / 2),2);
 	}
 
