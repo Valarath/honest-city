@@ -1,7 +1,9 @@
 package cz.honestcity.service.exchange;
 
 import cz.honestcity.model.exchange.Exchange;
+import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.subject.Position;
+import cz.honestcity.model.user.UserFilter;
 import cz.honestcity.service.gateway.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class ExchangeService {
 
-	private static final double AREA_RANGE = 500;
 	private static final double EARTH_RADIUS=6372.797560856;
 
 	@Autowired
@@ -22,14 +23,25 @@ public class ExchangeService {
 		exchangeGateway.createExchange(newExchange);
 	}
 
-	public List<Exchange> getExchangesInArea(Position userPosition){
+	public List<Exchange> getExchangesInArea(Position userPosition, UserFilter userFilter){
 		return exchangeGateway.getAllExchanges().stream()
-				.filter(exchange -> isInArea(userPosition,exchange.getPosition()))
+				.filter(exchange -> applyFilters(userPosition,exchange,userFilter))
 				.collect(Collectors.toList());
 	}
 
-	private boolean isInArea(Position userPosition, Position exchangePosition){
-		return calculateDistance(userPosition,exchangePosition)<=AREA_RANGE;
+	private boolean applyFilters(Position userPosition, Exchange exchange, UserFilter userFilter){
+		return isInHonestyRange(userFilter.getHonestyStatus(),exchange.getHonestyStatus())
+				&& isInArea(userFilter.getAreaRange(),userPosition,exchange.getPosition());
+	}
+
+	private boolean isInHonestyRange(HonestyStatus worsedRequestedStatus,HonestyStatus exchangeStatus){
+		return (worsedRequestedStatus.equals(exchangeStatus)
+				|| exchangeStatus.getNextLevelOfHonesty() != null)
+					&& isInHonestyRange(worsedRequestedStatus, exchangeStatus.getNextLevelOfHonesty());
+	}
+
+	private boolean isInArea(int areaRangeInMeters,Position userPosition, Position exchangePosition){
+		return calculateDistance(userPosition,exchangePosition)<= areaRangeInMeters;
 	}
 
 	private double getEarthRadiusInMeters(){
@@ -50,8 +62,8 @@ public class ExchangeService {
 						calculateHaversin(userPosition.getLongitude(),exchangePosition.getLongitude());
 	}
 
-	private double getCosOfPositionInRadians(Position exchangePosition) {
-		return Math.cos(toRadians(exchangePosition.getLatitude()));
+	private double getCosOfPositionInRadians(Position position) {
+		return Math.cos(toRadians(position.getLatitude()));
 	}
 
 	private double calculateHaversin(double position1, double position2){

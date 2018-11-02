@@ -1,4 +1,4 @@
-package Exchange;
+package exchange;
 
 import cz.honestcity.service.gateway.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;

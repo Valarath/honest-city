@@ -7,5 +7,5 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class Exchange extends ImmobileWatchedSubject {
-    private ExchangeRate exchangeRate;
+    private ExchangePointRate exchangePointRate;
 }

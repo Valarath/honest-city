@@ -3,4 +3,5 @@ module database {
     requires service;
     requires spring.beans;
     requires spring.context;
+    requires mybatis;
 }
