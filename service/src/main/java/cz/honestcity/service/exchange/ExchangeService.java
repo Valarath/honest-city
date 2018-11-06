@@ -35,9 +35,10 @@ public class ExchangeService {
 	}
 
 	private boolean isInHonestyRange(HonestyStatus worsedRequestedStatus,HonestyStatus exchangeStatus){
-		return (worsedRequestedStatus.equals(exchangeStatus)
-				|| exchangeStatus.getNextLevelOfHonesty() != null)
-					&& isInHonestyRange(worsedRequestedStatus, exchangeStatus.getNextLevelOfHonesty());
+		return worsedRequestedStatus.equals(exchangeStatus)
+				|| worsedRequestedStatus.getNextLevelOfHonesty()!=null
+					?isInHonestyRange(worsedRequestedStatus.getNextLevelOfHonesty(),exchangeStatus)
+					:false;
 	}
 
 	private boolean isInArea(int areaRangeInMeters,Position userPosition, Position exchangePosition){
