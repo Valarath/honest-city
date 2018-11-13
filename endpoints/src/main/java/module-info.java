@@ -4,4 +4,5 @@ module endpoints {
     requires service;
     requires model;
     requires lombok;
+    requires spring.context;
 }

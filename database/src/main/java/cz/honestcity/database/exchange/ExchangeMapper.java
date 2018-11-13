@@ -1,4 +1,4 @@
-package exchange;
+package cz.honestcity.database.exchange;
 
 import cz.honestcity.model.exchange.Exchange;
 

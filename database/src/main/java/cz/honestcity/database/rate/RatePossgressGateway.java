@@ -1,4 +1,4 @@
-package rate;
+package cz.honestcity.database.rate;
 
 import cz.honestcity.service.gateway.RateDatabaseGateway;
 import org.springframework.beans.factory.annotation.Autowired;

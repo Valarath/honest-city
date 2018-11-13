@@ -1,14 +1,3 @@
-plugins {
-    id 'java'
-}
-apply plugin: 'java'
-
-sourceCompatibility = 10
-
-repositories {
-    mavenCentral()
-}
-
 ext.moduleName = 'cz.honestcity.service'
 
 compileJava {

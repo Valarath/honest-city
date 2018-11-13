@@ -1,56 +1,48 @@
-allprojects  {
+plugins {
+    id 'java'
+}
+allprojects{
+
     apply plugin: 'maven'
-    //apply plugin: 'org.springframework.boot'
-   // apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
     group = 'cz.honestcity'
     version = '0.0.1-SNAPSHOT'
-}
-
-subprojects {
-    apply plugin: 'java'
-    sourceCompatibility = 10
-    targetCompatibility = 10
+    sourceCompatibility = 11
+    targetCompatibility = 11
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
 
+    ext.moduleName = 'honest-city'
+    compileJava {
+        inputs.property("moduleName", moduleName)
+        doFirst {
+            options.compilerArgs = [
+                    '--module-path', classpath.asPath,
+            ]
+            classpath = files()
+        }
+    }
 
-group = 'cz.cz.honestcity.service.exchange'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 10
 
-repositories {
-    mavenCentral()
-}
+    repositories {
+        mavenCentral()
+    }
+    configure(allprojects.findAll { it.name != 'cz.honestcity.model' }) {
+        dependencies {
 
-ext.moduleName = 'honest-city'
-
-compileJava {
-    inputs.property("moduleName", moduleName)
-    doFirst {
-        options.compilerArgs = [
-                '--module-path', classpath.asPath,
-        ]
-        classpath = files()
+            compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
+            compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE'
+            compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE') {
+                exclude(module: 'javax.annotation-api')
+                exclude(module: 'aopalliance')
+            }
+        }
     }
 }
-
 dependencies {
     compile project(':endpoints')
-    compile project(':service')
-    compile project(':model')
-    compile project(':database')
     compile project(':crawling')
-
-    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.5.RELEASE'){
-        //exclude(module:'hibernate-validator')
-        exclude(module: 'javax.annotation-api')
-        exclude(module: 'aopalliance')
-    }
-   /* compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.springframework.security:spring-security-test')*/
-}
+    compile project(':service')
+    compile project(':database')
 }

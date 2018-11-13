@@ -1,4 +1,4 @@
-package bank;
+package cz.honestcity.crawling.bank;
 
 public enum BankCsvValuesPosition {
     CZECH_NATIONAL_BANK(4,5);

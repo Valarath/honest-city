@@ -1,4 +1,4 @@
-package rate;
+package cz.honestcity.database.rate;
 
 import org.apache.ibatis.annotations.Mapper;
 

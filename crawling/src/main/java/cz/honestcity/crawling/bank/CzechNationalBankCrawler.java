@@ -1,4 +1,4 @@
-package bank;
+package cz.honestcity.crawling.bank;
 
 import cz.honestcity.model.exchange.Currency;
 import cz.honestcity.model.exchange.ExchangeRate;
@@ -10,24 +10,25 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
-import static bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
+import static cz.honestcity.crawling.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
 
 @Service
 public class CzechNationalBankCrawler implements RateCrawlerGateway {
-    private static final String SPLIT_BY="|";
+    private static final String SPLIT_BY="\\|";
     private static final String BASE_URL_FOR_NATIONAL_BANK_CRAWLING = "https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt";
     private static final int NUMBER_OF_LINES_TO_SKIP= 2;
+    public static final String DATE_FORMAT = "dd.MM.yyyy";
 
     @Override
     public ExchangeRate getRate(LocalDate day) {
         try {
             return new ExchangeRate()
                     .setValidFor(day)
-                    .setRates(convert(getRatesInCsv(day)));
+                    .setRates(toRates(getRatesInCsv(day)));
         } catch (IOException ex) {
             throw new ProblemInCrawlingException();
         }
@@ -36,21 +37,25 @@ public class CzechNationalBankCrawler implements RateCrawlerGateway {
     private BufferedReader getRatesInCsv(LocalDate day) throws IOException {
             return new BufferedReader(new InputStreamReader(new URL(getUrlForDayExchange(day)).openStream()));
     }
-
     private BufferedReader skipFirstLines(BufferedReader bufferedReader) throws IOException {
-        for(int lineNumber = 1; lineNumber < NUMBER_OF_LINES_TO_SKIP; lineNumber++)
+        for(int lineNumber = 1; lineNumber <= NUMBER_OF_LINES_TO_SKIP; lineNumber++)
             bufferedReader.readLine();
         return bufferedReader;
     }
 
-    private Set<Rate> convert(BufferedReader csvRates) throws IOException {
-        var rates = new HashSet<Rate>();
-        for(String line = csvRates.readLine(); line !=null;line=csvRates.readLine())
-            rates.add(convert(line));
-        return rates;
+    private Set<Rate> toRates(BufferedReader csvRates) throws IOException {
+        return skipFirstLines(csvRates).lines()
+                .filter(this::isRegistered)
+                .map(this::toRate)
+                .collect(Collectors.toSet());
     }
 
-    private Rate convert(String line){
+    private boolean isRegistered(String line){
+        return Currency.contains(line.split(SPLIT_BY)[CZECH_NATIONAL_BANK.getCurrencyCode()]);
+    }
+
+
+    private Rate toRate(String line){
         var values = line.split(SPLIT_BY);
         return new Rate()
                 .setCurrency(getCurrency(values[CZECH_NATIONAL_BANK.getCurrencyCode()]))
@@ -74,7 +79,7 @@ public class CzechNationalBankCrawler implements RateCrawlerGateway {
     }
 
     private DateTimeFormatter getDateFormat(){
-        return DateTimeFormatter.ofPattern("dd.mm.yyyy");
+        return DateTimeFormatter.ofPattern(DATE_FORMAT);
     }
 
     public static class ProblemInCrawlingException extends RuntimeException{}
