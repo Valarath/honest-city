@@ -1,5 +1,5 @@
 module service {
-	requires model;
+	requires transitive model;
     requires spring.beans;
     requires spring.context;
 
