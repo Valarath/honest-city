@@ -28,15 +28,16 @@ allprojects{
     repositories {
         mavenCentral()
     }
-    configure(allprojects.findAll { it.name != 'cz.honestcity.model' }) {
-        dependencies {
 
-            compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
-            compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE'
-            compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE') {
-                exclude(module: 'javax.annotation-api')
-                exclude(module: 'aopalliance')
-            }
+}
+
+configure(allprojects.findAll { it.name != 'cz.honestcity.model' }) {
+    dependencies {
+        compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE'
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE') {
+            exclude(module: 'javax.annotation-api')
+            exclude(module: 'aopalliance')
         }
     }
 }
