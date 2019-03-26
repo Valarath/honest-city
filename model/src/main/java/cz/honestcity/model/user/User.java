@@ -6,6 +6,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Data
 public class User {
-    private long userId;
+    private long id;
     private int score;
 }

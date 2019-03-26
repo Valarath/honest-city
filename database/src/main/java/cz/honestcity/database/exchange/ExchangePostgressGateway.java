@@ -3,7 +3,7 @@ package cz.honestcity.database.exchange;
 import cz.honestcity.service.gateway.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cz.honestcity.model.exchange.Exchange;
+import cz.honestcity.model.exchange.ExchangePoint;
 
 import java.util.List;
 
@@ -11,15 +11,20 @@ import java.util.List;
 public class ExchangePostgressGateway implements ExchangeGateway {
 
 	@Autowired
-	private ExchangeMapper exchangeMapper;
+	private ExchangePostgressMapper exchangeMapper;
 
 	@Override
-	public List<Exchange> getAllExchanges() {
+	public List<ExchangePoint> getAllExchanges() {
 		return exchangeMapper.getAllExchanges();
 	}
 
 	@Override
-	public void createExchange(Exchange newExchange) {
-		exchangeMapper.createNewExchange(newExchange);
+	public void createExchange(ExchangePoint newExchangePoint) {
+		exchangeMapper.createNewExchange(newExchangePoint);
+	}
+
+	@Override
+	public void changeExchangeRate(long newExchangeRateId, long exchangePointId) {
+		exchangeMapper.changeExchangeRate(newExchangeRateId,exchangePointId);
 	}
 }

@@ -1,6 +1,7 @@
 package cz.honestcity.endpoints.suggestion;
 
 import cz.honestcity.service.exchange.ExchangeChangeService;
+import cz.honestcity.service.suggestion.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,22 +12,43 @@ public class SuggestionController {
     @Autowired
     private ExchangeChangeService exchangeChangeService;
 
-    @GetMapping("/suggestions")
-    public SuggestionResponse getSuggestions(SuggestionRequest request){
-        return new SuggestionResponse()
+    @Autowired
+    private SuggestionService suggestionService;
+
+    @GetMapping("/suggestions-for-exchange-point")
+    public GetSuggestionsResponse getSuggestionsForExchangePoint(GetSuggestionsRequest request){
+        return new GetSuggestionsResponse()
                 .setSuggestions(exchangeChangeService.getSuggestions(
                         request.getPosition(),
                         request.getType(),
                         request.getState()));
     }
-    @PostMapping("/suggest")
-    public void suggest(@RequestBody PostSuggestionRequest request){
-        exchangeChangeService.suggestsChange(request.getSuggestion());
+
+    @GetMapping("/user-suggestions")
+    public GetUserSuggestionsResponse getUserSuggestions(GetUserSuggestionsRequest request){
+        return new GetUserSuggestionsResponse()
+                .setUserSuggestions(suggestionService.getUserSuggestions(request.getUserId()));
+    }
+
+    @PostMapping("/suggest-exhange-rate-change")
+    public void suggestUpdateOfExchangePoint(@RequestBody PostExchangeRateChangeRequest request){
+        suggestionService.suggestsExchangeRateChange(request.getSuggestion(),request.getExchangePointId(),request.getSuggestedExchangeRate());
+    }
+
+    @PostMapping("/suggest-exchange-point")
+    public void suggestNewExchangePoint(@RequestBody PostNewExchangePointRequest request){
+        suggestionService.suggestsNewExchangePoint(request.getSuggestion(),request.getPosition());
     }
 
     @DeleteMapping("/remove")
     public void remove(RemoveSuggestionRequest request){
-        exchangeChangeService.remove(request.getSuggestionId(),5);
+        suggestionService.remove(request.getSuggestionId());
+
+    }
+
+    @DeleteMapping("/report-non-existing-endpoint")
+    public void reportNonExistingPoint(ReportNonExistingExchangePointRequest request){
+        suggestionService.reportNonExistingPoint(request.getExchangePointId(),request.getSuggestion());
 
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Accessors(chain = true)
 @Data
-public class SuggestionResponse {
+public class GetSuggestionsResponse {
     private List<Suggestion> suggestions;
 
 }

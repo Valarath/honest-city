@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class SuggestionRequest {
+public class GetSuggestionsRequest {
     private Position position;
     private Type type;
     private State state;

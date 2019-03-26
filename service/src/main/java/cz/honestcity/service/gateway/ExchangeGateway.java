@@ -1,12 +1,14 @@
 package cz.honestcity.service.gateway;
 
-import cz.honestcity.model.exchange.Exchange;
+import cz.honestcity.model.exchange.ExchangePoint;
 
 import java.util.List;
 
 public interface ExchangeGateway {
 
-	List<Exchange> getAllExchanges();
+	List<ExchangePoint> getAllExchanges();
 
-	void createExchange(Exchange newExchange);
+	void createExchange(ExchangePoint newExchangePoint);
+
+    void changeExchangeRate(long newExchangeRateId, long exchangePointId);
 }

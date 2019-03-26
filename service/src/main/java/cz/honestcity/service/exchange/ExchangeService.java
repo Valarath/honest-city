@@ -1,6 +1,6 @@
 package cz.honestcity.service.exchange;
 
-import cz.honestcity.model.exchange.Exchange;
+import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.user.UserFilter;
@@ -19,19 +19,24 @@ public class ExchangeService {
 	@Autowired
 	private ExchangeGateway exchangeGateway;
 
-	public void createExchange(Exchange newExchange) {
-		exchangeGateway.createExchange(newExchange);
+
+	public void createExchange(ExchangePoint newExchangePoint) {
+		exchangeGateway.createExchange(newExchangePoint);
 	}
 
-	public List<Exchange> getExchangesInArea(Position userPosition, UserFilter userFilter){
+	public void changeExchangeRate( long newExchangeRateId, long exchangePointId) {
+		exchangeGateway.changeExchangeRate(newExchangeRateId,exchangePointId);
+	}
+
+	public List<ExchangePoint> getExchangesInArea(Position userPosition, UserFilter userFilter){
 		return exchangeGateway.getAllExchanges().stream()
 				.filter(exchange -> applyFilters(userPosition,exchange,userFilter))
 				.collect(Collectors.toList());
 	}
 
-	private boolean applyFilters(Position userPosition, Exchange exchange, UserFilter userFilter){
-		return isInHonestyRange(userFilter.getHonestyStatus(),exchange.getHonestyStatus())
-				&& isInArea(userFilter.getAreaRange(),userPosition,exchange.getPosition());
+	private boolean applyFilters(Position userPosition, ExchangePoint exchangePoint, UserFilter userFilter){
+		return isInHonestyRange(userFilter.getHonestyStatus(), exchangePoint.getHonestyStatus())
+				&& isInArea(userFilter.getAreaRange(),userPosition, exchangePoint.getPosition());
 	}
 
 	private boolean isInHonestyRange(HonestyStatus worsedRequestedStatus,HonestyStatus exchangeStatus){
@@ -78,4 +83,5 @@ public class ExchangeService {
 	private double toRadians(double value){
 		return value * Math.PI / 180;
 	}
+
 }

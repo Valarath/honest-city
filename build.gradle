@@ -1,9 +1,12 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
 }
+
+ext.moduleName = 'honest-city'
+
 allprojects{
 
-    apply plugin: 'maven'
     apply plugin: 'java'
     group = 'cz.honestcity'
     version = '0.0.1-SNAPSHOT'
@@ -13,7 +16,7 @@ allprojects{
         options.encoding = 'UTF-8'
     }
 
-    ext.moduleName = 'honest-city'
+
     compileJava {
         inputs.property("moduleName", moduleName)
         doFirst {
@@ -31,19 +34,15 @@ allprojects{
 
 }
 
-configure(allprojects.findAll { it.name != 'cz.honestcity.model' }) {
+configure(allprojects.findAll { it.name != 'model' }) {
     dependencies {
         compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
         compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE'
-        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE') {
-            exclude(module: 'javax.annotation-api')
-            exclude(module: 'aopalliance')
-        }
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE')
     }
 }
 dependencies {
     compile project(':endpoints')
     compile project(':crawling')
-    compile project(':service')
     compile project(':database')
 }

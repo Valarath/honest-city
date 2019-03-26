@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @Accessors(chain = true)
 public class ExchangeRate {
+    protected long id;
     protected LocalDate validFor;
     protected Set<Rate> rates;
 }

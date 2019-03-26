@@ -24,7 +24,7 @@ public class ExchangeChangeService {
     }
 
     private int compareUserScore(Suggestion userSuggestion1,Suggestion userSuggestion2){
-        return Integer.compare(userSuggestion1.getUser().getScore(),userSuggestion2.getUser().getScore());
+        return Integer.compare(userSuggestion1.getSuggestedBy().getScore(),userSuggestion2.getSuggestedBy().getScore());
     }
 
     public void suggestsChange(Suggestion suggestion) {
@@ -33,5 +33,10 @@ public class ExchangeChangeService {
 
     public List<Suggestion> getUserSuggestionsInProgress(long userId){
         return exchangeChangeGateway.getSuggestionsInProgress(userId);
+    }
+
+    public void remove(long suggestionId) {
+
+
     }
 }

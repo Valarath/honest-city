@@ -6,6 +6,6 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class Exchange extends ImmobileWatchedSubject {
+public class ExchangePoint extends ImmobileWatchedSubject {
     private ExchangePointRate exchangePointRate;
 }
