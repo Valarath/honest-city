@@ -25,9 +25,11 @@ allprojects{
 
 configure(allprojects.findAll { it.name != 'model' }) {
     dependencies {
-        compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
-        //compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE'
-        //compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE')
+        compile (group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE')
+        compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.0.RELEASE')
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.0.RELEASE'){
+            exclude(module: 'javax.annotation-api')
+        }
     }
 }
 dependencies {
