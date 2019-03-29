@@ -84,4 +84,7 @@ public class ExchangeService {
 		return value * Math.PI / 180;
 	}
 
+	public void deleteExchangePoint(long exchangePointId) {
+
+	}
 }

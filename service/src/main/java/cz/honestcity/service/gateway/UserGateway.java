@@ -6,4 +6,6 @@ public interface UserGateway {
     User getUser(long userId);
 
     void increaseUserScore(long id, int increasedScore);
+
+    long getUserScore(long userId);
 }

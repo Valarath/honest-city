@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public long getUserScore(long userId) {
-        return 0;
+        return userGateway.getUserScore(userId);
     }
 
     public void increaseUserScore(User user) {

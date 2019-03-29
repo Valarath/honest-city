@@ -1,6 +1,7 @@
 package cz.honestcity.service.vote;
 
 import cz.honestcity.model.exchange.ExchangePoint;
+import cz.honestcity.model.suggestion.DeleteExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
@@ -40,15 +41,27 @@ public class VoteService {
         recordVote(suggestionId,userId);
     }
 
+    public void upVoteDeleteExchangePointSuggestion(long suggestionId, long userId) {
+        if(isSuggestionAcceptable(suggestionId, userId))
+            acceptDeleteExchangePoint(suggestionId);
+        recordVote(suggestionId,userId);
+    }
+
     private void acceptExchangeRateChange(long suggestionId){
-        Suggestion suggestion = suggestionService.getSuggestion(suggestionId);
-        exchangeService.changeExchangeRate(suggestion.getExchangePointId());
+        ExchangeRateSuggestion suggestion = (ExchangeRateSuggestion) suggestionService.getSuggestion(suggestionId);
+        exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(),suggestion.getExchangePointId());
         userService.increaseUserScore(suggestion.getSuggestedBy());
     }
 
     private void acceptNewExchangePoint(long suggestionId){
         NewExchangePointSuggestion suggestion = (NewExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
         exchangeService.createExchange(getNewExchangePoint(suggestion));
+        userService.increaseUserScore(suggestion.getSuggestedBy());
+    }
+
+    private void acceptDeleteExchangePoint(long suggestionId){
+        DeleteExchangePointSuggestion suggestion = (DeleteExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
+        exchangeService.deleteExchangePoint(suggestion.getExchangePointId());
         userService.increaseUserScore(suggestion.getSuggestedBy());
     }
 
@@ -65,6 +78,6 @@ public class VoteService {
     }
 
     private double calculateUserTrustworthiness(long userId){
-        return Math.atan(userService.getUserScore(userId))/2;
+        return Math.atan(userService.getUserScore(userId));
     }
 }
