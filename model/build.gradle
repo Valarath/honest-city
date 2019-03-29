@@ -34,7 +34,7 @@ version '0.0.1-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 9
+sourceCompatibility = 11
 
 
 repositories {
@@ -43,17 +43,6 @@ repositories {
 }
 
 ext.moduleName = 'cz.honestcity.model'
-
-compileJava {
-    inputs.property("moduleName", moduleName)
-    doFirst {
-        options.compilerArgs = [
-                '--module-path', classpath.asPath,
-        ]
-        classpath = files()
-    }
-}
-
 
 
 dependencies {
