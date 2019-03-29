@@ -9,6 +9,16 @@ repositories {
     maven { url 'https://projectlombok.org/edge-releases' }
 }
 
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
 ext.moduleName = 'cz.honestcity.endpoints'
 
 
@@ -18,5 +28,4 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
     apt 'org.projectlombok:lombok:edge-SNAPSHOT'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

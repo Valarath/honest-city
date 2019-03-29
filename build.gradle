@@ -37,3 +37,15 @@ dependencies {
     compile project(':crawling')
     compile project(':database')
 }
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
+ext.moduleName = 'cz.honestcity.honestCity'

@@ -11,6 +11,18 @@ repositories {
     mavenCentral()
 }
 
+ext.moduleName = 'cz.honestcity.crawling'
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
 dependencies {
     compile project(':model')
     compile project(':service')
