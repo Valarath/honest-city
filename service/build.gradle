@@ -16,4 +16,6 @@ compileJava {
 
 dependencies {
     implementation  project(':model')
+    compile group: 'org.mockito', name: 'mockito-core', version:'2.12.0'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }

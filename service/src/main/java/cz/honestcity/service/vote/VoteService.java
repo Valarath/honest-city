@@ -78,6 +78,6 @@ public class VoteService {
     }
 
     private double calculateUserTrustworthiness(long userId){
-        return Math.atan(userService.getUserScore(userId));
+        return Math.atan(userService.getUserScore(userId)+Double.MIN_VALUE);
     }
 }

@@ -7,5 +7,5 @@ public interface UserGateway {
 
     void increaseUserScore(long id, int increasedScore);
 
-    long getUserScore(long userId);
+    int getUserScore(long userId);
 }
