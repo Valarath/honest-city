@@ -30,12 +30,16 @@ public class SuggestionService {
         return suggestionGateway.getExchangePointSuggestions(exchangePointId);
     }
 
+    public void removeSuggestions(List<Suggestion> toRemove){
+
+    }
+
     public Suggestion getSuggestion(long suggestionId) {
         return suggestionGateway.getSuggestion(suggestionId);
     }
 
-    public void reportNonExistingPoint(long suggestionId, Suggestion suggestion) {
-        suggestionGateway.reportNonExistingPoint(suggestionId,suggestion);
+    public void reportNonExistingPoint(long exchangePointId, Suggestion suggestion) {
+        suggestionGateway.reportNonExistingPoint(exchangePointId,suggestion);
     }
 
     public void suggestsExchangeRateChange(Suggestion suggestion, long exchangePointId, ExchangeRate suggestedExchangeRate) {

@@ -17,7 +17,7 @@ public interface SuggestionGateway {
 
     List<Suggestion> getExchangePointSuggestions(long exchangePointId);
 
-    void reportNonExistingPoint(long suggestionId, Suggestion suggestion);
+    void reportNonExistingPoint(long exchangePointId, Suggestion suggestion);
 
     void suggestsNewExchangePoint(NewExchangePointSuggestion suggestion);
 
