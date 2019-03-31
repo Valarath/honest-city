@@ -1,4 +1,4 @@
-package cz.honestcity.service.vote;
+/**package cz.honestcity.service.vote;
 
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.Position;
@@ -84,4 +84,4 @@ public class VoteServiceTest {
 	private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {
 		return (ExchangePoint) new ExchangePoint().setPosition(suggestion.getPosition());
 	}
-}
+}**/

@@ -1,7 +1,25 @@
+/**buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // You are telling gradle that this script (Not the project) depends on the 
+        // following plugin
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE"
+    }
+}
+
+apply plugin: "org.springframework.boot"
+**/
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.1.0.RELEASE'
 }
+
+/**task wrapper(type: Wrapper) {
+    gradleVersion = '4.10.3'
+}**/
 
 ext.moduleName = 'honest-city'
 
@@ -10,8 +28,8 @@ allprojects{
     apply plugin: 'java'
     group = 'cz.honestcity'
     version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 12
+    targetCompatibility = 12
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
@@ -19,6 +37,9 @@ allprojects{
 
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
 }
@@ -46,6 +67,10 @@ compileJava {
         ]
         classpath = files()
     }
+}
+
+jar {
+    exclude('java/datatransfer/**')
 }
 
 ext.moduleName = 'cz.honestcity.honestCity'

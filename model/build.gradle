@@ -32,9 +32,10 @@ plugins {
 }
 version '0.0.1-SNAPSHOT'
 
+
+
 apply plugin: 'java'
 
-sourceCompatibility = 11
 
 
 repositories {
@@ -57,7 +58,7 @@ ext.moduleName = 'cz.honestcity.model'
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
-
-    apt 'org.projectlombok:lombok:edge-SNAPSHOT'
+    annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
+    //apt 'org.projectlombok:lombok:edge-SNAPSHOT'
 }
 

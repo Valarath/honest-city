@@ -27,5 +27,5 @@ dependencies {
     compile project (':service')
 
     compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
-    apt 'org.projectlombok:lombok:edge-SNAPSHOT'
+    annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
 }

@@ -5,6 +5,5 @@ module cz.honestcity.model {
 	exports cz.honestcity.model.suggestion;
 
 	requires static lombok;
-	requires java.datatransfer;
 	requires java.desktop;
 }

@@ -1,3 +1,9 @@
+/**pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+    }
+}**/
 rootProject.name = 'honest-city'
 include 'model'
 include 'endpoints'
