@@ -20,10 +20,18 @@ public class UserService {
     }
 
     public void increaseUserScore(User user) {
-        userGateway.increaseUserScore(user.getId(), getIncreasedScore(user));
+        userGateway.setUserScore(getIncreasedScore(user));
     }
 
-    private int getIncreasedScore(User user) {
-        return user.getScore()+1;
+    private User getIncreasedScore(User user) {
+        return user.setScore(user.getScore()+1);
+    }
+
+    public void saveNewUser(User user){
+        userGateway.saveNewUser(user);
+    }
+
+    public void updateUserData(User user){
+        userGateway.updateUserData(user);
     }
 }

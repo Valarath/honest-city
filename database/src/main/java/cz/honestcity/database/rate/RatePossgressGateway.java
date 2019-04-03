@@ -10,10 +10,10 @@ import java.time.LocalDate;
 public class RatePossgressGateway implements RateDatabaseGateway {
 
     @Autowired
-    private RateMapper rateMapper;
+    private RatePostgressMapper ratePostgressMapper;
 
     @Override
     public Object getRate(LocalDate day) {
-        return rateMapper.getRate(day);
+        return ratePostgressMapper.getRate(day);
     }
 }

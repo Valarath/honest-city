@@ -1,8 +1,10 @@
-package cz.honestcity.service.gateway;
+package cz.honestcity.database.user;
 
 import cz.honestcity.model.user.User;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface UserGateway {
+@Mapper
+public interface UserPostgressMapper {
 
     User getUser(long userId);
 

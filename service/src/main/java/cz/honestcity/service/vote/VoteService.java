@@ -1,10 +1,9 @@
 package cz.honestcity.service.vote;
 
 import cz.honestcity.model.exchange.ExchangePoint;
-import cz.honestcity.model.suggestion.DeleteExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.exchange.ExchangeService;
 import cz.honestcity.service.gateway.VoteGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
@@ -60,7 +59,7 @@ public class VoteService {
     }
 
     private void acceptDeleteExchangePoint(long suggestionId){
-        DeleteExchangePointSuggestion suggestion = (DeleteExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
+        NonExistingExchangePointSuggestion suggestion = (NonExistingExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
         exchangeService.deleteExchangePoint(suggestion.getExchangePointId());
         userService.increaseUserScore(suggestion.getSuggestedBy());
     }

@@ -5,6 +5,6 @@ import lombok.experimental.Accessors;
 
 @Accessors(chain = true)
 @Data
-public class DeleteExchangePointSuggestion extends Suggestion {
+public class NonExistingExchangePointSuggestion extends Suggestion {
     private long exchangePointId;
 }

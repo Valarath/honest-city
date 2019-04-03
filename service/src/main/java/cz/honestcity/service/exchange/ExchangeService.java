@@ -1,9 +1,7 @@
 package cz.honestcity.service.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
-import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.subject.Position;
-import cz.honestcity.model.user.UserFilter;
 import cz.honestcity.service.gateway.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,7 @@ import java.util.stream.Collectors;
 public class ExchangeService {
 
 	private static final double EARTH_RADIUS=6372.797560856;
+	public static final int AREA_RANGE_IN_METERS = 22000;
 
 	@Autowired
 	private ExchangeGateway exchangeGateway;
@@ -28,22 +27,10 @@ public class ExchangeService {
 		exchangeGateway.changeExchangeRate(newExchangeRateId,exchangePointId);
 	}
 
-	public List<ExchangePoint> getExchangesInArea(Position userPosition, UserFilter userFilter){
+	public List<ExchangePoint> getExchangesInArea(Position userPosition){
 		return exchangeGateway.getAllExchanges().stream()
-				.filter(exchange -> applyFilters(userPosition,exchange,userFilter))
+				.filter(exchange -> isInArea(AREA_RANGE_IN_METERS,userPosition,exchange.getPosition()))
 				.collect(Collectors.toList());
-	}
-
-	private boolean applyFilters(Position userPosition, ExchangePoint exchangePoint, UserFilter userFilter){
-		return isInHonestyRange(userFilter.getHonestyStatus(), exchangePoint.getHonestyStatus())
-				&& isInArea(userFilter.getAreaRange(),userPosition, exchangePoint.getPosition());
-	}
-
-	private boolean isInHonestyRange(HonestyStatus worsedRequestedStatus,HonestyStatus exchangeStatus){
-		return worsedRequestedStatus.equals(exchangeStatus)
-				|| worsedRequestedStatus.getNextLevelOfHonesty()!=null
-					?isInHonestyRange(worsedRequestedStatus.getNextLevelOfHonesty(),exchangeStatus)
-					:false;
 	}
 
 	private boolean isInArea(int areaRangeInMeters,Position userPosition, Position exchangePosition){

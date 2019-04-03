@@ -27,16 +27,8 @@ public class ExchangeChangeService {
         return Integer.compare(userSuggestion1.getSuggestedBy().getScore(),userSuggestion2.getSuggestedBy().getScore());
     }
 
-    public void suggestsChange(Suggestion suggestion) {
-        exchangeChangeGateway.suggestsChange(suggestion);
-    }
-
     public List<Suggestion> getUserSuggestionsInProgress(long userId){
         return exchangeChangeGateway.getSuggestionsInProgress(userId);
     }
 
-    public void remove(long suggestionId) {
-
-
-    }
 }

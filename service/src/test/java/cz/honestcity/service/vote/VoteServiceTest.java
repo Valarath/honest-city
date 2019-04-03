@@ -52,7 +52,7 @@ public class VoteServiceTest {
 		when(userService.getUserScore(USER_ID)).thenReturn(USER_SCORE);
 		when(suggestionService.getSuggestion(SUGGESTION_ID)).thenReturn(suggestion);
 		doNothing().when(exchangeService).createExchange(getNewExchangePoint(suggestion));
-		doNothing().when(userService).increaseUserScore(suggestion.getSuggestedBy());
+		doNothing().when(userService).setUserScore(suggestion.getSuggestedBy());
 	}
 
 	private NewExchangePointSuggestion getNewExchangePointSuggestion() {

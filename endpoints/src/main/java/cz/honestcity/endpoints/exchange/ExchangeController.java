@@ -14,6 +14,6 @@ public class ExchangeController {
 	@GetMapping("/exchanges-in-area")
 	public GetExchangesResponse getExchangesInArea(GetExchangesRequest request){
 		return new GetExchangesResponse()
-				.setExchangePoints(exchangeService.getExchangesInArea(request.getUserPosition(),request.getUserFilter()));
+				.setExchangePoints(exchangeService.getExchangesInArea(request.getUserPosition()));
 	}
 }
