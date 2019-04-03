@@ -1,20 +1,22 @@
 databaseChangeLog:
   - changeset:
-    id: user_table
+    id: create_user_table
     author: michal_keder
     changes:
-      -createTable:
+      - createTable:
+          tableName: user
         columns:
           - column:
               name: user_id
               type: int
               autoIncrement: true
               constraints:
+                primaryKeyName: user_id
                 primaryKey: true
                 nullable: false
           - column:
               name: score
               type: float
-          - columne:
+          - column:
               name: username
               type: varchar(50)
