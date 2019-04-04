@@ -1,6 +1,5 @@
 package cz.honestcity.endpoints.suggestion;
 
-import cz.honestcity.service.exchange.ExchangeChangeService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/suggestion")
 public class SuggestionController {
 
-    @Autowired
-    private ExchangeChangeService exchangeChangeService;
 
     @Autowired
     private SuggestionService suggestionService;
@@ -18,10 +15,8 @@ public class SuggestionController {
     @GetMapping("/suggestions-for-exchange-point")
     public GetSuggestionsResponse getSuggestionsForExchangePoint(GetSuggestionsRequest request){
         return new GetSuggestionsResponse()
-                .setSuggestions(exchangeChangeService.getSuggestions(
-                        request.getPosition(),
-                        request.getType(),
-                        request.getState()));
+                .setSuggestions(suggestionService.getSuggestions(
+                        request.getPosition()));
     }
 
     @GetMapping("/user-suggestions")

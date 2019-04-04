@@ -1,8 +1,10 @@
 package cz.honestcity.service.gateway;
 
+import cz.honestcity.model.exchange.ExchangeRate;
+
 import java.time.LocalDate;
 
 public interface RateGateway {
 
-	Object getRate(LocalDate day);
+	ExchangeRate getRate(LocalDate day);
 }

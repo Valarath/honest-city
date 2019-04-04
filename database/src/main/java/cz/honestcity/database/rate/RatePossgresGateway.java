@@ -1,5 +1,6 @@
 package cz.honestcity.database.rate;
 
+import cz.honestcity.model.exchange.ExchangeRate;
 import cz.honestcity.service.gateway.RateDatabaseGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class RatePossgresGateway implements RateDatabaseGateway {
     private RatePostgresMapper ratePostgresMapper;
 
     @Override
-    public Object getRate(LocalDate day) {
+    public ExchangeRate getRate(LocalDate day) {
         return ratePostgresMapper.getRate(day);
     }
 }

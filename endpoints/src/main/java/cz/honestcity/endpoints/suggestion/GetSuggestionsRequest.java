@@ -1,9 +1,6 @@
 package cz.honestcity.endpoints.suggestion;
 
 import cz.honestcity.model.subject.Position;
-import cz.honestcity.model.suggestion.State;
-import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.model.suggestion.Type;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,6 +8,4 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class GetSuggestionsRequest {
     private Position position;
-    private Type type;
-    private State state;
 }
