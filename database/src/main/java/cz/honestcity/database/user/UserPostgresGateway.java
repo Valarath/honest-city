@@ -6,33 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserPostgressGateway implements UserGateway {
+public class UserPostgresGateway implements UserGateway {
 
     @Autowired
-    private UserPostgressMapper userPostgressMapper;
+    private UserPostgresMapper userPostgresMapper;
 
     @Override
     public User getUser(long userId) {
-        return userPostgressMapper.getUser(userId);
+        return userPostgresMapper.getUser(userId);
     }
 
     @Override
     public void setUserScore(User user) {
-        userPostgressMapper.setUserScore(user);
+        userPostgresMapper.setUserScore(user);
     }
 
     @Override
     public int getUserScore(long userId) {
-        return userPostgressMapper.getUserScore(userId);
+        return userPostgresMapper.getUserScore(userId);
     }
 
     @Override
     public void saveNewUser(User user) {
-        userPostgressMapper.saveNewUser(user);
+        userPostgresMapper.saveNewUser(user);
     }
 
     @Override
     public void updateUserData(User user) {
-        userPostgressMapper.updateUserData(user);
+        userPostgresMapper.updateUserData(user);
     }
 }

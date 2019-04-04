@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-public class RatePossgressGateway implements RateDatabaseGateway {
+public class RatePossgresGateway implements RateDatabaseGateway {
 
     @Autowired
-    private RatePostgressMapper ratePostgressMapper;
+    private RatePostgresMapper ratePostgresMapper;
 
     @Override
     public Object getRate(LocalDate day) {
-        return ratePostgressMapper.getRate(day);
+        return ratePostgresMapper.getRate(day);
     }
 }

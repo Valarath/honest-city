@@ -8,10 +8,10 @@ import cz.honestcity.model.exchange.ExchangePoint;
 import java.util.List;
 
 @Service
-public class ExchangePostgressGateway implements ExchangeGateway {
+public class ExchangePostgresGateway implements ExchangeGateway {
 
 	@Autowired
-	private ExchangePostgressMapper exchangeMapper;
+	private ExchangePostgresMapper exchangeMapper;
 
 	@Override
 	public List<ExchangePoint> getAllExchanges() {

@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface ExchangePostgressMapper {
+public interface ExchangePostgresMapper {
 	@Select("")
 	List<ExchangePoint> getAllExchanges();
 

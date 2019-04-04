@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import java.time.LocalDate;
 
 @Mapper
-public interface RatePostgressMapper {
+public interface RatePostgresMapper {
     Object getRate(LocalDate day);
 }

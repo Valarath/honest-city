@@ -12,44 +12,44 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SuggestionPostgressGateway implements SuggestionGateway {
+public class SuggestionPostgresGateway implements SuggestionGateway {
 
     @Autowired
-    private SuggestionPostgressMapper suggestionPostgressMapper;
+    private SuggestionPostgresMapper suggestionPostgresMapper;
 
     @Override
     public void remove(long suggestionId) {
-        suggestionPostgressMapper.remove(suggestionId);
+        suggestionPostgresMapper.remove(suggestionId);
     }
 
     @Override
     public List<Suggestion> getUserSuggestions(long userId) {
-        return suggestionPostgressMapper.getUserSuggestions(userId);
+        return suggestionPostgresMapper.getUserSuggestions(userId);
     }
 
     @Override
     public Suggestion getSuggestion(long suggestionId) {
-        return suggestionPostgressMapper.getSuggestion(suggestionId);
+        return suggestionPostgresMapper.getSuggestion(suggestionId);
     }
 
     @Override
     public List<Suggestion> getExchangePointSuggestions(long exchangePointId) {
-        return suggestionPostgressMapper.getExchangePointSuggestions(exchangePointId);
+        return suggestionPostgresMapper.getExchangePointSuggestions(exchangePointId);
     }
 
     @Override
     public void reportNonExistingPoint(long exchangePointId, Suggestion suggestion) {
-        suggestionPostgressMapper.reportNonExistingPoint(exchangePointId,suggestion);
+        suggestionPostgresMapper.reportNonExistingPoint(exchangePointId,suggestion);
     }
 
     @Override
     public void suggestsNewExchangePoint(NewExchangePointSuggestion suggestion) {
-        suggestionPostgressMapper.suggestsNewExchangePoint(suggestion);
+        suggestionPostgresMapper.suggestsNewExchangePoint(suggestion);
     }
 
     @Override
     public void suggestsExchangeRateChange(ExchangeRateSuggestion suggestion) {
-        suggestionPostgressMapper.suggestsExchangeRateChange(suggestion);
+        suggestionPostgresMapper.suggestsExchangeRateChange(suggestion);
     }
 
     @Override

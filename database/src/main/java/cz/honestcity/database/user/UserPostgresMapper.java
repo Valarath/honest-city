@@ -4,7 +4,7 @@ import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface UserPostgressMapper {
+public interface UserPostgresMapper {
 
     @Select("SELECT\n" +
             "  user_id,\n" +
