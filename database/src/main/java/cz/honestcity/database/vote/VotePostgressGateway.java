@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 public class VotePostgressGateway implements VoteGateway {
 
     @Autowired
-    private VotePostgressMapper votePostgressMapper;
+    private VotePostgresMapper votePostgresMapper;
 
     @Override
-    public int getNumberOfVotes(long suggestionId, long userId) {
-        return votePostgressMapper.getNumberOfVotes(suggestionId, userId);
+    public int getNumberOfVotes(long suggestionId) {
+        return votePostgresMapper.getNumberOfVotes(suggestionId);
     }
 
     @Override
     public void recordVote(long suggestionId, long userId) {
-        votePostgressMapper.recordVote(suggestionId,userId);
+        votePostgresMapper.recordVote(suggestionId,userId);
     }
 }

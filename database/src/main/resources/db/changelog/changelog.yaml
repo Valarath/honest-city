@@ -17,3 +17,5 @@ databaseChangeLog:
       file: classpath:db/changelog/currency_for_rate_changelist.xml
   - include:
       file: classpath:db/changelog/exchange_point_rate_changelist.xml
+  - include:
+      file: classpath:db/changelog/user_votes_changelist.xml

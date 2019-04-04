@@ -73,7 +73,7 @@ public class VoteService {
     }
 
     private boolean isSuggestionAcceptable(long suggestionId, long userId) {
-        return voteGateway.getNumberOfVotes(suggestionId,userId)*calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
+        return voteGateway.getNumberOfVotes(suggestionId)*calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 
     private double calculateUserTrustworthiness(long userId){
