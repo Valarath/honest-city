@@ -1,7 +1,13 @@
 package cz.honestcity.database.user;
 
+import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
+import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface UserPostgresMapper {
@@ -36,4 +42,10 @@ public interface UserPostgresMapper {
             "SET username = #{user.username}\n" +
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
+
+    List<ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId);
+
+    List<NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId);
+
+    List<NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId);
 }

@@ -2,6 +2,7 @@ package cz.honestcity.database.suggestion;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,17 +11,13 @@ import java.util.List;
 @Mapper
 public interface SuggestionPostgresMapper {
 
-    void remove(long suggestionId);
+    List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
 
-    List<Suggestion> getUserSuggestions(long userId);
+    void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions);
 
-    Suggestion getSuggestion(long suggestionId);
+    void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions);
 
-    List<Suggestion> getExchangePointSuggestions(long exchangePointId);
+    void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions);
 
-    void reportNonExistingPoint(long exchangePointId, Suggestion suggestion);
-
-    void suggestsNewExchangePoint(NewExchangePointSuggestion suggestion);
-
-    void suggestsExchangeRateChange(ExchangeRateSuggestion suggestion);
+    void removeSuggestions(List<? extends Suggestion> toRemove);
 }

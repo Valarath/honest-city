@@ -1,4 +1,4 @@
-package cz.honestcity.endpoints.suggestion;
+package cz.honestcity.endpoints.user;
 
 import lombok.Data;
 

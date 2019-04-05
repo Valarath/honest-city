@@ -4,6 +4,7 @@ import cz.honestcity.model.exchange.ExchangeRate;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.gateway.SuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,47 +19,28 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
     private SuggestionPostgresMapper suggestionPostgresMapper;
 
     @Override
-    public void remove(long suggestionId) {
-        suggestionPostgresMapper.remove(suggestionId);
-    }
-
-    @Override
-    public List<Suggestion> getUserSuggestions(long userId) {
-        return suggestionPostgresMapper.getUserSuggestions(userId);
-    }
-
-    @Override
-    public Suggestion getSuggestion(long suggestionId) {
-        return suggestionPostgresMapper.getSuggestion(suggestionId);
-    }
-
-    @Override
-    public List<Suggestion> getExchangePointSuggestions(long exchangePointId) {
+    public List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId) {
         return suggestionPostgresMapper.getExchangePointSuggestions(exchangePointId);
     }
 
     @Override
-    public void reportNonExistingPoint(long exchangePointId, Suggestion suggestion) {
-        suggestionPostgresMapper.reportNonExistingPoint(exchangePointId,suggestion);
+    public void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions) {
+        suggestionPostgresMapper.reportNonExistingPoint(nonExistingExchangePointSuggestions);
     }
 
     @Override
-    public void suggestsNewExchangePoint(NewExchangePointSuggestion suggestion) {
-        suggestionPostgresMapper.suggestsNewExchangePoint(suggestion);
+    public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions) {
+        suggestionPostgresMapper.suggestsNewExchangePoint(suggestions);
     }
 
     @Override
-    public void suggestsExchangeRateChange(ExchangeRateSuggestion suggestion) {
-        suggestionPostgresMapper.suggestsExchangeRateChange(suggestion);
+    public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions) {
+        suggestionPostgresMapper.suggestsExchangeRateChange(suggestions);
     }
 
     @Override
-    public void suggestsExchangeRateChange(Suggestion suggestion, long exchangePointId, ExchangeRate suggestedExchangeRate) {
-
+    public void removeSuggestions(List<? extends Suggestion> toRemove) {
+        suggestionPostgresMapper.removeSuggestions(toRemove);
     }
 
-    @Override
-    public void suggestsNewExchangePoint(Suggestion suggestion, Position position) {
-
-    }
 }

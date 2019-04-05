@@ -7,4 +7,5 @@ module cz.honestcity.service {
 	exports cz.honestcity.service.gateway;
     exports cz.honestcity.service.suggestion;
     exports cz.honestcity.service.vote;
+    exports cz.honestcity.service.user;
 }

@@ -2,6 +2,9 @@ package cz.honestcity.service.suggestion;
 
 import cz.honestcity.model.exchange.ExchangeRate;
 import cz.honestcity.model.subject.Position;
+import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
+import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.gateway.SuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ public class SuggestionService {
     @Autowired
     private SuggestionGateway suggestionGateway;
 
-    private List<Suggestion> getScoredSuggestions(long exchangePointId){
+    private List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId){
         return suggestionGateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
                 .collect(Collectors.toList());
@@ -26,27 +29,19 @@ public class SuggestionService {
         return Integer.compare(userSuggestion1.getSuggestedBy().getScore(),userSuggestion2.getSuggestedBy().getScore());
     }
 
-    public List<Suggestion> getUserSuggestions(long userId) {
-        return suggestionGateway.getUserSuggestions(userId);
+    public void removeSuggestions(List<? extends Suggestion> toRemove){
+        suggestionGateway.removeSuggestions(toRemove);
     }
 
-    public void remove(long suggestionId) {
-        suggestionGateway.remove(suggestionId);
+    public void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions) {
+        suggestionGateway.reportNonExistingPoint(nonExistingExchangePointSuggestions);
     }
 
-    public void removeSuggestions(List<Suggestion> toRemove){
-
+    public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> exchangeRateSuggestions) {
+        suggestionGateway.suggestsExchangeRateChange(exchangeRateSuggestions);
     }
 
-    public void reportNonExistingPoint(long exchangePointId, Suggestion suggestion) {
-        suggestionGateway.reportNonExistingPoint(exchangePointId,suggestion);
-    }
-
-    public void suggestsExchangeRateChange(Suggestion suggestion, long exchangePointId, ExchangeRate suggestedExchangeRate) {
-        suggestionGateway.suggestsExchangeRateChange(suggestion,exchangePointId,suggestedExchangeRate);
-    }
-
-    public void suggestsNewExchangePoint(Suggestion suggestion, Position position) {
-        suggestionGateway.suggestsNewExchangePoint(suggestion,position);
+    public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> newExchangePointSuggestions) {
+        suggestionGateway.suggestsNewExchangePoint(newExchangePointSuggestions);
     }
 }

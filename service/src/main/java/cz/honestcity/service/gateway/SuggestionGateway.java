@@ -4,26 +4,20 @@ import cz.honestcity.model.exchange.ExchangeRate;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 
 import java.util.List;
 
 public interface SuggestionGateway {
-    void remove(long suggestionId);
 
-    List<Suggestion> getUserSuggestions(long userId);
+    List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
 
-    Suggestion getSuggestion(long suggestionId);
+    void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions);
 
-    List<Suggestion> getExchangePointSuggestions(long exchangePointId);
+    void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions);
 
-    void reportNonExistingPoint(long exchangePointId, Suggestion suggestion);
+    void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions);
 
-    void suggestsNewExchangePoint(NewExchangePointSuggestion suggestion);
-
-    void suggestsExchangeRateChange(ExchangeRateSuggestion suggestion);
-
-    void suggestsExchangeRateChange(Suggestion suggestion, long exchangePointId, ExchangeRate suggestedExchangeRate);
-
-    void suggestsNewExchangePoint(Suggestion suggestion, Position position);
+    void removeSuggestions(List<? extends Suggestion> toRemove);
 }
