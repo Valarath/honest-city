@@ -4,5 +4,11 @@ import cz.honestcity.model.exchange.ExchangeRate;
 
 public interface RateDatabaseGateway extends RateGateway {
 
-    void save(ExchangeRate exchangeRate);
+    void saveCentralAuthorityRate(ExchangeRate exchangeRate);
+
+    ExchangeRate getCentralAuthorityRate();
+
+    ExchangeRate getExchangePointRate(long exchangePointId);
+
+
 }

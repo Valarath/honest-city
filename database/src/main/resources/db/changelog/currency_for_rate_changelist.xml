@@ -15,4 +15,10 @@
         </createTable>
     </changeSet>
 
+
+    <changeSet id="add_buy_attribute_to_currency_for_exchange_rate_table" author="michal_keder">
+        <addColumn tableName="currency_for_exchange_rate">
+            <column name="sell" type="int"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

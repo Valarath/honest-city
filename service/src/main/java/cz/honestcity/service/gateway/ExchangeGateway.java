@@ -10,6 +10,8 @@ public interface ExchangeGateway {
 
 	void createExchange(ExchangePoint newExchangePoint);
 
+	void deActivateOldExchangeRate(long exchangePointId);
+
     void changeExchangeRate(long newExchangeRateId, long exchangePointId);
 
     void deleteExchangePoint(long exchangePointId);

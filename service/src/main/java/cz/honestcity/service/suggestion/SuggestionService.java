@@ -2,10 +2,12 @@ package cz.honestcity.service.suggestion;
 
 import cz.honestcity.model.suggestion.*;
 import cz.honestcity.service.gateway.SuggestionGateway;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +32,7 @@ public class SuggestionService {
 
     public void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions) {
         suggestionGateway.reportNonExistingPoint(nonExistingExchangePointSuggestions);
+
     }
 
     public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> exchangeRateSuggestions) {

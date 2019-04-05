@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import cz.honestcity.service.gateway.RateGateway;
 import cz.honestcity.service.gateway.RateGatewayType;
 import org.springframework.stereotype.Service;
 import static cz.honestcity.crawling.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
@@ -63,7 +62,7 @@ public class CzechNationalBankCrawler implements RateCrawlerGateway {
 
     private ExchangeRateValues getRateValues(String value) {
         return new ExchangeRateValues()
-                .setSell(Integer.parseInt(value));
+                .setBuy(Integer.parseInt(value));
     }
 
     private Currency getCurrency(String value) {

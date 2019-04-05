@@ -7,7 +7,8 @@ public enum HonestyStatus {
     HONEST(null),
     HONEST_WITH_RESERVE(HONEST),
     BE_CAUTION(HONEST_WITH_RESERVE),
-    DISHONEST(BE_CAUTION),;
+    DISHONEST(BE_CAUTION),
+    UNKNOWN(null);
 
     HonestyStatus(HonestyStatus nextLevelOfHonesty) {
         this.nextLevelOfHonesty = nextLevelOfHonesty;

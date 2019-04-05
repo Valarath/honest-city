@@ -1,5 +1,7 @@
 package cz.honestcity.service.rate;
 
+import cz.honestcity.model.exchange.ExchangeRate;
+import cz.honestcity.service.gateway.RateCrawlerGateway;
 import cz.honestcity.service.gateway.RateDatabaseGateway;
 import cz.honestcity.service.gateway.RateGateway;
 import cz.honestcity.service.gateway.RateGatewayType;
@@ -17,8 +19,22 @@ public class RateService {
     private Map<String, ? extends RateGateway> rateGateways;
 
     @Scheduled(cron = "0 0 3 * * ?")
-    public void getRate() {
-        ((RateDatabaseGateway) rateGateways.get(RateGatewayType.RATE_DATABASE_GATEWAY.name)).save(
-                rateGateways.get(RateGatewayType.RATE_CRAWLING_GATEWAY.name).getRate(LocalDate.now()));
+    public void crawlRate() {
+        getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
+    }
+    public ExchangeRate getExchangePointRate(long exchangePointId){
+        return getRateDatabaseGateway().getExchangePointRate(exchangePointId);
+    }
+
+    public ExchangeRate getCentralAuthorityRate(){
+        return getRateDatabaseGateway().getCentralAuthorityRate();
+    }
+
+    private RateDatabaseGateway getRateDatabaseGateway() {
+        return (RateDatabaseGateway) rateGateways.get(RateGatewayType.RATE_DATABASE_GATEWAY.name);
+    }
+
+    private RateCrawlerGateway getRateCrawlerGateway() {
+        return (RateCrawlerGateway) rateGateways.get(RateGatewayType.RATE_CRAWLING_GATEWAY.name);
     }
 }

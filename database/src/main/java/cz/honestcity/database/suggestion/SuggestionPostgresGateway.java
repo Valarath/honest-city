@@ -6,17 +6,23 @@ import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.gateway.SuggestionGateway;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SuggestionPostgresGateway implements SuggestionGateway {
 
     @Autowired
     private SuggestionPostgresMapper suggestionPostgresMapper;
+
+    @Autowired
+    private Map<String, VoteService> voteServices;
 
     @Override
     public List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId) {
@@ -25,17 +31,29 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
 
     @Override
     public void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions) {
-        suggestionPostgresMapper.reportNonExistingPoint(nonExistingExchangePointSuggestions);
+        nonExistingExchangePointSuggestions.forEach(suggestion ->{
+            suggestionPostgresMapper.suggest(suggestion);
+            suggestionPostgresMapper.reportNonExistingPoint(suggestion);
+            voteServices.get(VoteType.VoteConstants.DELETE_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
+        });
     }
 
     @Override
     public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions) {
-        suggestionPostgresMapper.suggestsNewExchangePoint(suggestions);
+        suggestions.forEach(suggestion ->{
+            suggestionPostgresMapper.suggest(suggestion);
+            suggestionPostgresMapper.suggestsNewExchangePoint(suggestion);
+            voteServices.get(VoteType.VoteConstants.NEW_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
+        });
     }
 
     @Override
     public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions) {
-        suggestionPostgresMapper.suggestsExchangeRateChange(suggestions);
+        suggestions.forEach(suggestion ->{
+            suggestionPostgresMapper.suggest(suggestion);
+            suggestionPostgresMapper.suggestsExchangeRateChange(suggestion);
+            voteServices.get(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
+        });
     }
 
     @Override
@@ -45,17 +63,17 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
 
     @Override
     public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId) {
-        return null;
+        return suggestionPostgresMapper.getExchangeRateSuggestion(suggestionId);
     }
 
     @Override
     public NonExistingExchangePointSuggestion getNonExistingExchangePointSuggestion(long suggestionId) {
-        return null;
+        return suggestionPostgresMapper.getNonExistingExchangePointSuggestion(suggestionId);
     }
 
     @Override
     public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId) {
-        return null;
+        return suggestionPostgresMapper.getNewExchangePointSuggestion(suggestionId);
     }
 
 }

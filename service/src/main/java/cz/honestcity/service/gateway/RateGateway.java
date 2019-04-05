@@ -6,5 +6,5 @@ import java.time.LocalDate;
 
 public interface RateGateway {
 
-	ExchangeRate getRate(LocalDate day);
+
 }

@@ -1,12 +1,13 @@
 package cz.honestcity.database.user;
 
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
-import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.database.suggestion.ExchangeRatePostgresSuggestion;
+import cz.honestcity.database.suggestion.NewExchangePointPostgresSuggestion;
+import cz.honestcity.database.suggestion.NonExistingExchangePointPostgresSuggestion;
+import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
 
+import java.awt.*;
 import java.util.List;
 
 @Mapper
@@ -43,9 +44,53 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
 
-    List<ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId);
+    List<ExchangeRatePostgresSuggestion> getUserExchangeRateSuggestions(@Param("userId") long userId);
 
-    List<NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId);
+    @Select("SELECT suggestion.suggestion_id,\n" +
+            "       votes,\n" +
+            "       suggestion.user_id,\n" +
+            "       status,\n" +
+            "       username,\n" +
+            "       score,\n" +
+            "       proof,\n" +
+            "       latitude,\n" +
+            "       longitude\n" +
+            "FROM suggestion\n" +
+            "         join \"user\" u on suggestion.user_id = u.user_id\n" +
+            "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
+            "where suggestion.user_id = #{userId};")
+    @ConstructorArgs(value = {
+            @Arg(column = "longitude",javaType = Double.class),
+            @Arg(column = "latitude",javaType = Double.class),
+            @Arg(column = "suggestion_id",javaType = Long.class),
+            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "username",javaType = String.class),
+            @Arg(column = "score",javaType = Integer.class),
+            @Arg(column = "proof",javaType = Image.class),
+            @Arg(column = "status",javaType = State.class)
+    })
+    List<NewExchangePointPostgresSuggestion> getUserNewExchangePointSuggestions(@Param("userId") long userId);
 
-    List<NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId);
+    @Select("SELECT suggestion.suggestion_id,\n" +
+            "       votes,\n" +
+            "       suggestion.user_id,\n" +
+            "       status,\n" +
+            "       username,\n" +
+            "       score,\n" +
+            "       exchange_point_id,\n" +
+            "       proof\n" +
+            "FROM suggestion\n" +
+            "         join \"user\" u on suggestion.user_id = u.user_id\n" +
+            "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
+            "where  suggestion.user_id  = #{userId};")
+    @ConstructorArgs(value = {
+            @Arg(column = "exchange_point_id",javaType = Long.class),
+            @Arg(column = "suggestion_id",javaType = Long.class),
+            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "username",javaType = String.class),
+            @Arg(column = "score",javaType = Integer.class),
+            @Arg(column = "proof",javaType = Image.class),
+            @Arg(column = "status",javaType = State.class),
+    })
+    List<NonExistingExchangePointPostgresSuggestion> getUserNonExistingExchangePointSuggestions(@Param("userId")long userId);
 }
