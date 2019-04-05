@@ -10,6 +10,6 @@ import java.util.Set;
 @Accessors(chain = true)
 public class ExchangeRate {
     protected long id;
-    protected LocalDate validFor;
+    protected Watched watched;
     protected Set<Rate> rates;
 }

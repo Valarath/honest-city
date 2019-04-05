@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class ExchangePoint extends ImmobileWatchedSubject {
-    private ExchangePointRate exchangePointRate;
+    private ExchangeRate exchangePointRate;
     private List<Suggestion> suggestions;
 }

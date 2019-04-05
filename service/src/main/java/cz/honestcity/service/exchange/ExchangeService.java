@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ExchangeService {
 
 	private static final double EARTH_RADIUS=6372.797560856;
-	public static final int AREA_RANGE_IN_METERS = 22000;
+	private static final int AREA_RANGE_IN_METERS = 22000;
 
 	@Autowired
 	private ExchangeGateway exchangeGateway;

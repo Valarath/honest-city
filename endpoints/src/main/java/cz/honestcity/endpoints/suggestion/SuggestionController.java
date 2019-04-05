@@ -12,13 +12,6 @@ public class SuggestionController {
     @Autowired
     private SuggestionService suggestionService;
 
-    @GetMapping("/suggestions-for-exchange-point")
-    public GetSuggestionsResponse getSuggestionsForExchangePoint(GetSuggestionsRequest request){
-        return new GetSuggestionsResponse()
-                .setSuggestions(suggestionService.getSuggestions(
-                        request.getPosition()));
-    }
-
     @GetMapping("/user-suggestions")
     public GetUserSuggestionsResponse getUserSuggestions(GetUserSuggestionsRequest request){
         return new GetUserSuggestionsResponse()

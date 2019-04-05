@@ -2,8 +2,7 @@ package cz.honestcity.service.suggestion;
 
 import cz.honestcity.model.exchange.ExchangeRate;
 import cz.honestcity.model.subject.Position;
-import cz.honestcity.model.suggestion.*;
-import cz.honestcity.service.exchange.ExchangeService;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.gateway.SuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,8 @@ public class SuggestionService {
     @Autowired
     private SuggestionGateway suggestionGateway;
 
-    public List<Suggestion> getSuggestions(Position exchangePosition){
-        return suggestionGateway.getSuggestions(exchangePosition).stream()
+    private List<Suggestion> getScoredSuggestions(long exchangePointId){
+        return suggestionGateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
                 .collect(Collectors.toList());
     }
@@ -35,16 +34,8 @@ public class SuggestionService {
         suggestionGateway.remove(suggestionId);
     }
 
-    public List<Suggestion> getExchangePointSuggestions(long exchangePointId){
-        return suggestionGateway.getExchangePointSuggestions(exchangePointId);
-    }
-
     public void removeSuggestions(List<Suggestion> toRemove){
 
-    }
-
-    public Suggestion getSuggestion(long suggestionId) {
-        return suggestionGateway.getSuggestion(suggestionId);
     }
 
     public void reportNonExistingPoint(long exchangePointId, Suggestion suggestion) {
