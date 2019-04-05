@@ -3,6 +3,7 @@ package cz.honestcity.service.exchange;
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.service.gateway.ExchangeGateway;
+import cz.honestcity.service.suggestion.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class ExchangeService {
 	@Autowired
 	private ExchangeGateway exchangeGateway;
 
+	@Autowired
+	private SuggestionService suggestionService;
 
 	public void createExchange(ExchangePoint newExchangePoint) {
 		exchangeGateway.createExchange(newExchangePoint);
@@ -30,7 +33,12 @@ public class ExchangeService {
 	public List<ExchangePoint> getExchangesInArea(Position userPosition){
 		return exchangeGateway.getAllExchanges().stream()
 				.filter(exchange -> isInArea(AREA_RANGE_IN_METERS,userPosition,exchange.getPosition()))
+				.map(this::setSuggestions)
 				.collect(Collectors.toList());
+	}
+
+	private ExchangePoint setSuggestions(ExchangePoint exchangePoint){
+		return exchangePoint.setExchangeRateSuggestions(suggestionService.getScoredSuggestions(exchangePoint.getId()));
 	}
 
 	private boolean isInArea(int areaRangeInMeters,Position userPosition, Position exchangePosition){
@@ -72,6 +80,6 @@ public class ExchangeService {
 	}
 
 	public void deleteExchangePoint(long exchangePointId) {
-
+		exchangeGateway.deleteExchangePoint(exchangePointId);
 	}
 }

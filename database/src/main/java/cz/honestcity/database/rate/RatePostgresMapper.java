@@ -8,4 +8,6 @@ import java.time.LocalDate;
 @Mapper
 public interface RatePostgresMapper {
     ExchangeRate getRate(LocalDate day);
+
+    void save(ExchangeRate exchangeRate);
 }

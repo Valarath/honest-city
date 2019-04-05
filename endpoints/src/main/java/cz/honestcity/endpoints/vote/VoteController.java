@@ -5,19 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/vote-for")
+import java.util.Map;
+
+@RestController
 public class VoteController {
 
     @Autowired
-    private VoteService voteService;
+    private Map<String,VoteService> voteServices;
 
-    @PostMapping("/new-exchange-point")
-    public void upVoteNewExchangePointSuggestion(PostUpVoteSuggestionRequest request){
-        voteService.upVoteNewExchangePointSuggestion(request.getSuggestionId(),0);
+    @PostMapping("/up-vote")
+    public void upVote(PostUpVoteRequest request){
+        request.getVotes().forEach(vote -> voteServices.get(vote.getVoteType().name()).upVote(vote.getSuggestionId(),vote.getUserId()));
     }
 
-    @PostMapping("/exchange-point-rate-change")
-    public void upVoteExchangePointRateChangeSuggestion(PostUpVoteSuggestionRequest request){
-        voteService.upVoteExchangePointRateChangeSuggestion(request.getSuggestionId(),0);
-    }
 }

@@ -15,4 +15,6 @@ public interface ExchangePostgresMapper {
 
 	@Update("")
 	void changeExchangeRate(long newExchangeRateId, long exchangePointId);
+
+    void deleteExchangePoint(long exchangePointId);
 }

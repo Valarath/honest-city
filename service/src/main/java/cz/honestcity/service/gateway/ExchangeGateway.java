@@ -11,4 +11,6 @@ public interface ExchangeGateway {
 	void createExchange(ExchangePoint newExchangePoint);
 
     void changeExchangeRate(long newExchangeRateId, long exchangePointId);
+
+    void deleteExchangePoint(long exchangePointId);
 }

@@ -27,4 +27,9 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	public void changeExchangeRate(long newExchangeRateId, long exchangePointId) {
 		exchangeMapper.changeExchangeRate(newExchangeRateId,exchangePointId);
 	}
+
+	@Override
+	public void deleteExchangePoint(long exchangePointId) {
+		exchangeMapper.deleteExchangePoint(exchangePointId);
+	}
 }

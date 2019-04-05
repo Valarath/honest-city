@@ -1,11 +1,6 @@
 package cz.honestcity.service.suggestion;
 
-import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.model.subject.Position;
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
-import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.model.suggestion.*;
 import cz.honestcity.service.gateway.SuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +14,7 @@ public class SuggestionService {
     @Autowired
     private SuggestionGateway suggestionGateway;
 
-    private List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId){
+    public List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId){
         return suggestionGateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
                 .collect(Collectors.toList());
@@ -43,5 +38,17 @@ public class SuggestionService {
 
     public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> newExchangePointSuggestions) {
         suggestionGateway.suggestsNewExchangePoint(newExchangePointSuggestions);
+    }
+
+    public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId){
+        return suggestionGateway.getExchangeRateSuggestion(suggestionId);
+    }
+
+    public NonExistingExchangePointSuggestion getNonExistingExchangePointSuggestion(long suggestionId){
+        return suggestionGateway.getNonExistingExchangePointSuggestion(suggestionId);
+    }
+
+    public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId){
+        return suggestionGateway.getNewExchangePointSuggestion(suggestionId);
     }
 }

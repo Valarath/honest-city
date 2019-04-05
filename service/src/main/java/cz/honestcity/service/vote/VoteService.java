@@ -4,6 +4,7 @@ import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.suggestion.NonExistingExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.user.User;
 import cz.honestcity.service.exchange.ExchangeService;
 import cz.honestcity.service.gateway.VoteGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
@@ -11,8 +12,10 @@ import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
-public class VoteService {
+public abstract class VoteService {
 
     private static final int LOWEST_VALUE_FOR_ACCEPTENCE = 5;
 
@@ -20,59 +23,25 @@ public class VoteService {
     private VoteGateway voteGateway;
 
     @Autowired
-    private SuggestionService suggestionService;
+    protected SuggestionService suggestionService;
 
     @Autowired
-    private ExchangeService exchangeService;
+    protected ExchangeService exchangeService;
 
     @Autowired
     private UserService userService;
 
-    public void upVoteNewExchangePointSuggestion(long suggestionId, long userId) {
-        if(isSuggestionAcceptable(suggestionId, userId))
-            acceptNewExchangePoint(suggestionId);
-        recordVote(suggestionId,userId);
+    public abstract void upVote(long suggestionId, long userId);
+
+    protected void increaseSuggesterScore(User user){
+        userService.increaseUserScore(user);
     }
 
-    public void upVoteExchangePointRateChangeSuggestion(long suggestionId, long userId) {
-        if(isSuggestionAcceptable(suggestionId, userId))
-            acceptExchangeRateChange(suggestionId);
-        recordVote(suggestionId,userId);
-    }
-
-    public void upVoteDeleteExchangePointSuggestion(long suggestionId, long userId) {
-        if(isSuggestionAcceptable(suggestionId, userId))
-            acceptDeleteExchangePoint(suggestionId);
-        recordVote(suggestionId,userId);
-    }
-
-    private void acceptExchangeRateChange(long suggestionId){
-        ExchangeRateSuggestion suggestion = (ExchangeRateSuggestion) suggestionService.getSuggestion(suggestionId);
-        exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(),suggestion.getExchangePointId());
-        userService.increaseUserScore(suggestion.getSuggestedBy());
-    }
-
-    private void acceptNewExchangePoint(long suggestionId){
-        NewExchangePointSuggestion suggestion = (NewExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
-        exchangeService.createExchange(getNewExchangePoint(suggestion));
-        userService.increaseUserScore(suggestion.getSuggestedBy());
-    }
-
-    private void acceptDeleteExchangePoint(long suggestionId){
-        NonExistingExchangePointSuggestion suggestion = (NonExistingExchangePointSuggestion) suggestionService.getSuggestion(suggestionId);
-        exchangeService.deleteExchangePoint(suggestion.getExchangePointId());
-        userService.increaseUserScore(suggestion.getSuggestedBy());
-    }
-
-    private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {
-        return (ExchangePoint) new ExchangePoint().setPosition(suggestion.getPosition());
-    }
-
-    private void recordVote(long suggestionId, long userId){
+    protected void recordVote(long suggestionId, long userId){
         voteGateway.recordVote(suggestionId,userId);
     }
 
-    private boolean isSuggestionAcceptable(long suggestionId, long userId) {
+    protected boolean isSuggestionAcceptable(long suggestionId, long userId) {
         return voteGateway.getNumberOfVotes(suggestionId)*calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 

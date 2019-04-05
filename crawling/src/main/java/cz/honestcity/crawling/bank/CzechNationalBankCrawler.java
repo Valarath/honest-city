@@ -1,9 +1,6 @@
 package cz.honestcity.crawling.bank;
 
-import cz.honestcity.model.exchange.Currency;
-import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.model.exchange.ExchangeRateValues;
-import cz.honestcity.model.exchange.Rate;
+import cz.honestcity.model.exchange.*;
 import cz.honestcity.service.gateway.RateCrawlerGateway;
 
 import java.io.*;
@@ -13,10 +10,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import cz.honestcity.service.gateway.RateGateway;
+import cz.honestcity.service.gateway.RateGatewayType;
 import org.springframework.stereotype.Service;
 import static cz.honestcity.crawling.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
 
-@Service
+@Service(RateGatewayType.RateGatewayConstants.RATE_CRAWLING_GATEWAY)
 public class CzechNationalBankCrawler implements RateCrawlerGateway {
     private static final String SPLIT_BY="\\|";
     private static final String BASE_URL_FOR_NATIONAL_BANK_CRAWLING = "https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt";
@@ -27,7 +26,7 @@ public class CzechNationalBankCrawler implements RateCrawlerGateway {
     public ExchangeRate getRate(LocalDate day) {
         try {
             return new ExchangeRate()
-                    .setValidFor(day)
+                    .setWatched(new Watched().setFrom(day))
                     .setRates(toRates(getRatesInCsv(day)));
         } catch (IOException ex) {
             throw new ProblemInCrawlingException();

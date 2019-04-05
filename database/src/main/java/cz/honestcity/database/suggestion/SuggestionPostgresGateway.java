@@ -43,4 +43,19 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
         suggestionPostgresMapper.removeSuggestions(toRemove);
     }
 
+    @Override
+    public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId) {
+        return null;
+    }
+
+    @Override
+    public NonExistingExchangePointSuggestion getNonExistingExchangePointSuggestion(long suggestionId) {
+        return null;
+    }
+
+    @Override
+    public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId) {
+        return null;
+    }
+
 }
