@@ -2,6 +2,7 @@ package cz.honestcity.endpoints.suggestion;
 
 import cz.honestcity.endpoints.user.GetUserSuggestionsRequest;
 import cz.honestcity.endpoints.user.GetUserSuggestionsResponse;
+import cz.honestcity.service.suggestion.BaseSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,6 @@ public class SuggestionController {
 
     @PostMapping("/remove")
     public void remove(@RequestBody RemoveSuggestionRequest request){
-        suggestionServices.get(SuggestionServiceType.CLOSED_EXCHANGE_POINT).removeSuggestions(request.getSuggestions());
+        ((BaseSuggestionService)suggestionServices.get(SuggestionServiceType.BASE_SERVICE)).removeSuggestions(request.getSuggestions());
     }
 }

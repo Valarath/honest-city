@@ -15,6 +15,11 @@ public class ExchangeRateSuggestionService extends SuggestionService{
         suggestionGateway.suggestsExchangeRateChange((List<ExchangeRateSuggestion>)suggestions);
     }
 
+    @Override
+    public Suggestion getSuggestion(long suggestionId) {
+        return suggestionGateway.getExchangeRateSuggestion(suggestionId);
+    }
+
     public List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId){
         return suggestionGateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
@@ -23,9 +28,5 @@ public class ExchangeRateSuggestionService extends SuggestionService{
 
     private int compareUserScore(Suggestion userSuggestion1,Suggestion userSuggestion2){
         return Integer.compare(userSuggestion1.getSuggestedBy().getScore(),userSuggestion2.getSuggestedBy().getScore());
-    }
-
-    public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId){
-        return suggestionGateway.getExchangeRateSuggestion(suggestionId);
     }
 }

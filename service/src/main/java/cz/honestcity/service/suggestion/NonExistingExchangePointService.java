@@ -8,12 +8,15 @@ import java.util.List;
 
 @Service(SuggestionServiceType.SuggestionServiceTypeNames.CLOSED_EXCHANGE_POINT)
 public class NonExistingExchangePointService extends SuggestionService{
+
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
         suggestionGateway.reportNonExistingPoint((List<NonExistingExchangePointSuggestion>) suggestions);
     }
 
-    public NonExistingExchangePointSuggestion getNonExistingExchangePointSuggestion(long suggestionId){
+    @Override
+    public Suggestion getSuggestion(long suggestionId) {
         return suggestionGateway.getNonExistingExchangePointSuggestion(suggestionId);
     }
-}
+
+ }

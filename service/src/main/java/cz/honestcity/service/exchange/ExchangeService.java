@@ -4,6 +4,7 @@ import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.service.gateway.ExchangeGateway;
 import cz.honestcity.service.rate.RateService;
+import cz.honestcity.service.suggestion.ExchangeRateSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ExchangeService {
 	private ExchangeGateway exchangeGateway;
 
 	@Autowired
-	private SuggestionService suggestionService;
+	private ExchangeRateSuggestionService suggestionService;
 
 	@Autowired
 	private RateService rateService;

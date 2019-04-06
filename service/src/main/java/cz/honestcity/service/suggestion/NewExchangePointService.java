@@ -14,7 +14,8 @@ public class NewExchangePointService extends SuggestionService {
         suggestionGateway.suggestsNewExchangePoint((List<NewExchangePointSuggestion>)suggestions);
     }
 
-    public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId){
+    @Override
+    public Suggestion getSuggestion(long suggestionId) {
         return suggestionGateway.getNewExchangePointSuggestion(suggestionId);
     }
 }

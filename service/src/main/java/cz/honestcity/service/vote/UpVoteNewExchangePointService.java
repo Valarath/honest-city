@@ -3,6 +3,7 @@ package cz.honestcity.service.vote;
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.vote.VoteType;
+import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.stereotype.Service;
 
 @Service(VoteType.VoteConstants.NEW_EXCHANGE_POINT)
@@ -15,7 +16,7 @@ public class UpVoteNewExchangePointService extends VoteService{
     }
 
     private void acceptNewExchangePoint(long suggestionId){
-        NewExchangePointSuggestion suggestion =  suggestionServices.getNewExchangePointSuggestion(suggestionId);
+        NewExchangePointSuggestion suggestion = (NewExchangePointSuggestion) suggestionServices.get(SuggestionServiceType.NEW_EXCHANGE_POINT.name()).getSuggestion(suggestionId);
         exchangeService.createExchange(getNewExchangePoint(suggestion));
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }
