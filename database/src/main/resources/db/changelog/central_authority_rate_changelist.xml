@@ -6,8 +6,8 @@
 
     <changeSet id="create_central_authority_rate_table" author="michal_keder">
         <createTable tableName="central_authority_rate">
-            <column name="exchange_rate_id" type="bigint">
-                <constraints foreignKeyName="fk_exchange_rate_id" references="exchange_rate(exchange_rate_id)" nullable="false"/>
+            <column name="exchange_rates_id" type="bigint">
+                <constraints foreignKeyName="fk_exchange_rates_id" references="exchange_rates(exchange_rates_id)" nullable="false"/>
             </column>
             <column name="central_authority_id" type="bigint">
                 <constraints foreignKeyName="fk_central_authority_id" references="central_authority(central_authority_id)" nullable="false"/>

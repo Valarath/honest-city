@@ -9,6 +9,7 @@ import java.util.List;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.suggestion.State;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.EnumTypeHandler;
 
 @Mapper
 public interface ExchangePostgresMapper {
@@ -20,7 +21,7 @@ public interface ExchangePostgresMapper {
 			@Arg(column = "latitude",javaType = Double.class),
 			@Arg(column = "exchange_point_id",javaType = Long.class),
 			@Arg(column = "active_to",javaType = LocalDate.class),
-			@Arg(column = "honesty_status",javaType = HonestyStatus.class)
+			@Arg(column = "honesty_status",javaType = HonestyStatus.class, typeHandler = EnumTypeHandler.class)
 	})
 	List<ExchangePoint> getAllExchanges();
 

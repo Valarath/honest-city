@@ -32,7 +32,7 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
     @Override
     public void reportNonExistingPoint(List<NonExistingExchangePointSuggestion> nonExistingExchangePointSuggestions) {
         nonExistingExchangePointSuggestions.forEach(suggestion ->{
-            suggestionPostgresMapper.suggest(suggestion);
+            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
             suggestionPostgresMapper.reportNonExistingPoint(suggestion);
             voteServices.get(VoteType.VoteConstants.DELETE_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });
@@ -41,7 +41,7 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
     @Override
     public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions) {
         suggestions.forEach(suggestion ->{
-            suggestionPostgresMapper.suggest(suggestion);
+            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
             suggestionPostgresMapper.suggestsNewExchangePoint(suggestion);
             voteServices.get(VoteType.VoteConstants.NEW_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });
@@ -50,7 +50,7 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
     @Override
     public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions) {
         suggestions.forEach(suggestion ->{
-            suggestionPostgresMapper.suggest(suggestion);
+            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
             suggestionPostgresMapper.suggestsExchangeRateChange(suggestion);
             voteServices.get(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });

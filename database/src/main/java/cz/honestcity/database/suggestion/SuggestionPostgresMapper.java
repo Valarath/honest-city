@@ -2,6 +2,7 @@ package cz.honestcity.database.suggestion;
 
 import cz.honestcity.model.suggestion.*;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.EnumTypeHandler;
 
 import java.awt.*;
 import java.util.List;
@@ -23,8 +24,8 @@ public interface SuggestionPostgresMapper {
             "values(#{suggestion.exchangePointId},#{suggestion.id},#{suggestion.suggestedExchangeRate.id});")
     void suggestsExchangeRateChange(@Param("suggestion")ExchangeRateSuggestion suggestions);
 
-    @Insert("INSERT INTO suggestion(user_id, status, votes, proof)\n" +
-            "values (#{suggestion.suggestedBy.id},#{suggestion.state},0,#{suggestion.proofPicture});")
+    @Insert("INSERT INTO suggestion(user_id, status, votes)\n" +
+            "values (#{suggestion.suggestedBy.id},#{suggestion.state},0);")
     @Options(useGeneratedKeys = true, keyProperty = "suggestion.id", keyColumn = "suggestion_id")
     long suggest(@Param("suggestion") Suggestion suggestion);
 
@@ -33,7 +34,8 @@ public interface SuggestionPostgresMapper {
             "FROM suggestion\n" +
             "WHERE suggestion_id in\n" +
             "<foreach collection='toRemove' item='suggestion' index='index' open='(' separator =',' close=')'> \n" +
-            "#{suggestion.id}" +
+            "#{suggestion.id}\n" +
+            "</foreach>" +
             "</script>")
     void removeSuggestions(@Param("toRemove") List<? extends Suggestion> toRemove);
 
@@ -46,7 +48,6 @@ public interface SuggestionPostgresMapper {
             "       username,\n" +
             "       score,\n" +
             "       exchange_point_id,\n" +
-            "       proof\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
@@ -57,8 +58,7 @@ public interface SuggestionPostgresMapper {
             @Arg(column = "user_id",javaType = Long.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "proof",javaType = Image.class),
-            @Arg(column = "status",javaType = State.class)
+            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
     NonExistingExchangePointPostgresSuggestion getNonExistingExchangePointSuggestion(@Param("suggestionId") long suggestionId);
 
@@ -68,7 +68,6 @@ public interface SuggestionPostgresMapper {
             "       status,\n" +
             "       username,\n" +
             "       score,\n" +
-            "       proof,\n" +
             "       latitude,\n" +
             "       longitude\n" +
             "FROM suggestion\n" +
@@ -82,8 +81,7 @@ public interface SuggestionPostgresMapper {
             @Arg(column = "user_id",javaType = Long.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "proof",javaType = Image.class),
-            @Arg(column = "status",javaType = State.class)
+            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
     NewExchangePointPostgresSuggestion getNewExchangePointSuggestion(@Param("suggestionId") long suggestionId);
 }

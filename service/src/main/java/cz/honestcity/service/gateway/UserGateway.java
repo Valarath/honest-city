@@ -20,9 +20,9 @@ public interface UserGateway {
 
     void updateUserData(User user);
 
-    List<ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId);
+    List<? extends ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId);
 
-    List<NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId);
+    List<? extends NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId);
 
-    List<NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId);
+    List<? extends NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId);
 }

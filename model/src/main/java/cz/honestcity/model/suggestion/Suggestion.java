@@ -11,6 +11,5 @@ import java.awt.*;
 public class Suggestion {
     private long id;
     private User suggestedBy;
-    private Image proofPicture;
     private State state;
 }

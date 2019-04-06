@@ -10,10 +10,14 @@ import java.util.Set;
 @Mapper
 public interface RatePostgresMapper {
 
-    @Insert("INSERT INTO central_authority_rate(active_from, active_to)\n" +
-            "values (#{exchangeRate.watched.from},#{exchangeRate.watched.to});")
+    @Insert("INSERT INTO central_authority_rate(active_from, active_to,exchange_rate_id)\n" +
+            "values (#{exchangeRate.watched.from},#{exchangeRate.watched.to},#{exchangeRateId});")
     @Options(useGeneratedKeys = true, keyProperty = "exchangeRate.id", keyColumn = "exchange_rate_id")
-    void saveCentralAuthorityRate(@Param("exchangeRate") ExchangeRate exchangeRate);
+    void saveCentralAuthorityRate(@Param("exchangeRate") ExchangeRate exchangeRate,@Param("exchangeRateId") long exchangeRateId);
+
+    @Insert("INSERT INTO exchange_rate")
+    @Options(useGeneratedKeys = true, keyProperty = "suggestion.id", keyColumn = "suggestion_id")
+    long saveExchangeRate();
 
     void saveCentralAuthorityRate(@Param("rates") Set<Rate> rates);
 

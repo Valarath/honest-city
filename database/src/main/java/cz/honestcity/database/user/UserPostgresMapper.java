@@ -6,6 +6,7 @@ import cz.honestcity.database.suggestion.NonExistingExchangePointPostgresSuggest
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.EnumTypeHandler;
 
 import java.awt.*;
 import java.util.List;
@@ -52,7 +53,6 @@ public interface UserPostgresMapper {
             "       status,\n" +
             "       username,\n" +
             "       score,\n" +
-            "       proof,\n" +
             "       latitude,\n" +
             "       longitude\n" +
             "FROM suggestion\n" +
@@ -66,8 +66,7 @@ public interface UserPostgresMapper {
             @Arg(column = "user_id",javaType = Long.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "proof",javaType = Image.class),
-            @Arg(column = "status",javaType = State.class)
+            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
     List<NewExchangePointPostgresSuggestion> getUserNewExchangePointSuggestions(@Param("userId") long userId);
 
@@ -78,7 +77,6 @@ public interface UserPostgresMapper {
             "       username,\n" +
             "       score,\n" +
             "       exchange_point_id,\n" +
-            "       proof\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
@@ -89,8 +87,7 @@ public interface UserPostgresMapper {
             @Arg(column = "user_id",javaType = Long.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "proof",javaType = Image.class),
-            @Arg(column = "status",javaType = State.class),
+            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
     })
     List<NonExistingExchangePointPostgresSuggestion> getUserNonExistingExchangePointSuggestions(@Param("userId")long userId);
 }

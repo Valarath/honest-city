@@ -43,17 +43,17 @@ public class UserPostgresGateway implements UserGateway {
     }
 
     @Override
-    public List<ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId) {
+    public List<? extends ExchangeRateSuggestion> getUserExchangeRateSuggestions(long userId) {
         return userPostgresMapper.getUserExchangeRateSuggestions(userId);
     }
 
     @Override
-    public List<NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId) {
+    public List<? extends NewExchangePointSuggestion> getUserNewExchangePointSuggestions(long userId) {
         return userPostgresMapper.getUserNewExchangePointSuggestions(userId);
     }
 
     @Override
-    public List<NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId) {
+    public List<? extends NonExistingExchangePointSuggestion> getUserNonExistingExchangePointSuggestions(long userId) {
         return userPostgresMapper.getUserNonExistingExchangePointSuggestions(userId);
     }
 

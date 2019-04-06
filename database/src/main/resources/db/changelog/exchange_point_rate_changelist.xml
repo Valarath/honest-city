@@ -6,8 +6,8 @@
 
     <changeSet id="create_exchange_point_rate_table" author="michal_keder">
         <createTable tableName="exchange_point_rate">
-            <column name="exchange_rate_id" type="bigint">
-                <constraints foreignKeyName="fk_exchange_rate_id" references="exchange_rate(exchange_rate_id)" nullable="false"/>
+            <column name="exchange_rates_id" type="bigint">
+                <constraints foreignKeyName="fk_exchange_rates_id" references="exchange_rates(exchange_rates_id)" nullable="false"/>
             </column>
             <column name="exchange_point_id" type="bigint">
                 <constraints foreignKeyName="fk_exchange_point_id" references="exchange_point(exchange_point_id)" nullable="false"/>
