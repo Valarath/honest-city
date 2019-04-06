@@ -3,35 +3,25 @@ package cz.honestcity.endpoints.suggestion;
 import cz.honestcity.endpoints.user.GetUserSuggestionsRequest;
 import cz.honestcity.endpoints.user.GetUserSuggestionsResponse;
 import cz.honestcity.service.suggestion.SuggestionService;
+import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/suggestion")
 public class SuggestionController {
 
     @Autowired
-    private SuggestionService suggestionService;
+    private Map<String, SuggestionService> suggestionServices;
 
-    @PostMapping("/suggest-exhange-rate-change")
-    public void suggestUpdateOfExchangePoint(@RequestBody PostExchangeRateChangeRequest request){
-        suggestionService.suggestsExchangeRateChange(request.getExchangeRateSuggestions());
+    @PostMapping("/suggest")
+    public void suggest(@RequestBody PostSuggestRequest request){
+        suggestionServices.get(request.getSuggestionServiceType().name()).suggest(request.getNewExchangePointSuggestions());
     }
 
-    @PostMapping("/suggest-exchange-point")
-    public void suggestNewExchangePoint(@RequestBody PostNewExchangePointRequest request){
-        suggestionService.suggestsNewExchangePoint(request.getNewExchangePointSuggestions());
-    }
-
-    @DeleteMapping("/remove")
-    public void remove(RemoveSuggestionRequest request){
-        suggestionService.removeSuggestions(request.getSuggestions());
-
-    }
-
-    @DeleteMapping("/report-non-existing-endpoint")
-    public void reportNonExistingPoint(ReportNonExistingExchangePointRequest request){
-        suggestionService.reportNonExistingPoint(request.getNonExistingExchangePointSuggestions());
-
+    @PostMapping("/remove")
+    public void remove(@RequestBody RemoveSuggestionRequest request){
+        suggestionServices.get(SuggestionServiceType.CLOSED_EXCHANGE_POINT).removeSuggestions(request.getSuggestions());
     }
 }

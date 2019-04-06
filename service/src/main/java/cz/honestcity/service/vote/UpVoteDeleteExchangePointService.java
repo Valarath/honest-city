@@ -14,7 +14,7 @@ public class UpVoteDeleteExchangePointService extends VoteService {
     }
 
     private void acceptDeleteExchangePoint(long suggestionId){
-        NonExistingExchangePointSuggestion suggestion =  suggestionService.getNonExistingExchangePointSuggestion(suggestionId);
+        NonExistingExchangePointSuggestion suggestion =  suggestionServices.getNonExistingExchangePointSuggestion(suggestionId);
         exchangeService.deleteExchangePoint(suggestion.getExchangePointId());
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }

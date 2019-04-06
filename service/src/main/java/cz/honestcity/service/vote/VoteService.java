@@ -23,7 +23,7 @@ public abstract class VoteService {
     private VoteGateway voteGateway;
 
     @Autowired
-    protected SuggestionService suggestionService;
+    protected Map<String, SuggestionService> suggestionServices;
 
     @Autowired
     protected ExchangeService exchangeService;

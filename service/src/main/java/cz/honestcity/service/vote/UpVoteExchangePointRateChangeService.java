@@ -14,7 +14,7 @@ public class UpVoteExchangePointRateChangeService extends VoteService{
     }
 
     private void acceptExchangeRateChange(long suggestionId){
-        ExchangeRateSuggestion suggestion =  suggestionService.getExchangeRateSuggestion(suggestionId);
+        ExchangeRateSuggestion suggestion =  suggestionServices.getExchangeRateSuggestion(suggestionId);
         exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(),suggestion.getExchangePointId());
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }

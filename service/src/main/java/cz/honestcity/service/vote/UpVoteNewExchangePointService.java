@@ -15,7 +15,7 @@ public class UpVoteNewExchangePointService extends VoteService{
     }
 
     private void acceptNewExchangePoint(long suggestionId){
-        NewExchangePointSuggestion suggestion =  suggestionService.getNewExchangePointSuggestion(suggestionId);
+        NewExchangePointSuggestion suggestion =  suggestionServices.getNewExchangePointSuggestion(suggestionId);
         exchangeService.createExchange(getNewExchangePoint(suggestion));
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }
