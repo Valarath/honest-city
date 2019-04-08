@@ -6,8 +6,8 @@ import cz.honestcity.model.exchange.Rate;
 
 public class PostgresRate extends Rate {
 
-    public PostgresRate(Currency currency, Integer sell) {
+    public PostgresRate(Currency currency, Integer buy) {
         setCurrency(currency);
-        setRateValues(new ExchangePointRateValues().setSell(sell));
+        setRateValues(new ExchangePointRateValues().setBuy(buy));
     }
 }

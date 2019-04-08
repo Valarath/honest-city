@@ -15,8 +15,7 @@ public class RatePostgresGateway implements RateDatabaseGateway {
     @Override
     public void saveCentralAuthorityRate(ExchangeRate exchangeRate) {
         long exchangeRateId = ratePostgresMapper.saveExchangeRate();
-        ratePostgresMapper.saveCentralAuthorityRate(exchangeRate,exchangeRateId);
-        ratePostgresMapper.saveCentralAuthorityRate(exchangeRate.getRates());
+        ratePostgresMapper.saveCentralAuthorityRate(exchangeRate.getRates(),exchangeRateId);
     }
 
     @Override

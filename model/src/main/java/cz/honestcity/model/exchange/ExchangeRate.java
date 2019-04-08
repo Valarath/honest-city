@@ -11,5 +11,5 @@ import java.util.Set;
 public class ExchangeRate {
     protected long id;
     protected Watched watched;
-    protected Set<Rate> rates;
+    protected Set<? extends Rate> rates;
 }
