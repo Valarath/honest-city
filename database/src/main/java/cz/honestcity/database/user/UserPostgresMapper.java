@@ -1,14 +1,13 @@
 package cz.honestcity.database.user;
 
-import cz.honestcity.database.suggestion.ExchangeRatePostgresSuggestion;
+import cz.honestcity.database.suggestion.exchange.rate.ExchangeRatePostgresSuggestion;
 import cz.honestcity.database.suggestion.NewExchangePointPostgresSuggestion;
-import cz.honestcity.database.suggestion.NonExistingExchangePointPostgresSuggestion;
+import cz.honestcity.database.suggestion.exchange.closed.ClosedExchangePointPostgresSuggestion;
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.EnumTypeHandler;
 
-import java.awt.*;
 import java.util.List;
 
 @Mapper
@@ -89,5 +88,5 @@ public interface UserPostgresMapper {
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
     })
-    List<NonExistingExchangePointPostgresSuggestion> getUserNonExistingExchangePointSuggestions(@Param("userId")long userId);
+    List<ClosedExchangePointPostgresSuggestion> getUserNonExistingExchangePointSuggestions(@Param("userId")long userId);
 }

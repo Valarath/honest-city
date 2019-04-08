@@ -1,7 +1,6 @@
 package cz.honestcity.service.suggestion;
 
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.service.gateway.SuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

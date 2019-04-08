@@ -1,18 +1,15 @@
-package cz.honestcity.database.suggestion;
+package cz.honestcity.database.suggestion.exchange.closed;
 
-import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
+import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 
-public class ExchangeRatePostgresSuggestion extends ExchangeRateSuggestion {
+public class ClosedExchangePointPostgresSuggestion extends ClosedExchangePointSuggestion {
 
-    public ExchangeRatePostgresSuggestion(Long exchangePointId, Long suggestionId, Long suggesterId, String suggesterUsername, Integer suggesterScore, Integer votes, State state, Long exchangeRateId ) {
+    public ClosedExchangePointPostgresSuggestion(Long exchangePointId, Long suggestionId, Long suggesterId, String suggesterUsername, Integer suggesterScore, State state ) {
         setExchangePointId(exchangePointId);
         setId(suggestionId);
         setState(state);
-        setVotes(votes);
-        setSuggestedExchangeRate(new ExchangeRate().setId(exchangeRateId));
         initializeSuggester(suggesterId, suggesterUsername, suggesterScore);
     }
 
@@ -22,5 +19,4 @@ public class ExchangeRatePostgresSuggestion extends ExchangeRateSuggestion {
                         .setScore(suggesterScore)
                         .setUsername(suggesterUsername));
     }
-
 }

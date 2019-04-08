@@ -12,10 +12,10 @@ public enum SuggestionServiceType {
         this.name = name;
     }
 
-    static class SuggestionServiceTypeNames{
-        public final static String NEW_EXCHANGE_POINT="NewExchangePointService";
-        public final static String BASE_SERVICE="BaseService";
-        public final static String CLOSED_EXCHANGE_POINT="ClosedExchangePointService";
-        public final static String EXCHANGE_RATE_CHANGE="ExchangeRateChangeService";
+    public static class SuggestionServiceTypeNames{
+        public final static String NEW_EXCHANGE_POINT="NewExchangePointSuggestionService";
+        public final static String BASE_SERVICE="BaseSuggestionService";
+        public final static String CLOSED_EXCHANGE_POINT="ClosedExchangePointSuggestionService";
+        public final static String EXCHANGE_RATE_CHANGE="ExchangeRateChangeSuggestionService";
     }
 }

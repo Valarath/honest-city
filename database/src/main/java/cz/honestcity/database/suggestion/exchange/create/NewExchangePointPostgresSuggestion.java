@@ -1,4 +1,4 @@
-package cz.honestcity.database.suggestion;
+package cz.honestcity.database.suggestion.exchange.create;
 
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;

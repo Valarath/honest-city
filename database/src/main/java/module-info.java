@@ -4,7 +4,6 @@ module cz.honestcity.database {
     requires spring.context;
     requires mybatis;
     requires mybatis.spring;
-    requires spring.tx;
     requires java.sql;
     requires java.desktop;
 }
