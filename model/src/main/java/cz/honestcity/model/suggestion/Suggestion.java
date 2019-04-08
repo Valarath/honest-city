@@ -12,4 +12,5 @@ public class Suggestion {
     private long id;
     private User suggestedBy;
     private State state;
+    private int votes;
 }

@@ -63,7 +63,8 @@ public class SuggestionPostgresGateway implements SuggestionGateway {
 
     @Override
     public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId) {
-        return suggestionPostgresMapper.getExchangeRateSuggestion(suggestionId);
+        ExchangeRatePostgresSuggestion exchangeRateSuggestion = suggestionPostgresMapper.getExchangeRateSuggestion(suggestionId);
+        return exchangeRateSuggestion.getSuggestedExchangeRate().setRates();
     }
 
     @Override
