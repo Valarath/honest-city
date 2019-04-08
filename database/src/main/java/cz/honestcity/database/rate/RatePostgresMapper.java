@@ -14,7 +14,7 @@ public interface RatePostgresMapper {
 
     @Insert("INSERT INTO exchange_rates")
     @Options(useGeneratedKeys = true, keyColumn = "exchange_rates_id")
-    long saveExchangeRate();
+    long saveExchangeRates();
 
     @Insert("INSERT INTO exchange_rate (exchange_rates_id, buy, currency_shortcut) \n" +
             "\"<foreach collection='rates' item='rate' index='index' open='(' separator = '),(' close=')' >#{exchangeRatesId},#{rate.exchangeRateValues.buy},#{rate.currency}</foreach>\" +\n" +

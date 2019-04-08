@@ -14,7 +14,7 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	private ExchangePostgresMapper exchangeMapper;
 
 	@Override
-	public List<ExchangePoint> getAllExchanges() {
+	public List<? extends ExchangePoint> getAllExchanges() {
 		return exchangeMapper.getAllExchanges();
 	}
 

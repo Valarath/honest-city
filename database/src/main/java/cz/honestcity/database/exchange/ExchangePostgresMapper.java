@@ -23,7 +23,7 @@ public interface ExchangePostgresMapper {
 			@Arg(column = "active_to",javaType = LocalDate.class),
 			@Arg(column = "honesty_status",javaType = HonestyStatus.class, typeHandler = EnumTypeHandler.class)
 	})
-	List<ExchangePoint> getAllExchanges();
+	List<ExchangePostgresPoint> getAllExchanges();
 
 	@Insert("INSERT into exchange_point(honesty_status, latitude, longitude)\n" +
 			"values (#{exchangePoint.honestyStatus},#{exchangePoint.latitude},#{exchangePoint.longitude});")

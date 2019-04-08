@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ExchangeGateway {
 
-	List<ExchangePoint> getAllExchanges();
+	List<? extends ExchangePoint> getAllExchanges();
 
 	void createExchange(ExchangePoint newExchangePoint);
 
