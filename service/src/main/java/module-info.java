@@ -13,4 +13,5 @@ module cz.honestcity.service {
     exports cz.honestcity.service.vote.exchange.closed;
     exports cz.honestcity.service.vote.exchange.rate;
     exports cz.honestcity.service.user;
+    exports cz.honestcity.service.rate;
 }
