@@ -1,6 +1,6 @@
 package cz.honestcity.database.exchange;
 
-import cz.honestcity.service.gateway.ExchangeGateway;
+import cz.honestcity.service.exchange.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cz.honestcity.model.exchange.ExchangePoint;

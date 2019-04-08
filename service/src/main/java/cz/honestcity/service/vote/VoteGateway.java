@@ -1,4 +1,4 @@
-package cz.honestcity.service.gateway;
+package cz.honestcity.service.vote;
 
 public interface VoteGateway {
     int getNumberOfVotes(long suggestionId);

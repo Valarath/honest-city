@@ -1,4 +1,4 @@
-package cz.honestcity.service.gateway;
+package cz.honestcity.service.rate;
 
 public enum RateGatewayType {
     RATE_CRAWLING_GATEWAY(RateGatewayConstants.RATE_CRAWLING_GATEWAY),

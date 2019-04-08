@@ -1,13 +1,14 @@
-package cz.honestcity.service.vote;
+package cz.honestcity.service.vote.exchange.create;
 
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.stereotype.Service;
 
 @Service(VoteType.VoteConstants.NEW_EXCHANGE_POINT)
-public class UpVoteNewExchangePointService extends VoteService{
+public class UpVoteNewExchangePointService extends VoteService {
 
     public void upVote(long suggestionId, long userId) {
         if(isSuggestionAcceptable(suggestionId, userId))

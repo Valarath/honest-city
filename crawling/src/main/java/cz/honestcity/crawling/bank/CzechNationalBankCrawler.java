@@ -1,7 +1,7 @@
 package cz.honestcity.crawling.bank;
 
 import cz.honestcity.model.exchange.*;
-import cz.honestcity.service.gateway.RateCrawlerGateway;
+import cz.honestcity.service.rate.RateCrawlerGateway;
 
 import java.io.*;
 import java.net.URL;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import cz.honestcity.service.gateway.RateGatewayType;
+import cz.honestcity.service.rate.RateGatewayType;
 import org.springframework.stereotype.Service;
 import static cz.honestcity.crawling.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
 

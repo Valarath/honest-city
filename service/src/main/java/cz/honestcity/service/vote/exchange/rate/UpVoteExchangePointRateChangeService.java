@@ -1,12 +1,13 @@
-package cz.honestcity.service.vote;
+package cz.honestcity.service.vote.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.stereotype.Service;
 
 @Service(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE)
-public class UpVoteExchangePointRateChangeService extends VoteService{
+public class UpVoteExchangePointRateChangeService extends VoteService {
 
     public void upVote(long suggestionId, long userId) {
         if(isSuggestionAcceptable(suggestionId, userId))

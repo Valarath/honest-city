@@ -2,7 +2,6 @@ package cz.honestcity.service.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.Position;
-import cz.honestcity.service.gateway.ExchangeGateway;
 import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;

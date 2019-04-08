@@ -1,6 +1,6 @@
 package cz.honestcity.database.vote;
 
-import cz.honestcity.service.gateway.VoteGateway;
+import cz.honestcity.service.vote.VoteGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

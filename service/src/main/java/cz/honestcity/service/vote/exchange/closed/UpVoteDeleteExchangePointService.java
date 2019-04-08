@@ -1,8 +1,9 @@
-package cz.honestcity.service.vote;
+package cz.honestcity.service.vote.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.stereotype.Service;
 
 @Service(VoteType.VoteConstants.DELETE_EXCHANGE_POINT)

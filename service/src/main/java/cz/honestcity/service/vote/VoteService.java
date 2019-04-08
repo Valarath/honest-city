@@ -2,7 +2,6 @@ package cz.honestcity.service.vote;
 
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.exchange.ExchangeService;
-import cz.honestcity.service.gateway.VoteGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

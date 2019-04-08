@@ -1,10 +1,6 @@
 package cz.honestcity.service.rate;
 
 import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.service.gateway.RateCrawlerGateway;
-import cz.honestcity.service.gateway.RateDatabaseGateway;
-import cz.honestcity.service.gateway.RateGateway;
-import cz.honestcity.service.gateway.RateGatewayType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

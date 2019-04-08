@@ -1,8 +1,8 @@
 package cz.honestcity.database.rate;
 
 import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.service.gateway.RateDatabaseGateway;
-import cz.honestcity.service.gateway.RateGatewayType;
+import cz.honestcity.service.rate.RateDatabaseGateway;
+import cz.honestcity.service.rate.RateGatewayType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

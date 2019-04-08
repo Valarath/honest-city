@@ -6,7 +6,7 @@ import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.exchange.ExchangeService;
-import cz.honestcity.service.gateway.VoteGateway;
+import cz.honestcity.service.vote.VoteGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.junit.Test;

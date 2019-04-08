@@ -5,7 +5,6 @@ import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
-import cz.honestcity.service.gateway.UserGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
