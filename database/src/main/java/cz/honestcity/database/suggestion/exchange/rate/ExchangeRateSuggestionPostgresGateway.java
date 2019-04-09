@@ -39,6 +39,13 @@ public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGat
         return exchangeRateSuggestion;
     }
 
+    @Override
+    public List<? extends ExchangeRateSuggestion> getUserSuggestions(long userId) {
+        List<ExchangeRatePostgresSuggestion> suggestions = mapper.getUserExchangeRateSuggestions(userId);
+        suggestions.forEach(this::setRates);
+        return suggestions;
+    }
+
     private void setRates(ExchangeRatePostgresSuggestion exchangeRateSuggestion) {
         exchangeRateSuggestion.getSuggestedExchangeRate().setRates(mapper.getSuggestedRates(exchangeRateSuggestion.getSuggestedExchangeRate().getId()));
     }

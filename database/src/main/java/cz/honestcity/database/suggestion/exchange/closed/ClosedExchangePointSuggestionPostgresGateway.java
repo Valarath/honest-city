@@ -2,6 +2,7 @@ package cz.honestcity.database.suggestion.exchange.closed;
 
 import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.exchange.closed.ClosedExchangePointSuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPost
 
     @Override
     public ClosedExchangePointSuggestion getClosedExchangePointSuggestion(long suggestionId) {
-        return mapper.getNonExistingExchangePointSuggestion(suggestionId);
+        return mapper.getClosedExchangePointSuggestion(suggestionId);
+    }
+
+    @Override
+    public List<? extends ClosedExchangePointSuggestion> getUserSuggestions(long userId) {
+        return mapper.getUserClosedExchangePointSuggestions(userId);
     }
 }

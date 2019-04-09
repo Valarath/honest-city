@@ -18,6 +18,11 @@ public class BaseSuggestionService extends SuggestionService {
         return null;
     }
 
+    @Override
+    public List<? extends Suggestion> getUserSuggestions(long userId) {
+        return null;
+    }
+
     public void removeSuggestions(List<? extends Suggestion> toRemove){
         suggestionGateway.removeSuggestions(toRemove);
     }

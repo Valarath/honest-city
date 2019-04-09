@@ -3,6 +3,7 @@ package cz.honestcity.database.suggestion.exchange.create;
 import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.exchange.create.NewExchangePointSuggestionGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgre
     @Override
     public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId) {
         return mapper.getNewExchangePointSuggestion(suggestionId);
+    }
+
+    @Override
+    public List<? extends NewExchangePointSuggestion> getUserSuggestions(long userId) {
+        return mapper.getUserNewExchangePointSuggestions(userId);
     }
 }

@@ -26,4 +26,8 @@ public class ClosedExchangePointSuggestionService extends BaseSuggestionService 
         return gateway.getClosedExchangePointSuggestion(suggestionId);
     }
 
+    @Override
+    public List<? extends Suggestion> getUserSuggestions(long userId) {
+        return gateway.getUserSuggestions(userId);
+    }
  }

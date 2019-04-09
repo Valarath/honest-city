@@ -36,4 +36,9 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService {
     private int compareUserScore(Suggestion userSuggestion1,Suggestion userSuggestion2){
         return Integer.compare(userSuggestion1.getSuggestedBy().getScore(),userSuggestion2.getSuggestedBy().getScore());
     }
+
+    @Override
+    public List<? extends Suggestion> getUserSuggestions(long userId) {
+        return gateway.getUserSuggestions(userId);
+    }
 }

@@ -18,5 +18,5 @@ public abstract class SuggestionService {
 
     public abstract Suggestion getSuggestion(long suggestionId);
 
-
+    public abstract List<? extends Suggestion> getUserSuggestions(long userId);
 }

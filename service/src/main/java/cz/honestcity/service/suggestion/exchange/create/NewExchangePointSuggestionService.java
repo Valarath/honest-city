@@ -25,4 +25,9 @@ public class NewExchangePointSuggestionService extends BaseSuggestionService {
     public Suggestion getSuggestion(long suggestionId) {
         return gateway.getNewExchangePointSuggestion(suggestionId);
     }
+
+    @Override
+    public List<? extends Suggestion> getUserSuggestions(long userId) {
+        return gateway.getUserSuggestions(userId);
+    }
 }

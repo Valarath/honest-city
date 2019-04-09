@@ -12,4 +12,6 @@ public interface ExchangeRateSuggestionGateway {
     void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions);
 
     ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId);
+
+    List<? extends ExchangeRateSuggestion> getUserSuggestions(long userId);
 }
