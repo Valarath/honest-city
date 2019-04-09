@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ExchangeRateSuggestionGateway {
 
-    List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
+    List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
 
     void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions);
 

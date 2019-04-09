@@ -17,8 +17,10 @@ public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGat
     private ExchangeRateSuggestionPostgresMapper mapper;
 
     @Override
-    public List<ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId) {
-        return mapper.getExchangePointSuggestions(exchangePointId);
+    public List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId) {
+        List<ExchangeRatePostgresSuggestion> suggestions = mapper.getExchangePointSuggestions(exchangePointId);
+        suggestions.forEach(this::setRates);
+        return suggestions;
     }
 
     @Override
@@ -33,8 +35,12 @@ public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGat
     @Override
     public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId) {
         ExchangeRatePostgresSuggestion exchangeRateSuggestion = mapper.getExchangeRateSuggestion(suggestionId);
-        exchangeRateSuggestion.getSuggestedExchangeRate().setRates(mapper.getSuggestedRates(exchangeRateSuggestion.getSuggestedExchangeRate().getId()));
+        setRates(exchangeRateSuggestion);
         return exchangeRateSuggestion;
+    }
+
+    private void setRates(ExchangeRatePostgresSuggestion exchangeRateSuggestion) {
+        exchangeRateSuggestion.getSuggestedExchangeRate().setRates(mapper.getSuggestedRates(exchangeRateSuggestion.getSuggestedExchangeRate().getId()));
     }
 
 }

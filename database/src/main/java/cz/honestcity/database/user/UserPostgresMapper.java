@@ -1,8 +1,8 @@
 package cz.honestcity.database.user;
 
-import cz.honestcity.database.suggestion.exchange.rate.ExchangeRatePostgresSuggestion;
-import cz.honestcity.database.suggestion.NewExchangePointPostgresSuggestion;
 import cz.honestcity.database.suggestion.exchange.closed.ClosedExchangePointPostgresSuggestion;
+import cz.honestcity.database.suggestion.exchange.create.NewExchangePointPostgresSuggestion;
+import cz.honestcity.database.suggestion.exchange.rate.ExchangeRatePostgresSuggestion;
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
