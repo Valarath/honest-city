@@ -1,8 +1,11 @@
-package cz.honestcity.service.exchange;
+package cz.honestcity.service.subject.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.Position;
+import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.service.rate.RateService;
+import cz.honestcity.service.subject.SubjectService;
+import cz.honestcity.service.subject.SubjectType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-public class ExchangeService {
+@Service(SubjectType.SubjectTypeConstants.EXCHANGE)
+public class ExchangeService extends SubjectService {
 
 	private static final double EARTH_RADIUS=6372.797560856;
 	private static final int AREA_RANGE_IN_METERS = 22000;
@@ -25,8 +28,17 @@ public class ExchangeService {
 	@Autowired
 	private RateService rateService;
 
-	public void createExchange(ExchangePoint newExchangePoint) {
-		exchangeGateway.createExchange(newExchangePoint);
+	@Override
+	public void createSubject(WatchedSubject subject) {
+		exchangeGateway.createExchange((ExchangePoint) subject);
+	}
+
+	@Override
+	public List<? extends WatchedSubject> getSubjectsInArea(Position position) {
+		return exchangeGateway.getAllExchanges().stream()
+				.filter(exchange -> isInArea(AREA_RANGE_IN_METERS,position,exchange.getPosition()))
+				.map(this::getFullyInitializeExchangePoint)
+				.collect(Collectors.toList());
 	}
 
 	public void changeExchangeRate( long newExchangeRateId, long exchangePointId) {
@@ -89,4 +101,6 @@ public class ExchangeService {
 	public void deleteExchangePoint(long exchangePointId) {
 		exchangeGateway.deleteExchangePoint(exchangePointId);
 	}
+
+
 }

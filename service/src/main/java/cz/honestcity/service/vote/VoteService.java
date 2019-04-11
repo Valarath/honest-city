@@ -1,15 +1,13 @@
 package cz.honestcity.service.vote;
 
 import cz.honestcity.model.user.User;
-import cz.honestcity.service.exchange.ExchangeService;
+import cz.honestcity.service.subject.exchange.ExchangeService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Service
 public abstract class VoteService {
 
     private static final int LOWEST_VALUE_FOR_ACCEPTENCE = 5;

@@ -1,4 +1,4 @@
-package cz.honestcity.service.exchange;
+package cz.honestcity.service.subject.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
 

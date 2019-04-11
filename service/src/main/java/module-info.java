@@ -3,7 +3,7 @@ module cz.honestcity.service {
     requires spring.beans;
     requires spring.context;
 
-    exports cz.honestcity.service.exchange;
+    exports cz.honestcity.service.subject.exchange;
     exports cz.honestcity.service.suggestion;
     exports cz.honestcity.service.suggestion.exchange.closed;
     exports cz.honestcity.service.suggestion.exchange.create;
@@ -14,4 +14,5 @@ module cz.honestcity.service {
     exports cz.honestcity.service.vote.exchange.rate;
     exports cz.honestcity.service.user;
     exports cz.honestcity.service.rate;
+    exports cz.honestcity.service.subject;
 }
