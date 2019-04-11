@@ -4,6 +4,6 @@ import cz.honestcity.model.exchange.ExchangeRate;
 
 import java.time.LocalDate;
 
-public interface RateCrawlerGateway extends RateGateway{
+public interface RateCrawlingGateway extends RateGateway{
     ExchangeRate getRate(LocalDate day);
 }

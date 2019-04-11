@@ -44,49 +44,4 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
 
-    List<ExchangeRatePostgresSuggestion> getUserExchangeRateSuggestions(@Param("userId") long userId);
-
-    @Select("SELECT suggestion.suggestion_id,\n" +
-            "       votes,\n" +
-            "       suggestion.user_id,\n" +
-            "       status,\n" +
-            "       username,\n" +
-            "       score,\n" +
-            "       latitude,\n" +
-            "       longitude\n" +
-            "FROM suggestion\n" +
-            "         join \"user\" u on suggestion.user_id = u.user_id\n" +
-            "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
-            "where suggestion.user_id = #{userId};")
-    @ConstructorArgs(value = {
-            @Arg(column = "longitude",javaType = Double.class),
-            @Arg(column = "latitude",javaType = Double.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
-            @Arg(column = "username",javaType = String.class),
-            @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
-    })
-    List<NewExchangePointPostgresSuggestion> getUserNewExchangePointSuggestions(@Param("userId") long userId);
-
-    @Select("SELECT suggestion.suggestion_id,\n" +
-            "       votes,\n" +
-            "       suggestion.user_id,\n" +
-            "       status,\n" +
-            "       username,\n" +
-            "       score,\n" +
-            "       exchange_point_id,\n" +
-            "FROM suggestion\n" +
-            "         join \"user\" u on suggestion.user_id = u.user_id\n" +
-            "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
-            "where  suggestion.user_id  = #{userId};")
-    @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
-            @Arg(column = "username",javaType = String.class),
-            @Arg(column = "score",javaType = Integer.class),
-            @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
-    })
-    List<ClosedExchangePointPostgresSuggestion> getUserNonExistingExchangePointSuggestions(@Param("userId")long userId);
 }

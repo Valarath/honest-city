@@ -5,7 +5,7 @@ import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.subject.SubjectService;
-import cz.honestcity.service.subject.SubjectType;
+import cz.honestcity.service.subject.SubjectServiceType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service(SubjectType.SubjectTypeConstants.EXCHANGE)
+@Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
 public class ExchangeService extends SubjectService {
 
 	private static final double EARTH_RADIUS=6372.797560856;
@@ -44,13 +44,6 @@ public class ExchangeService extends SubjectService {
 	public void changeExchangeRate( long newExchangeRateId, long exchangePointId) {
 		exchangeGateway.deActivateOldExchangeRate(exchangePointId);
 		exchangeGateway.changeExchangeRate(newExchangeRateId,exchangePointId);
-	}
-
-	public List<ExchangePoint> getExchangesInArea(Position userPosition){
-		return exchangeGateway.getAllExchanges().stream()
-				.filter(exchange -> isInArea(AREA_RANGE_IN_METERS,userPosition,exchange.getPosition()))
-				.map(this::getFullyInitializeExchangePoint)
-				.collect(Collectors.toList());
 	}
 
 	private ExchangePoint getFullyInitializeExchangePoint(ExchangePoint exchangePoint) {

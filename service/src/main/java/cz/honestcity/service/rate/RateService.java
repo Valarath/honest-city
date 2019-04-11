@@ -30,7 +30,7 @@ public class RateService {
         return (RateDatabaseGateway) rateGateways.get(RateGatewayType.RATE_DATABASE_GATEWAY.name);
     }
 
-    private RateCrawlerGateway getRateCrawlerGateway() {
-        return (RateCrawlerGateway) rateGateways.get(RateGatewayType.RATE_CRAWLING_GATEWAY.name);
+    private RateCrawlingGateway getRateCrawlerGateway() {
+        return (RateCrawlingGateway) rateGateways.get(RateGatewayType.RATE_CRAWLING_GATEWAY.name);
     }
 }
