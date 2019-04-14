@@ -1,6 +1,7 @@
 package cz.honestcity.service.vote.exchange.create;
 
 import cz.honestcity.model.exchange.ExchangePoint;
+import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
@@ -24,6 +25,8 @@ public class UpVoteNewExchangePointService extends VoteExchangeService {
     }
 
     private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {
-        return (ExchangePoint) new ExchangePoint().setPosition(suggestion.getPosition());
+        return (ExchangePoint) new ExchangePoint()
+                .setPosition(suggestion.getPosition())
+                .setHonestyStatus(HonestyStatus.UNKNOWN);
     }
 }
