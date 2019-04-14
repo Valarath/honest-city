@@ -4,10 +4,11 @@ import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import cz.honestcity.service.vote.VoteService;
+import cz.honestcity.service.vote.exchange.VoteExchangeService;
 import org.springframework.stereotype.Service;
 
 @Service(VoteType.VoteConstants.DELETE_EXCHANGE_POINT)
-public class UpVoteDeleteExchangePointService extends VoteService {
+public class UpVoteDeleteExchangePointService extends VoteExchangeService {
 
     public void upVote(long suggestionId, long userId) {
         if(isSuggestionAcceptable(suggestionId, userId))

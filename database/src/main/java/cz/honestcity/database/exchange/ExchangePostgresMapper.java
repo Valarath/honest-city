@@ -46,4 +46,9 @@ public interface ExchangePostgresMapper {
 			"SET active_to = now()::date\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
     void deleteExchangePoint(@Param("exchangePointId") long exchangePointId);
+
+	@Update("UPDATE exchange_point\n" +
+			"SET honesty_status = #{honestyStatus}\n" +
+			"WHERE exchange_point_id = #{exchangePointId};")
+    void setHonestyStatus(@Param("exchangePointId") long exchangePointId, @Param("honestyStatus") HonestyStatus honestyStatus);
 }

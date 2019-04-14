@@ -19,9 +19,6 @@ public abstract class VoteService {
     protected Map<String, SuggestionService> suggestionServices;
 
     @Autowired
-    protected ExchangeService exchangeService;
-
-    @Autowired
     private UserService userService;
 
     public abstract void upVote(long suggestionId, long userId);

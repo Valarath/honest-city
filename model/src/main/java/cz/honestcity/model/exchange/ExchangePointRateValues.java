@@ -6,5 +6,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Data
 public class ExchangePointRateValues extends ExchangeRateValues{
-    private int sell;
+    private double sell;
 }

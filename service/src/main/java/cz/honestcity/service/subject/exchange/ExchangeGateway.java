@@ -1,6 +1,7 @@
 package cz.honestcity.service.subject.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
+import cz.honestcity.model.subject.HonestyStatus;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface ExchangeGateway {
     void changeExchangeRate(long newExchangeRateId, long exchangePointId);
 
     void deleteExchangePoint(long exchangePointId);
+
+    void setHonestyStatus(long exchangePointId, HonestyStatus calculateHonestyStatus);
 }

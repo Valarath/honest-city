@@ -1,5 +1,6 @@
 package cz.honestcity.database.exchange;
 
+import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.service.subject.exchange.ExchangeGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,10 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	@Override
 	public void deleteExchangePoint(long exchangePointId) {
 		exchangeMapper.deleteExchangePoint(exchangePointId);
+	}
+
+	@Override
+	public void setHonestyStatus(long exchangePointId, HonestyStatus honestyStatus) {
+		exchangeMapper.setHonestyStatus(exchangePointId,honestyStatus);
 	}
 }
