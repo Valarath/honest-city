@@ -27,7 +27,7 @@ In case of extending project by yourself, to use already existing features make 
 
 for all these services exists Enums classes containing names of services, you need to add original service names and name services accordingly.
 
-For creating tests make sure that your test classes extend AbstractServiceTest.
+For creating tests for your services make sure that your test classes extend AbstractServiceTest.
 
 ## Used frameworks and libraries
 - java 12
