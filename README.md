@@ -4,6 +4,21 @@ Project hugely inspired by Honest Prague Guide and their fight with scam exchang
  ## Project Architecture
 This part of project is backend. Architecture is shown on picture.
 
+[![image11.jpg](https://i.postimg.cc/50TY45y5/image11.jpg)](https://postimg.cc/Kk7vQMn4)
+
+Principles of this architecture are:
+- classes in module Model represent all businness DTO.
+- All modules depend on module Model to use it's DTO.
+- all business logic is in module Service.
+- services in module Service use gateways (java interfaces) in order to communicate outside of it's module.
+- services in modules Database and Crawling implement gateways from module Service.
+- module Database handle communication with database.
+- module Crawling handle communication with services outside of this project.
+- module Endpoints represents public api of backend. 
+- comunication with backend use REST architecture.
+- for every incomming request to endpoints contollers exists class representing its parameters.
+- for every response from endpoints contollers exists class representing its parameters.
+
 ## Project extending
 In case of extending project by yourself, to use already existing features make sure that
 - Services dealing with new subjects are extending SubjectService
