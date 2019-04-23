@@ -3,7 +3,7 @@ Project hugely inspired by Honest Prague Guide and their fight with scam exchang
 
 ## Project structure
 - branch master contains releases
-- branch develop contains contains part of application in development state
+- branch develop contains part of application in development state
 
  ## Project Architecture
 This part of project is backend. Architecture is shown on picture.
