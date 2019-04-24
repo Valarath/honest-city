@@ -1,6 +1,7 @@
 package cz.honestcity.service.vote.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
+import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE)
 public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
@@ -30,8 +33,18 @@ public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
     }
 
     private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion){
-        List<ExchangeRateSuggestion> scoredSuggestions = exchangeRateSuggestionService.getScoredSuggestions(suggestion.getExchangePointId());
+        List<ExchangeRateSuggestion> scoredSuggestions = getInProgressSuggestions(suggestion);
         scoredSuggestions.remove(suggestion);
         exchangeRateSuggestionService.removeSuggestions(scoredSuggestions);
+    }
+
+    private List<ExchangeRateSuggestion> getInProgressSuggestions(ExchangeRateSuggestion suggestion) {
+        return exchangeRateSuggestionService.getScoredSuggestions(suggestion.getExchangePointId()).stream()
+                .filter(suggestionIsInProgressState())
+                .collect(Collectors.toList());
+    }
+
+    private Predicate<ExchangeRateSuggestion> suggestionIsInProgressState() {
+        return scoredSuggestion ->scoredSuggestion.getState().equals(State.IN_PROGRESS);
     }
 }
