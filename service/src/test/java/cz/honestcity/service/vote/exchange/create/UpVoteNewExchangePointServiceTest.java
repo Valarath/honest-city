@@ -28,19 +28,9 @@ public class UpVoteNewExchangePointServiceTest extends VoteExchangeServiceTest {
     }
 
     private void prepareEnvironment_suggestionAcceptedTest(){
-        NewExchangePointSuggestion suggestion = getClosedExchangePointSuggestionForTest();
+        NewExchangePointSuggestion suggestion = getNewExchangePointSuggestionForTest();
         setCommonEnvironment(suggestion,SuggestionServiceType.NEW_EXCHANGE_POINT,newExchangePointSuggestionService);
         doNothing().when(exchangeService).createSubject(getNewExchangePoint(suggestion));
-    }
-
-    private NewExchangePointSuggestion getClosedExchangePointSuggestionForTest() {
-        return (NewExchangePointSuggestion) new NewExchangePointSuggestion()
-                .setPosition(getPositionForTest())
-                .setSuggestedBy(getUser());
-    }
-
-    private Position getPositionForTest() {
-        return new Position();
     }
 
     private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {

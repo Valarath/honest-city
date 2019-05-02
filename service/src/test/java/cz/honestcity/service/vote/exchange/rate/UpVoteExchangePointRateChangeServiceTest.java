@@ -31,17 +31,6 @@ public class UpVoteExchangePointRateChangeServiceTest extends VoteExchangeServic
         doNothing().when(exchangeService).changeExchangeRate(EXCHANGE_RATE_ID,EXCHANGE_POINT_ID);
     }
 
-    private ExchangeRateSuggestion getExchangeRateSuggestionForTest() {
-        return new ExchangeRateSuggestion()
-                .setExchangePointId(EXCHANGE_POINT_ID)
-                .setSuggestedExchangeRate(getSuggestedExchangeRate());
-    }
-
-    private ExchangeRate getSuggestedExchangeRate() {
-        return new ExchangeRate()
-                .setId(EXCHANGE_RATE_ID);
-    }
-
     @Test
     public void upVote_suggestionNotAccepted() {
         upVote_suggestionNotAccepted(service);

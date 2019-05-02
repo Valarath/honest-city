@@ -32,12 +32,6 @@ public abstract class VoteExchangeServiceTest extends AbstractServiceTest {
     @Mock
     protected Map<String, SuggestionService> suggestionServices;
 
-    protected static final int VOTES_ON_ACCEPTED_SCENARIO = 20;
-    protected static final long SUGGESTION_ID = 1;
-    protected static final long USER_ID = 1;
-    protected static final int USER_SCORE = 0;
-    protected static final long EXCHANGE_POINT_ID = 1;
-    protected static final long EXCHANGE_RATE_ID = 1;
 
     protected void setCommonEnvironment(Suggestion suggestion,SuggestionServiceType type,SuggestionService service){
         setSuggestionService(suggestion,type,service);
@@ -60,11 +54,6 @@ public abstract class VoteExchangeServiceTest extends AbstractServiceTest {
         when(service.getSuggestion(SUGGESTION_ID)).thenReturn(suggestion);
     }
 
-    protected User getUser() {
-        return new User()
-                .setId(USER_ID)
-                .setScore(USER_SCORE);
-    }
 
     protected void upVote_suggestionNotAccepted(VoteExchangeService service){
         setCommonVoteGatewayEnvironment();

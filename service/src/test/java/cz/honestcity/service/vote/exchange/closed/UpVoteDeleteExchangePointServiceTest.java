@@ -30,12 +30,6 @@ public class UpVoteDeleteExchangePointServiceTest extends VoteExchangeServiceTes
         doNothing().when(exchangeService).deleteExchangePoint(suggestion.getExchangePointId());
     }
 
-    private ClosedExchangePointSuggestion getClosedExchangePointSuggestionForTest() {
-        return (ClosedExchangePointSuggestion) new ClosedExchangePointSuggestion()
-                .setExchangePointId(EXCHANGE_POINT_ID)
-                .setSuggestedBy(getUser());
-    }
-
     @Test
     public void upVote_suggestionNotAccepted(){
        upVote_suggestionNotAccepted(service);
