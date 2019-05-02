@@ -44,6 +44,13 @@ public class ExchangeRateSuggestionServiceTest extends SuggestionServiceTest {
 
     @Test
     public void getScoredSuggestions() {
+        List<? extends ExchangeRateSuggestion> suggestions = getSuggestionsForTest(ExchangeRateSuggestion.class);
+        prepareEnvironmentForGetScoredSuggestions(suggestions);
+        assertEquals(suggestions,service.getScoredSuggestions(EXCHANGE_POINT_ID));
+    }
+
+    private void prepareEnvironmentForGetScoredSuggestions(List<? extends ExchangeRateSuggestion> suggestions) {
+        doReturn(suggestions).when(gateway).getExchangePointSuggestions(EXCHANGE_POINT_ID);
     }
 
     @Test
