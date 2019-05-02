@@ -16,11 +16,6 @@ public abstract class SuggestionServiceTest extends AbstractServiceTest {
         this.gateway = gateway;
     }
 
-
-    protected  <T> List<? extends T> getSuggestionsForTest(Class<T> clazz) {
-        return new ArrayList<T>();
-    }
-
     protected void prepareEnvironmentForSuggestTest(List<? extends Suggestion> suggestions) {
         doNothing().when(gateway).suggests(suggestions);
     }

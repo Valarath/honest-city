@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
 public class ExchangeService extends SubjectService {
 
-    private static final double EARTH_RADIUS = 6372.797560856;
     private static final int AREA_RANGE_IN_METERS = 22000;
 
     @Autowired
@@ -63,7 +62,7 @@ public class ExchangeService extends SubjectService {
 
     private HonestyStatus calculateHonestyStatus(long exchangePointId) {
         double exchangePointEuroRate = getEurRate(rateService.getExchangePointRate(exchangePointId));
-        double centralAuthorityEuroRate = getEurRate(rateService.getExchangePointRate(exchangePointId));
+        double centralAuthorityEuroRate = getEurRate(rateService.getCentralAuthorityRate());
         if(1-exchangePointEuroRate/centralAuthorityEuroRate*100>10)
             return HonestyStatus.DISHONEST;
         else

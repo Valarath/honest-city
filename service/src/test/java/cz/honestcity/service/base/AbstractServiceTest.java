@@ -9,6 +9,9 @@ import cz.honestcity.model.user.User;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class AbstractServiceTest {
 
     protected static final int SUGGESTION_ID = 1;
@@ -17,6 +20,8 @@ public abstract class AbstractServiceTest {
     protected static final long USER_ID = 1;
     protected static final int USER_SCORE = 0;
     protected static final long EXCHANGE_RATE_ID = 1;
+    public static final int LATITUDE = 0;
+    public static final int LONGITUDE = 0;
 
     @Before
     public void setup(){
@@ -43,6 +48,10 @@ public abstract class AbstractServiceTest {
                 .setId(SUGGESTION_ID);
     }
 
+    protected  <T> List<? extends T> getSuggestionsForTest(Class<T> clazz) {
+        return new ArrayList<T>();
+    }
+
     protected ExchangeRateSuggestion getExchangeRateSuggestionForTest() {
         return (ExchangeRateSuggestion) new ExchangeRateSuggestion()
                 .setExchangePointId(EXCHANGE_POINT_ID)
@@ -56,7 +65,9 @@ public abstract class AbstractServiceTest {
                 .setId(EXCHANGE_RATE_ID);
     }
 
-    private Position getPositionForTest() {
-        return new Position();
+    protected Position getPositionForTest() {
+        return new Position()
+                .setLatitude(LATITUDE)
+                .setLongitude(LONGITUDE);
     }
 }
