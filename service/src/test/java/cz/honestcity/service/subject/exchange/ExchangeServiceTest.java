@@ -67,7 +67,7 @@ public class ExchangeServiceTest extends AbstractServiceTest {
     }
 
     private void prepareEnvironmentForGetSubjectsInAreaOneSubjectReturned(ExchangePoint exchangePoint) {
-        doReturn(Arrays.asList(exchangePoint)).when(gateway).getAllExchanges();
+        doReturn(Collections.singletonList(exchangePoint)).when(gateway).getAllExchanges();
         when(suggestionService.getScoredSuggestions(exchangePoint.getId())).thenReturn(exchangePoint.getExchangeRateSuggestions());
         when(rateService.getExchangePointRate(exchangePoint.getId())).thenReturn(exchangePoint.getExchangePointRate());
     }
