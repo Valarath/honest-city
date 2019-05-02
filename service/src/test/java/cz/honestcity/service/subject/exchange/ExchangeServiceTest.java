@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 public class ExchangeServiceTest extends AbstractServiceTest {
 
-    private static final int HONEST_BUY_VALUE = 2;
+
     private static final int DISHONEST_BUY_VALUE = 1;
     private static final int LATITUDE = 100;
     private static final int LONGITUDE = 100;
@@ -94,7 +94,6 @@ public class ExchangeServiceTest extends AbstractServiceTest {
         prepareCommonEnvironmentForChangeExchangeRate();
     }
 
-
     private void prepareCommonEnvironmentForChangeExchangeRate() {
         when(rateService.getCentralAuthorityRate()).thenReturn(getExchangePointRateForTest());
         when(rateService.getExchangePointRate(EXCHANGE_POINT_ID)).thenReturn(getExchangePointRateForTest());
@@ -119,28 +118,6 @@ public class ExchangeServiceTest extends AbstractServiceTest {
                 .setExchangePointRate(getExchangePointRateForTest())
                 .setExchangeRateSuggestions((List<ExchangeRateSuggestion>) getSuggestionsForTest(ExchangeRateSuggestion.class))
                 .setPosition(getPositionForTest());
-    }
-
-    private ExchangeRate getExchangePointRateForTest() {
-        return new ExchangeRate()
-                .setRates(getHonestRatesForTest());
-    }
-
-    private Set<? extends Rate> getHonestRatesForTest() {
-        HashSet<Rate> rates = new HashSet<>();
-        rates.add(getHonestEuroRateForTest());
-        return rates;
-    }
-
-    private Rate getHonestEuroRateForTest(){
-        return new Rate()
-                .setCurrency(Currency.EU)
-                .setRateValues(getHonestRateValuesForTest());
-    }
-
-    private ExchangeRateValues getHonestRateValuesForTest() {
-        return new ExchangeRateValues()
-                .setBuy(HONEST_BUY_VALUE);
     }
 
     private Set<? extends Rate> getDishonestRatesForTest() {

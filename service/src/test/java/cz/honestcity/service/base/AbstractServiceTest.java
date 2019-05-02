@@ -1,6 +1,9 @@
 package cz.honestcity.service.base;
 
+import cz.honestcity.model.exchange.Currency;
 import cz.honestcity.model.exchange.ExchangeRate;
+import cz.honestcity.model.exchange.ExchangeRateValues;
+import cz.honestcity.model.exchange.Rate;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
@@ -10,7 +13,9 @@ import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class AbstractServiceTest {
 
@@ -20,8 +25,9 @@ public abstract class AbstractServiceTest {
     protected static final long USER_ID = 1;
     protected static final int USER_SCORE = 0;
     protected static final long EXCHANGE_RATE_ID = 1;
-    public static final int LATITUDE = 0;
-    public static final int LONGITUDE = 0;
+    private static final int LATITUDE = 0;
+    private static final int LONGITUDE = 0;
+    private static final int HONEST_BUY_VALUE = 2;
 
     @Before
     public void setup(){
@@ -55,19 +61,37 @@ public abstract class AbstractServiceTest {
     protected ExchangeRateSuggestion getExchangeRateSuggestionForTest() {
         return (ExchangeRateSuggestion) new ExchangeRateSuggestion()
                 .setExchangePointId(EXCHANGE_POINT_ID)
-                .setSuggestedExchangeRate(getSuggestedExchangeRate())
+                .setSuggestedExchangeRate(getExchangePointRateForTest())
                 .setSuggestedBy(getUserForTest())
                 .setId(SUGGESTION_ID);
-    }
-
-    private ExchangeRate getSuggestedExchangeRate() {
-        return new ExchangeRate()
-                .setId(EXCHANGE_RATE_ID);
     }
 
     protected Position getPositionForTest() {
         return new Position()
                 .setLatitude(LATITUDE)
                 .setLongitude(LONGITUDE);
+    }
+
+    protected ExchangeRate getExchangePointRateForTest() {
+        return new ExchangeRate()
+                .setRates(getHonestRatesForTest())
+                .setId(EXCHANGE_RATE_ID);
+    }
+
+    private Set<? extends Rate> getHonestRatesForTest() {
+        HashSet<Rate> rates = new HashSet<>();
+        rates.add(getHonestEuroRateForTest());
+        return rates;
+    }
+
+    private Rate getHonestEuroRateForTest(){
+        return new Rate()
+                .setCurrency(Currency.EU)
+                .setRateValues(getHonestRateValuesForTest());
+    }
+
+    private ExchangeRateValues getHonestRateValuesForTest() {
+        return new ExchangeRateValues()
+                .setBuy(HONEST_BUY_VALUE);
     }
 }
