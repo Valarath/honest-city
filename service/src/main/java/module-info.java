@@ -8,6 +8,7 @@ module cz.honestcity.service {
     exports cz.honestcity.service.suggestion.exchange.closed;
     exports cz.honestcity.service.suggestion.exchange.create;
     exports cz.honestcity.service.suggestion.exchange.rate;
+    exports cz.honestcity.service.suggestion.base;
     exports cz.honestcity.service.vote;
     exports cz.honestcity.service.vote.exchange.create;
     exports cz.honestcity.service.vote.exchange.closed;

@@ -4,6 +4,7 @@ import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.service.base.AbstractServiceTest;
 import cz.honestcity.service.suggestion.SuggestionServiceTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,16 +23,17 @@ public class NewExchangePointSuggestionServiceTest extends SuggestionServiceTest
     @Mock
     private NewExchangePointSuggestionGateway gateway;
 
+    @Before
+    public void setup(){
+        super.setup();
+        setupGateway(gateway);
+    }
 
     @Test
     public void suggest() {
         var suggestions = getSuggestionsForTest(NewExchangePointSuggestion.class);
         prepareEnvironmentForSuggestTest(suggestions);
         service.suggest(suggestions);
-    }
-
-    private void prepareEnvironmentForSuggestTest(List<? extends NewExchangePointSuggestion> suggestions) {
-        doNothing().when(gateway).suggestsNewExchangePoint((List<NewExchangePointSuggestion>) suggestions);
     }
 
     @Test
@@ -41,20 +43,11 @@ public class NewExchangePointSuggestionServiceTest extends SuggestionServiceTest
         assertEquals(suggestion,service.getSuggestion(SUGGESTION_ID));
     }
 
-    private void prepareEnvironmentForGetSuggestionTest(NewExchangePointSuggestion suggestion) {
-        when(gateway.getNewExchangePointSuggestion(suggestion.getId())).thenReturn(suggestion);
-    }
-
     @Test
     public void getUserSuggestions() {
         var suggestionsForTest = getSuggestionsForTest(NewExchangePointSuggestion.class);
         prepareEnvironmentForGetUserSuggestionsTest(suggestionsForTest);
         assertEquals(suggestionsForTest,service.getUserSuggestions(USER_ID));
     }
-
-    private void prepareEnvironmentForGetUserSuggestionsTest(List<? extends NewExchangePointSuggestion> suggestionsForTest) {
-        doReturn(suggestionsForTest).when(gateway).getUserSuggestions(USER_ID);
-    }
-
 
 }

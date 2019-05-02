@@ -2,8 +2,7 @@ package cz.honestcity.service.suggestion.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.service.suggestion.BaseSuggestionService;
-import cz.honestcity.service.suggestion.SuggestionService;
+import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,12 @@ public class ClosedExchangePointSuggestionService extends BaseSuggestionService 
 
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
-        gateway.reportClosedPoint((List<ClosedExchangePointSuggestion>) suggestions);
+        gateway.suggests(suggestions);
     }
 
     @Override
     public Suggestion getSuggestion(long suggestionId) {
-        return gateway.getClosedExchangePointSuggestion(suggestionId);
+        return gateway.getSuggestion(suggestionId);
     }
 
     @Override

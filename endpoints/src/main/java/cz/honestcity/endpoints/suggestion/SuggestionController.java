@@ -1,8 +1,6 @@
 package cz.honestcity.endpoints.suggestion;
 
-import cz.honestcity.endpoints.user.GetUserSuggestionsRequest;
-import cz.honestcity.endpoints.user.GetUserSuggestionsResponse;
-import cz.honestcity.service.suggestion.BaseSuggestionService;
+import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;

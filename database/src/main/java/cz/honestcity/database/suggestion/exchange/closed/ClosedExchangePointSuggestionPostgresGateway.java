@@ -17,16 +17,16 @@ public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPost
     private ClosedExchangePointSuggestionPostgresMapper mapper;
 
     @Override
-    public void reportClosedPoint(List<ClosedExchangePointSuggestion> closedExchangePointSuggestions) {
+    public void suggests(List<? extends Suggestion> closedExchangePointSuggestions) {
         closedExchangePointSuggestions.forEach(suggestion ->{
             suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
-            mapper.reportNonExistingPoint(suggestion);
+            mapper.reportNonExistingPoint((ClosedExchangePointSuggestion) suggestion);
             voteServices.get(VoteType.VoteConstants.DELETE_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });
     }
 
     @Override
-    public ClosedExchangePointSuggestion getClosedExchangePointSuggestion(long suggestionId) {
+    public ClosedExchangePointSuggestion getSuggestion(long suggestionId) {
         return mapper.getClosedExchangePointSuggestion(suggestionId);
     }
 

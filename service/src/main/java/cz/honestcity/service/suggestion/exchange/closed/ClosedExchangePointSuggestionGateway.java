@@ -2,14 +2,10 @@ package cz.honestcity.service.suggestion.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.service.suggestion.SuggestionGateway;
 
 import java.util.List;
 
-public interface ClosedExchangePointSuggestionGateway {
+public interface ClosedExchangePointSuggestionGateway extends SuggestionGateway {
 
-    void reportClosedPoint(List<ClosedExchangePointSuggestion> closedExchangePointSuggestions);
-
-    ClosedExchangePointSuggestion getClosedExchangePointSuggestion(long suggestionId);
-
-    List<? extends ClosedExchangePointSuggestion> getUserSuggestions(long userId);
 }

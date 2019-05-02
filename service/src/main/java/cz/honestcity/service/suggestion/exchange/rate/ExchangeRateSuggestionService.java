@@ -2,8 +2,7 @@ package cz.honestcity.service.suggestion.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.service.suggestion.BaseSuggestionService;
-import cz.honestcity.service.suggestion.SuggestionService;
+import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +18,12 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService {
 
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
-        gateway.suggestsExchangeRateChange((List<ExchangeRateSuggestion>)suggestions);
+        gateway.suggests(suggestions);
     }
 
     @Override
     public Suggestion getSuggestion(long suggestionId) {
-        return gateway.getExchangeRateSuggestion(suggestionId);
+        return gateway.getSuggestion(suggestionId);
     }
 
     public List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId){

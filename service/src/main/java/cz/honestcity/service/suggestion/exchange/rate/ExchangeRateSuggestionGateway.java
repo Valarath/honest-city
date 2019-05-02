@@ -2,16 +2,12 @@ package cz.honestcity.service.suggestion.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.service.suggestion.SuggestionGateway;
 
 import java.util.List;
 
-public interface ExchangeRateSuggestionGateway {
+public interface ExchangeRateSuggestionGateway extends SuggestionGateway {
 
     List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
 
-    void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions);
-
-    ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId);
-
-    List<? extends ExchangeRateSuggestion> getUserSuggestions(long userId);
 }

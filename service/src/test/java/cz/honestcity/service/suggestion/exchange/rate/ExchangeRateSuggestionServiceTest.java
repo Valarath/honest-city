@@ -4,6 +4,7 @@ import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.service.base.AbstractServiceTest;
 import cz.honestcity.service.suggestion.SuggestionServiceTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,12 @@ public class ExchangeRateSuggestionServiceTest extends SuggestionServiceTest {
     @Mock
     private ExchangeRateSuggestionGateway gateway;
 
+    @Before
+    public void setup(){
+        super.setup();
+        setupGateway(gateway);
+    }
+
     @Test
     public void suggest() {
         var suggestions = getSuggestionsForTest(ExchangeRateSuggestion.class);
@@ -28,19 +35,11 @@ public class ExchangeRateSuggestionServiceTest extends SuggestionServiceTest {
         service.suggest(suggestions);
     }
 
-    private void prepareEnvironmentForSuggestTest(List<? extends ExchangeRateSuggestion> suggestions) {
-        doNothing().when(gateway).suggestsExchangeRateChange((List<ExchangeRateSuggestion>) suggestions);
-    }
-
     @Test
     public void getSuggestion() {
         ExchangeRateSuggestion suggestion = getExchangeRateSuggestionForTest();
         prepareEnvironmentForGetSuggestionTest(suggestion);
         assertEquals(suggestion,service.getSuggestion(SUGGESTION_ID));
-    }
-
-    private void prepareEnvironmentForGetSuggestionTest(ExchangeRateSuggestion suggestion) {
-        when(gateway.getExchangeRateSuggestion(suggestion.getId())).thenReturn(suggestion);
     }
 
     @Test
@@ -54,7 +53,4 @@ public class ExchangeRateSuggestionServiceTest extends SuggestionServiceTest {
         assertEquals(suggestionsForTest,service.getUserSuggestions(USER_ID));
     }
 
-    private void prepareEnvironmentForGetUserSuggestionsTest(List<? extends ExchangeRateSuggestion> suggestionsForTest) {
-        doReturn(suggestionsForTest).when(gateway).getUserSuggestions(USER_ID);
-    }
 }

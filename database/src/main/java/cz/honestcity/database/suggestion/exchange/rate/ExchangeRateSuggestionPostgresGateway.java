@@ -24,16 +24,16 @@ public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGat
     }
 
     @Override
-    public void suggestsExchangeRateChange(List<ExchangeRateSuggestion> suggestions) {
+    public void suggests(List<? extends Suggestion> suggestions) {
         suggestions.forEach(suggestion ->{
             suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
-            mapper.suggestsExchangeRateChange(suggestion);
+            mapper.suggestsExchangeRateChange((ExchangeRateSuggestion) suggestion);
             voteServices.get(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });
     }
 
     @Override
-    public ExchangeRateSuggestion getExchangeRateSuggestion(long suggestionId) {
+    public ExchangeRateSuggestion getSuggestion(long suggestionId) {
         ExchangeRatePostgresSuggestion exchangeRateSuggestion = mapper.getExchangeRateSuggestion(suggestionId);
         setRates(exchangeRateSuggestion);
         return exchangeRateSuggestion;

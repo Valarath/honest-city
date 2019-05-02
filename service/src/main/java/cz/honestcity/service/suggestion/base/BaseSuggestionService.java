@@ -1,6 +1,8 @@
-package cz.honestcity.service.suggestion;
+package cz.honestcity.service.suggestion.base;
 
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.service.suggestion.SuggestionService;
+import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,6 @@ public class BaseSuggestionService extends SuggestionService {
     public void suggest(List<? extends Suggestion> suggestions) {
 
     }
-
     @Override
     public Suggestion getSuggestion(long suggestionId) {
         return null;

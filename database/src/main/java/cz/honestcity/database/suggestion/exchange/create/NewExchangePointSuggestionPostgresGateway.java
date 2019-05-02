@@ -1,7 +1,6 @@
 package cz.honestcity.database.suggestion.exchange.create;
 
 import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
@@ -18,16 +17,16 @@ public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgre
     private NewExchangePointSuggestionPostgresMapper mapper;
 
     @Override
-    public void suggestsNewExchangePoint(List<NewExchangePointSuggestion> suggestions) {
+    public void suggests(List<? extends Suggestion> suggestions) {
         suggestions.forEach(suggestion ->{
             suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
-            mapper.suggestsNewExchangePoint(suggestion);
+            mapper.suggestsNewExchangePoint((NewExchangePointSuggestion) suggestion);
             voteServices.get(VoteType.VoteConstants.NEW_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
         });
     }
 
     @Override
-    public NewExchangePointSuggestion getNewExchangePointSuggestion(long suggestionId) {
+    public NewExchangePointSuggestion getSuggestion(long suggestionId) {
         return mapper.getNewExchangePointSuggestion(suggestionId);
     }
 
