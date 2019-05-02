@@ -6,5 +6,4 @@ module cz.honestcity.model {
     exports cz.honestcity.model.vote;
 
     requires static lombok;
-	requires java.desktop;
 }

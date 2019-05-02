@@ -1,8 +1,6 @@
 package cz.honestcity.service.vote.exchange.closed;
 
-import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import cz.honestcity.service.suggestion.exchange.closed.ClosedExchangePointSuggestionService;
@@ -23,18 +21,16 @@ public class UpVoteDeleteExchangePointServiceTest extends VoteExchangeServiceTes
     private ClosedExchangePointSuggestionService closedExchangePointSuggestionService;
 
     @Test
-    public void upVote(){
-        prepareEnvironment_successfulTest();
+    public void upVote_suggestionAccepted(){
+        prepareEnvironment_suggestionAcceptedTest();
         service.upVote(SUGGESTION_ID,USER_ID);
     }
 
-    public void prepareEnvironment_successfulTest(){
+    private void prepareEnvironment_suggestionAcceptedTest(){
         ClosedExchangePointSuggestion suggestion = getClosedExchangePointSuggestion();
-        when(voteGateway.getNumberOfVotes(SUGGESTION_ID)).thenReturn(VOTES_ON_ACCEPTED_SCENARIO);
-        when(userService.getUserScore(USER_ID)).thenReturn(USER_SCORE);
+        setCommonEnvironment(suggestion);
         setSuggestionService(suggestion);
         doNothing().when(exchangeService).deleteExchangePoint(suggestion.getExchangePointId());
-        doNothing().when(userService).increaseUserScore(suggestion.getSuggestedBy());
     }
 
     private void setSuggestionService(ClosedExchangePointSuggestion suggestion) {
@@ -48,9 +44,4 @@ public class UpVoteDeleteExchangePointServiceTest extends VoteExchangeServiceTes
                 .setSuggestedBy(getUser());
     }
 
-    private User getUser() {
-        return new User()
-                .setId(USER_ID)
-                .setScore(USER_SCORE);
-    }
 }
