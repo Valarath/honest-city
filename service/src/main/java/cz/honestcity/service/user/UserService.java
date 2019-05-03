@@ -35,14 +35,17 @@ public class UserService {
         Map<Class<? extends Suggestion>,List<? extends Suggestion>> userSuggestions = new HashMap<>();
         suggestionServices.entrySet().forEach( entry -> {
             if(!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
-                addUserSuggestions(userId, userSuggestions, entry);
+                userSuggestions.putAll(addUserSuggestions(userId,entry));
         });
         return  userSuggestions;
     }
 
-    private void addUserSuggestions(long userId, Map<Class<? extends Suggestion>, List<? extends Suggestion>> userSuggestions, Map.Entry<String, SuggestionService> entry) {
+    private Map<Class<? extends Suggestion>,List<? extends Suggestion>> addUserSuggestions(long userId, Map.Entry<String, SuggestionService> entry) {
+        Map<Class<? extends Suggestion>,List<? extends Suggestion>> userSuggestions = new HashMap<>();
         List<? extends Suggestion> suggestions = entry.getValue().getUserSuggestions(userId);
-        userSuggestions.put((Class<? extends Suggestion>) suggestions.getClass().arrayType(),suggestions);
+        if(!suggestions.isEmpty())
+            userSuggestions.put(suggestions.get(0).getClass(),suggestions);
+        return userSuggestions;
     }
 
     public void increaseUserScore(User user) {
