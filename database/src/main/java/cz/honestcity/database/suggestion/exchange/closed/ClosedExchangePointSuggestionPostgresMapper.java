@@ -41,11 +41,11 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       status,\n" +
             "       username,\n" +
             "       score,\n" +
-            "       exchange_point_id,\n" +
-            "FROM suggestion\n" +
+            "       exchange_point_id\n" +
+            " FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
-            "where  suggestion.user_id  = #{userId};")
+            " WHERE  suggestion.user_id  = #{userId};")
     @ConstructorArgs(value = {
             @Arg(column = "exchange_point_id",javaType = Long.class),
             @Arg(column = "suggestion_id",javaType = Long.class),
