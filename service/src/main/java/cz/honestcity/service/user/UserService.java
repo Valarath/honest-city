@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public Map<Class<? extends Suggestion>,List<? extends Suggestion>> getUserSuggestions(long userId) {
-        Map<Class<? extends Suggestion>,List<? extends Suggestion>> userSuggestions = new HashMap<>();
+        var userSuggestions = new HashMap<Class<? extends Suggestion>,List<? extends Suggestion>>();
         suggestionServices.entrySet().forEach( entry -> {
             if(!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
                 userSuggestions.putAll(addUserSuggestions(userId,entry));
@@ -41,8 +41,8 @@ public class UserService {
     }
 
     private Map<Class<? extends Suggestion>,List<? extends Suggestion>> addUserSuggestions(long userId, Map.Entry<String, SuggestionService> entry) {
-        Map<Class<? extends Suggestion>,List<? extends Suggestion>> userSuggestions = new HashMap<>();
-        List<? extends Suggestion> suggestions = entry.getValue().getUserSuggestions(userId);
+        var userSuggestions = new HashMap<Class<? extends Suggestion>,List<? extends Suggestion>>();
+        var suggestions = entry.getValue().getUserSuggestions(userId);
         if(!suggestions.isEmpty())
             userSuggestions.put(suggestions.get(0).getClass(),suggestions);
         return userSuggestions;
