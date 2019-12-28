@@ -7,29 +7,31 @@ import cz.honestcity.model.exchange.Rate;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.subject.WatchedSubject;
+import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.subject.SubjectService;
-import cz.honestcity.service.subject.SubjectServiceType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
+//@Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
+@HonestCityService(beanId = ExchangePoint.class)
 public class ExchangeService extends SubjectService {
 
     private static final int AREA_RANGE_IN_METERS = 22000;
 
-    @Autowired
-    private ExchangeGateway exchangeGateway;
+    private final ExchangeGateway exchangeGateway;
 
-    @Autowired
-    private ExchangeRateSuggestionService suggestionService;
+    private final ExchangeRateSuggestionService suggestionService;
 
-    @Autowired
-    private RateService rateService;
+    private final RateService rateService;
+
+    public ExchangeService(ExchangeGateway exchangeGateway, ExchangeRateSuggestionService suggestionService, RateService rateService) {
+        this.exchangeGateway = exchangeGateway;
+        this.suggestionService = suggestionService;
+        this.rateService = rateService;
+    }
 
     @Override
     public void createSubject(WatchedSubject subject) {

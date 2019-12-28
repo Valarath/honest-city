@@ -2,18 +2,23 @@ package cz.honestcity.service.suggestion.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;
-import cz.honestcity.service.suggestion.SuggestionServiceType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-@Service(SuggestionServiceType.SuggestionServiceTypeNames.CLOSED_EXCHANGE_POINT)
+//@Service(SuggestionServiceType.SuggestionServiceTypeNames.CLOSED_EXCHANGE_POINT)
+@HonestCityService(beanId = ClosedExchangePointSuggestion.class)
 public class ClosedExchangePointSuggestionService extends BaseSuggestionService {
 
-    @Autowired
-    private ClosedExchangePointSuggestionGateway gateway;
+    private final ClosedExchangePointSuggestionGateway gateway;
+
+    public ClosedExchangePointSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway, ClosedExchangePointSuggestionGateway gateway) {
+        super(suggestionGateway);
+        this.gateway = gateway;
+    }
 
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
@@ -29,4 +34,4 @@ public class ClosedExchangePointSuggestionService extends BaseSuggestionService 
     public List<? extends Suggestion> getUserSuggestions(long userId) {
         return gateway.getUserSuggestions(userId);
     }
- }
+}

@@ -1,6 +1,5 @@
 package cz.honestcity.endpoints.suggestion;
 
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import lombok.Data;

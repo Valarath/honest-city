@@ -1,13 +1,9 @@
 package cz.honestcity.service.user;
 
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
-import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,13 +13,15 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserGateway userGateway;
+    protected final Map<String, SuggestionService> suggestionServices;
+    private final UserGateway userGateway;
 
-    @Autowired
-    protected Map<String, SuggestionService> suggestionServices;
+    public UserService(UserGateway userGateway, Map<String, SuggestionService> suggestionServices) {
+        this.userGateway = userGateway;
+        this.suggestionServices = suggestionServices;
+    }
 
-    public User getUser(long userId){
+    public User getUser(long userId) {
         return userGateway.getUser(userId);
     }
 
@@ -31,7 +29,7 @@ public class UserService {
         return userGateway.getUserScore(userId);
     }
 
-    public Map<Class<? extends Suggestion>,List<? extends Suggestion>> getUserSuggestions(long userId) {
+    public Map<Class<? extends Suggestion>, List<? extends Suggestion>> getUserSuggestions(long userId) {
         var userSuggestions = new HashMap<Class<? extends Suggestion>,List<? extends Suggestion>>();
         suggestionServices.entrySet().forEach( entry -> {
             if(!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))

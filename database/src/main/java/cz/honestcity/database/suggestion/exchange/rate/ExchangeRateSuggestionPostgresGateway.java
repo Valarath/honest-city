@@ -5,7 +5,6 @@ import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionGateway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.List;
 @Service
 public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGateway implements ExchangeRateSuggestionGateway {
 
-    @Autowired
-    private ExchangeRateSuggestionPostgresMapper mapper;
+    private final ExchangeRateSuggestionPostgresMapper mapper;
+
+    public ExchangeRateSuggestionPostgresGateway(ExchangeRateSuggestionPostgresMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId) {

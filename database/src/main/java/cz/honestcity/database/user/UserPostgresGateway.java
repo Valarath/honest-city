@@ -1,20 +1,17 @@
 package cz.honestcity.database.user;
 
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
-import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.user.UserGateway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserPostgresGateway implements UserGateway {
 
-    @Autowired
-    private UserPostgresMapper userPostgresMapper;
+    private final UserPostgresMapper userPostgresMapper;
+
+    public UserPostgresGateway(UserPostgresMapper userPostgresMapper) {
+        this.userPostgresMapper = userPostgresMapper;
+    }
 
     @Override
     public User getUser(long userId) {

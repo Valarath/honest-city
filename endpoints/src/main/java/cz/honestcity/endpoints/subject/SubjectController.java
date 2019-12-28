@@ -1,10 +1,8 @@
 package cz.honestcity.endpoints.subject;
 
-import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.service.subject.SubjectService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +14,11 @@ import java.util.Map;
 @RequestMapping("/subject")
 public class SubjectController {
 
-    private Map<String, SubjectService> subjectServices;
+    private final Map<String, SubjectService> subjectServices;
+
+    public SubjectController(Map<String, SubjectService> subjectServices) {
+        this.subjectServices = subjectServices;
+    }
 
     @GetMapping("/subjects-in-area")
     public GetSubjectsResponse getSubjects(GetSubjectsRequest getSubjectsRequest) {

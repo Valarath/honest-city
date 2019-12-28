@@ -16,4 +16,5 @@ module cz.honestcity.service {
     exports cz.honestcity.service.user;
     exports cz.honestcity.service.rate;
     exports cz.honestcity.service.subject;
+    exports cz.honestcity.service.configuration;
 }

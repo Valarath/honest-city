@@ -1,18 +1,20 @@
 package cz.honestcity.database.exchange;
 
+import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.service.subject.exchange.ExchangeGateway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cz.honestcity.model.exchange.ExchangePoint;
 
 import java.util.List;
 
 @Service
 public class ExchangePostgresGateway implements ExchangeGateway {
 
-	@Autowired
-	private ExchangePostgresMapper exchangeMapper;
+	private final ExchangePostgresMapper exchangeMapper;
+
+	public ExchangePostgresGateway(ExchangePostgresMapper exchangeMapper) {
+		this.exchangeMapper = exchangeMapper;
+	}
 
 	@Override
 	public List<? extends ExchangePoint> getAllExchanges() {

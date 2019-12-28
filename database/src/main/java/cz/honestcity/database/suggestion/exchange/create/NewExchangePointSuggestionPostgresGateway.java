@@ -5,7 +5,6 @@ import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.exchange.create.NewExchangePointSuggestionGateway;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +12,18 @@ import java.util.List;
 @Service
 public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgresGateway implements NewExchangePointSuggestionGateway {
 
-    @Autowired
-    private NewExchangePointSuggestionPostgresMapper mapper;
+    private final NewExchangePointSuggestionPostgresMapper mapper;
+
+    public NewExchangePointSuggestionPostgresGateway(NewExchangePointSuggestionPostgresMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public void suggests(List<? extends Suggestion> suggestions) {
-        suggestions.forEach(suggestion ->{
+        suggestions.forEach(suggestion -> {
             suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
             mapper.suggestsNewExchangePoint((NewExchangePointSuggestion) suggestion);
-            voteServices.get(VoteType.VoteConstants.NEW_EXCHANGE_POINT).upVote(suggestion.getId(),suggestion.getSuggestedBy().getId());
+            voteServices.get(VoteType.VoteConstants.NEW_EXCHANGE_POINT).upVote(suggestion.getId(), suggestion.getSuggestedBy().getId());
         });
     }
 

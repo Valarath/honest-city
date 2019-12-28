@@ -2,19 +2,24 @@ package cz.honestcity.service.suggestion.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;
-import cz.honestcity.service.suggestion.SuggestionServiceType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service(SuggestionServiceType.SuggestionServiceTypeNames.EXCHANGE_RATE_CHANGE)
+//@Service(SuggestionServiceType.SuggestionServiceTypeNames.EXCHANGE_RATE_CHANGE)
+@HonestCityService(beanId = ExchangeRateSuggestion.class)
 public class ExchangeRateSuggestionService extends BaseSuggestionService {
 
-    @Autowired
-    private ExchangeRateSuggestionGateway gateway;
+    private final ExchangeRateSuggestionGateway gateway;
+
+    public ExchangeRateSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway, ExchangeRateSuggestionGateway gateway) {
+        super(suggestionGateway);
+        this.gateway = gateway;
+    }
 
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
