@@ -1,20 +1,24 @@
 package cz.honestcity.database.suggestion.exchange.rate;
 
 import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
+import cz.honestcity.database.suggestion.SuggestionPostgresMapper;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionGateway;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGateway implements ExchangeRateSuggestionGateway {
 
     private final ExchangeRateSuggestionPostgresMapper mapper;
 
-    public ExchangeRateSuggestionPostgresGateway(ExchangeRateSuggestionPostgresMapper mapper) {
+    public ExchangeRateSuggestionPostgresGateway(SuggestionPostgresMapper suggestionPostgresMapper, Map<String, VoteService> voteServices, ExchangeRateSuggestionPostgresMapper mapper) {
+        super(suggestionPostgresMapper, voteServices);
         this.mapper = mapper;
     }
 

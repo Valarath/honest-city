@@ -20,7 +20,7 @@ public class VoteController {
 
     @PostMapping("/up-vote")
     public void upVote(@RequestBody PostUpVoteRequest request) {
-        request.getVotes().forEach(vote -> voteServices.get(vote.getClass()).upVote(vote.getSuggestionId(), vote.getUserId()));
+        request.getVotes().forEach(vote -> voteServices.get(vote.getClass()).upVote(vote.getSuggestionId(), request.getUserId()));
     }
 
 }

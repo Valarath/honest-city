@@ -6,11 +6,13 @@ import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.State;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.EnumTypeHandler;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @Mapper
+@Service
 public interface ExchangeRateSuggestionPostgresMapper {
 
     @Insert("INSERT INTO exchange_rate_suggestion(exchange_point_id, suggestion_id, exchange_rate_id)\n" +

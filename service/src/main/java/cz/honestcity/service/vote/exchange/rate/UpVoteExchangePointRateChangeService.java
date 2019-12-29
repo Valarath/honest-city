@@ -2,6 +2,7 @@ package cz.honestcity.service.vote.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.State;
+import cz.honestcity.model.vote.VoteForExchangePointRateChange;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
@@ -12,7 +13,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 //@Service(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE)
-@HonestCityService(beanId =)
+@HonestCityService(beanId = VoteForExchangePointRateChange.class)
 public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
 
     private final ExchangeRateSuggestionService exchangeRateSuggestionService;

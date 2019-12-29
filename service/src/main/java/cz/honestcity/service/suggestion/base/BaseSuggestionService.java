@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-//@Service(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE)
 @HonestCityService(beanId = Suggestion.class)
 public class BaseSuggestionService extends SuggestionService {
 
