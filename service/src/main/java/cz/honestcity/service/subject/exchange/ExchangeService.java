@@ -11,6 +11,7 @@ import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.subject.SubjectService;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class ExchangeService extends SubjectService {
 
     private final RateService rateService;
 
+    @Autowired
     public ExchangeService(ExchangeGateway exchangeGateway, ExchangeRateSuggestionService suggestionService, RateService rateService) {
         this.exchangeGateway = exchangeGateway;
         this.suggestionService = suggestionService;

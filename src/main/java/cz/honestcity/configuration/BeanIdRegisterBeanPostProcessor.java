@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.context.annotation.ScannedGenericBeanDefinition;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -29,6 +30,47 @@ public class BeanIdRegisterBeanPostProcessor implements BeanDefinitionRegistryPo
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
+    }
+
+    -----------------------------------------------------------------------------------------------------------
+
+    public static String deCapitalize(String string) {
+        return string.substring(0, 1).toLowerCase() + string.substring(1);
+    }
+/*
+    private void changeBeansIds(BeanDefinitionRegistry registry, Map.Entry<String, Object> entry) {
+        Class<?> beanClass = entry.getValue().getClass();
+        MyServiceAnnotation annotation = beanClass.getAnnotation(MyServiceAnnotation.class);
+        System.out.println(annotation.value());
+        registry.removeBeanDefinition(entry.getKey());
+        registry.registerBeanDefinition(annotation.value().name(), BeanDefinitionBuilder.genericBeanDefinition(beanClass).getBeanDefinition());
+
+    }*/
+
+    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        String[] beanNamesForAnnotation = ((ConfigurableListableBeanFactory) registry).getBeanNamesForAnnotation(Service.class);
+        for (String beanNames : beanNamesForAnnotation)
+            changeBeansIds(registry, (ScannedGenericBeanDefinition) registry.getBeanDefinition(beanNames));
+    }
+
+    private void changeBeansIds(BeanDefinitionRegistry registry, Map.Entry<String, Object> entry) {
+        Class<?> beanClass = entry.getValue().getClass();
+        Service annotation = beanClass.getAnnotation(Service.class);
+        System.out.println(annotation.id());
+        registry.removeBeanDefinition(entry.getKey());
+        registry.registerBeanDefinition(annotation.id().getSimpleName(), BeanDefinitionBuilder.genericBeanDefinition(beanClass).getBeanDefinition());
+
+    }
+
+    private void changeBeansIds(BeanDefinitionRegistry registry, ScannedGenericBeanDefinition beanDefinition) {
+        Class newId = (Class) beanDefinition.getMetadata().getAnnotationAttributes(Service.class.getName()).get("id");
+        String[] split = beanDefinition.getMetadata().getClassName().split("\\.");
+        String oldId = deCapitalize(split[split.length - 1]);
+        System.out.println(newId);
+        registry.removeBeanDefinition(oldId);
+        registry.registerBeanDefinition(newId.getSimpleName(), beanDefinition);
 
     }
 }
