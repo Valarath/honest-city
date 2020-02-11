@@ -3,7 +3,7 @@ package cz.honestcity.service.suggestion.base;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.SuggestionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.honestcity.service.vote.VoteService;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
@@ -11,14 +11,12 @@ import java.util.List;
 @HonestCityService(beanId = Suggestion.class)
 public class BaseSuggestionService extends SuggestionService {
 
-    @Autowired
     public BaseSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway) {
         super(suggestionGateway);
     }
 
     @Override
     public void suggest(List<? extends Suggestion> suggestions) {
-
     }
 
     @Override
@@ -34,4 +32,11 @@ public class BaseSuggestionService extends SuggestionService {
     public void removeSuggestions(List<? extends Suggestion> toRemove){
         suggestionGateway.removeSuggestions(toRemove);
     }
+
+    protected void suggesterVotesForHisSuggestions(List<? extends Suggestion> suggestions, VoteService service) {
+        suggestions.forEach(suggestion ->
+                service.upVote(suggestion, suggestion.getSuggestedBy().getId())
+        );
+    }
+
 }

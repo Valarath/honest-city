@@ -2,9 +2,9 @@ package cz.honestcity.service.vote.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.State;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteForExchangePointRateChange;
 import cz.honestcity.service.configuration.HonestCityService;
-import cz.honestcity.service.suggestion.SuggestionServiceType;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
 import cz.honestcity.service.vote.exchange.VoteExchangeService;
 
@@ -22,14 +22,13 @@ public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
         this.exchangeRateSuggestionService = exchangeRateSuggestionService;
     }
 
-    public void upVote(long suggestionId, long userId) {
-        if (isSuggestionAcceptable(suggestionId, userId))
-            acceptExchangeRateChange(suggestionId);
-        recordVote(suggestionId, userId);
+    public void upVote(Suggestion suggestion, long userId) {
+        if (isSuggestionAcceptable(suggestion.getId(), userId))
+            acceptExchangeRateChange((ExchangeRateSuggestion) suggestion);
+        recordVote(suggestion.getId(), userId);
     }
 
-    private void acceptExchangeRateChange(long suggestionId) {
-        ExchangeRateSuggestion suggestion = (ExchangeRateSuggestion) suggestionServices.get(SuggestionServiceType.EXCHANGE_RATE_CHANGE.name()).getSuggestion(suggestionId);
+    private void acceptExchangeRateChange(ExchangeRateSuggestion suggestion) {
         exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getExchangePointId());
         removeDeclinedSuggestions(suggestion);
         increaseSuggesterScore(suggestion.getSuggestedBy());
@@ -38,6 +37,7 @@ public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
     private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion){
         List<ExchangeRateSuggestion> scoredSuggestions = getInProgressSuggestions(suggestion);
         scoredSuggestions.remove(suggestion);
+        //Tohle bude muset být vlastnost  exchange servisy jako m8 to smysl a nebudeš muset posílat parametr
         exchangeRateSuggestionService.removeSuggestions(scoredSuggestions);
     }
 

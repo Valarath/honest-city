@@ -1,27 +1,21 @@
 package cz.honestcity.service.vote;
 
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
-import cz.honestcity.service.subject.exchange.ExchangeService;
-import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
-
 public abstract class VoteService {
 
+    //TODO to config file
     private static final int LOWEST_VALUE_FOR_ACCEPTENCE = 5;
 
     @Autowired
     private VoteGateway voteGateway;
 
-    @Autowired
-    protected Map<String, SuggestionService> suggestionServices;
-
-    @Autowired
     private UserService userService;
 
-    public abstract void upVote(long suggestionId, long userId);
+    public abstract void upVote(Suggestion suggestion, long userId);
 
     protected void increaseSuggesterScore(User user){
         userService.increaseUserScore(user);
@@ -37,5 +31,10 @@ public abstract class VoteService {
 
     private double calculateUserTrustworthiness(long userId){
         return Math.atan(userService.getUserScore(userId)+Double.MIN_VALUE);
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

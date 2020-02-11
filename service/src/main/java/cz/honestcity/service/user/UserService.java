@@ -4,6 +4,8 @@ import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -13,12 +15,11 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    protected final Map<String, SuggestionService> suggestionServices;
+    private Map<String, SuggestionService> suggestionServices;
     private final UserGateway userGateway;
 
-    public UserService(UserGateway userGateway, Map<String, SuggestionService> suggestionServices) {
+    public UserService(UserGateway userGateway) {
         this.userGateway = userGateway;
-        this.suggestionServices = suggestionServices;
     }
 
     public User getUser(long userId) {
@@ -60,5 +61,11 @@ public class UserService {
 
     public void updateUserData(User user){
         userGateway.updateUserData(user);
+    }
+
+    @Autowired
+    @Lazy
+    public void setSuggestionServices(Map<String, SuggestionService> suggestionServices) {
+        this.suggestionServices = suggestionServices;
     }
 }

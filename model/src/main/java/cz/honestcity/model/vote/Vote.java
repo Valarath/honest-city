@@ -1,5 +1,6 @@
 package cz.honestcity.model.vote;
 
+import cz.honestcity.model.suggestion.Suggestion;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -7,5 +8,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public abstract class Vote {
     //private VoteType voteType;
-    private long suggestionId;
+    private Suggestion suggestion;
 }

@@ -22,7 +22,7 @@ public class SuggestionController {
     @PostMapping("/suggest")
     public void suggest(@RequestBody PostSuggestRequest request) {
         if (!request.getNewExchangePointSuggestions().isEmpty())
-            suggestionServices.get(request.getNewExchangePointSuggestions().get(0).getClass()).suggest(request.getNewExchangePointSuggestions());
+            suggestionServices.get(request.getNewExchangePointSuggestions().get(0).getClass().getSimpleName()).suggest(request.getNewExchangePointSuggestions());
     }
 
     @PostMapping("/remove")

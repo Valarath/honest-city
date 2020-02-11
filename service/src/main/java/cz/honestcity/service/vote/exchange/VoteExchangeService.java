@@ -8,4 +8,5 @@ public abstract class VoteExchangeService extends VoteService {
 
     @Autowired
     protected ExchangeService exchangeService;
+
 }
