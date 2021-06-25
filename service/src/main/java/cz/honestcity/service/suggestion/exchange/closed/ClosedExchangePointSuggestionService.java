@@ -31,12 +31,12 @@ public class ClosedExchangePointSuggestionService extends BaseSuggestionService 
     }
 
     @Override
-    public Suggestion getSuggestion(long suggestionId) {
+    public Suggestion getSuggestion(String suggestionId) {
         return gateway.getSuggestion(suggestionId);
     }
 
     @Override
-    public List<? extends Suggestion> getUserSuggestions(long userId) {
+    public List<? extends Suggestion> getUserSuggestions(String userId) {
         return gateway.getUserSuggestions(userId);
     }
 }

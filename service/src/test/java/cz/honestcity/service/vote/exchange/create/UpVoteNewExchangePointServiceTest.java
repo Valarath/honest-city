@@ -24,7 +24,7 @@ public class UpVoteNewExchangePointServiceTest extends VoteExchangeServiceTest {
     @Test
     public void upVote_suggestionAccepted() {
         prepareEnvironment_suggestionAcceptedTest();
-        service.upVote(SUGGESTION_ID,USER_ID);
+        service.upVote(getClosedExchangePointSuggestionForTest(),USER_ID);
     }
 
     private void prepareEnvironment_suggestionAcceptedTest(){

@@ -21,7 +21,7 @@ public class RateService {
         getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
     }
 
-    public ExchangeRate getExchangePointRate(long exchangePointId) {
+    public ExchangeRate getExchangePointRate(String exchangePointId) {
         return getRateDatabaseGateway().getExchangePointRate(exchangePointId);
     }
 

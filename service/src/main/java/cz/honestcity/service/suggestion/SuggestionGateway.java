@@ -9,8 +9,8 @@ public interface SuggestionGateway {
 
     void suggests(List<? extends Suggestion> suggestions);
 
-    Suggestion getSuggestion(long suggestionId);
+    Suggestion getSuggestion(String suggestionId);
 
-    List<? extends Suggestion> getUserSuggestions(long userId);
+    List<? extends Suggestion> getUserSuggestions(String userId);
 
 }

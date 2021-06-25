@@ -29,12 +29,12 @@ public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPost
     }
 
     @Override
-    public ClosedExchangePointSuggestion getSuggestion(long suggestionId) {
+    public ClosedExchangePointSuggestion getSuggestion(String suggestionId) {
         return mapper.getClosedExchangePointSuggestion(suggestionId);
     }
 
     @Override
-    public List<? extends ClosedExchangePointSuggestion> getUserSuggestions(long userId) {
+    public List<? extends ClosedExchangePointSuggestion> getUserSuggestions(String userId) {
         return mapper.getUserClosedExchangePointSuggestions(userId);
     }
 }

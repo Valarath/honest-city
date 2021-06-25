@@ -1,6 +1,7 @@
 package cz.honestcity.crawling.bank;
 
 import cz.honestcity.model.exchange.*;
+import cz.honestcity.service.configuration.IdProvider;
 import cz.honestcity.service.rate.RateCrawlingGateway;
 
 import java.io.*;
@@ -21,10 +22,17 @@ public class CzechNationalBankCrawling implements RateCrawlingGateway {
     private static final int NUMBER_OF_LINES_TO_SKIP= 2;
     public static final String DATE_FORMAT = "dd.MM.yyyy";
 
+    private final IdProvider idProvider;
+
+    public CzechNationalBankCrawling(IdProvider idProvider) {
+        this.idProvider = idProvider;
+    }
+
     @Override
     public ExchangeRate getRate(LocalDate day) {
         try {
             return new ExchangeRate()
+                    .setId(idProvider.provideNewId())
                     .setWatched(new Watched().setFrom(day))
                     .setRates(toRates(getRatesInCsv(day)));
         } catch (IOException ex) {

@@ -4,6 +4,7 @@ module cz.honestcity.model {
 	exports cz.honestcity.model.user;
 	exports cz.honestcity.model.suggestion;
     exports cz.honestcity.model.vote;
+    exports cz.honestcity.model.login;
 
     requires static lombok;
 }

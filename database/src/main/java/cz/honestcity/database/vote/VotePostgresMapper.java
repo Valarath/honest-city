@@ -11,9 +11,9 @@ interface VotePostgresMapper {
     @Select("SELECT votes\n" +
             "FROM suggestion\n" +
             "where suggestion_id = #{suggestionId}")
-    int getNumberOfVotes(@Param("suggestionId") long suggestionId);
+    int getNumberOfVotes(@Param("suggestionId") String suggestionId);
 
     @Insert("INSERT INTO user_votes(user_id, suggestion_id)\n" +
             "values (#{userId},#{suggestionId});")
-    void recordVote(@Param("suggestionId") long suggestionId,@Param("userId") long userId);
+    void recordVote(@Param("suggestionId") String suggestionId,@Param("userId") String userId);
 }

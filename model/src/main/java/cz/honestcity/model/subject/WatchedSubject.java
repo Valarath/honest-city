@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @Accessors(chain = true)
 public class WatchedSubject {
-    private long id;
+    private String id;
     private LocalDate watchedTo;
     private HonestyStatus honestyStatus;
 }

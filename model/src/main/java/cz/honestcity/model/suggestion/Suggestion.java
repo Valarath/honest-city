@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class Suggestion {
-    private long id;
+    private String id;
     private User suggestedBy;
     private State state;
     private int votes;

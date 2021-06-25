@@ -28,12 +28,12 @@ public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgre
     }
 
     @Override
-    public NewExchangePointSuggestion getSuggestion(long suggestionId) {
+    public NewExchangePointSuggestion getSuggestion(String suggestionId) {
         return mapper.getNewExchangePointSuggestion(suggestionId);
     }
 
     @Override
-    public List<? extends NewExchangePointSuggestion> getUserSuggestions(long userId) {
+    public List<? extends NewExchangePointSuggestion> getUserSuggestions(String userId) {
         return mapper.getUserNewExchangePointSuggestions(userId);
     }
 }

@@ -48,7 +48,7 @@ public class ExchangeService extends SubjectService {
                 .collect(Collectors.toList());
     }
 
-    public void changeExchangeRate(long newExchangeRateId, long exchangePointId) {
+    public void changeExchangeRate(String newExchangeRateId, String exchangePointId) {
         exchangeGateway.deActivateOldExchangeRate(exchangePointId);
         exchangeGateway.changeExchangeRate(newExchangeRateId, exchangePointId);
         exchangeGateway.setHonestyStatus(exchangePointId,calculateHonestyStatus(exchangePointId));
@@ -60,11 +60,11 @@ public class ExchangeService extends SubjectService {
                 .setExchangeRateSuggestions(suggestionService.getScoredSuggestions(exchangePoint.getId()));
     }
 
-    public void deleteExchangePoint(long exchangePointId) {
+    public void deleteExchangePoint(String exchangePointId) {
         exchangeGateway.deleteExchangePoint(exchangePointId);
     }
 
-    private HonestyStatus calculateHonestyStatus(long exchangePointId) {
+    private HonestyStatus calculateHonestyStatus(String exchangePointId) {
         double exchangePointEuroRate = getEurRate(rateService.getExchangePointRate(exchangePointId));
         double centralAuthorityEuroRate = getEurRate(rateService.getCentralAuthorityRate());
         if(1-exchangePointEuroRate/centralAuthorityEuroRate*100>10)

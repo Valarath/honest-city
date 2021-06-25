@@ -26,14 +26,14 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
             "WHERE ceps.suggestion_id = #{suggestionId} AND status = 'IN_PROGRESS';")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "exchange_point_id",javaType = String.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
-    ClosedExchangePointPostgresSuggestion getClosedExchangePointSuggestion(@Param("suggestionId") long suggestionId);
+    ClosedExchangePointPostgresSuggestion getClosedExchangePointSuggestion(@Param("suggestionId") String suggestionId);
 
     @Select("SELECT suggestion.suggestion_id,\n" +
             "       votes,\n" +
@@ -47,12 +47,12 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "         join closed_exchange_point_suggestion ceps on suggestion.suggestion_id = ceps.suggestion_id\n" +
             " WHERE  suggestion.user_id  = #{userId};")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "exchange_point_id",javaType = String.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
     })
-    List<ClosedExchangePointPostgresSuggestion> getUserClosedExchangePointSuggestions(@Param("userId")long userId);
+    List<ClosedExchangePointPostgresSuggestion> getUserClosedExchangePointSuggestions(@Param("userId")String userId);
 }

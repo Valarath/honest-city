@@ -15,21 +15,21 @@ public abstract class VoteService {
 
     private UserService userService;
 
-    public abstract void upVote(Suggestion suggestion, long userId);
+    public abstract void upVote(Suggestion suggestion, String userId);
 
     protected void increaseSuggesterScore(User user){
         userService.increaseUserScore(user);
     }
 
-    protected void recordVote(long suggestionId, long userId){
+    protected void recordVote(String suggestionId, String userId){
         voteGateway.recordVote(suggestionId,userId);
     }
 
-    protected boolean isSuggestionAcceptable(long suggestionId, long userId) {
+    protected boolean isSuggestionAcceptable(String suggestionId, String userId) {
         return voteGateway.getNumberOfVotes(suggestionId)*calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 
-    private double calculateUserTrustworthiness(long userId){
+    private double calculateUserTrustworthiness(String userId){
         return Math.atan(userService.getUserScore(userId)+Double.MIN_VALUE);
     }
 

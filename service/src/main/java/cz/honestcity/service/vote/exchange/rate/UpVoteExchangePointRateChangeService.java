@@ -22,7 +22,7 @@ public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
         this.exchangeRateSuggestionService = exchangeRateSuggestionService;
     }
 
-    public void upVote(Suggestion suggestion, long userId) {
+    public void upVote(Suggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion.getId(), userId))
             acceptExchangeRateChange((ExchangeRateSuggestion) suggestion);
         recordVote(suggestion.getId(), userId);

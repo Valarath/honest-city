@@ -19,7 +19,7 @@ public interface ExchangePostgresMapper {
 	@ConstructorArgs(value = {
 			@Arg(column = "longitude",javaType = Double.class),
 			@Arg(column = "latitude",javaType = Double.class),
-			@Arg(column = "exchange_point_id",javaType = Long.class),
+			@Arg(column = "exchange_point_id",javaType = String.class),
 			@Arg(column = "active_to",javaType = LocalDate.class),
 			@Arg(column = "honesty_status",javaType = HonestyStatus.class, typeHandler = EnumTypeHandler.class)
 	})
@@ -35,20 +35,20 @@ public interface ExchangePostgresMapper {
 			"    active_from = now()::date\n" +
 			"WHERE exchange_rate_id = #{newExchangeRateId}\n" +
 			"  and exchange_point_id = #{exchangePointId};")
-	void setNewExchangeRate(@Param("newExchangeRateId") long newExchangeRateId, @Param("exchangePointId") long exchangePointId);
+	void setNewExchangeRate(@Param("newExchangeRateId") String newExchangeRateId, @Param("exchangePointId") String exchangePointId);
 
 	@Update("UPDATE exchange_point_rate\n" +
 			"SET active_to = now()::date\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
-	void deActivateOldExchangeRate(@Param("exchangePointId") long exchangePointId);
+	void deActivateOldExchangeRate(@Param("exchangePointId") String exchangePointId);
 
 	@Update("UPDATE exchange_point\n" +
 			"SET active_to = now()::date\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
-    void deleteExchangePoint(@Param("exchangePointId") long exchangePointId);
+    void deleteExchangePoint(@Param("exchangePointId") String exchangePointId);
 
 	@Update("UPDATE exchange_point\n" +
 			"SET honesty_status = #{honestyStatus}\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
-    void setHonestyStatus(@Param("exchangePointId") long exchangePointId, @Param("honestyStatus") HonestyStatus honestyStatus);
+    void setHonestyStatus(@Param("exchangePointId") String exchangePointId, @Param("honestyStatus") HonestyStatus honestyStatus);
 }

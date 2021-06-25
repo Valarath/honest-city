@@ -11,7 +11,7 @@ public interface SuggestionPostgresMapper {
     @Insert("INSERT INTO suggestion(user_id, status, votes)\n" +
             "values (#{suggestion.suggestedBy.id},#{suggestion.state},0);")
     @Options(useGeneratedKeys = true, keyProperty = "suggestion.id", keyColumn = "suggestion_id")
-    long suggest(@Param("suggestion") Suggestion suggestion);
+    String suggest(@Param("suggestion") Suggestion suggestion);
 
     @Delete("<script>\n" +
             "DELETE\n" +

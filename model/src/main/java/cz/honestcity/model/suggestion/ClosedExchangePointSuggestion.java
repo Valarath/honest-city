@@ -6,5 +6,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Data
 public class ClosedExchangePointSuggestion extends Suggestion {
-    private long exchangePointId;
+    private String exchangePointId;
 }

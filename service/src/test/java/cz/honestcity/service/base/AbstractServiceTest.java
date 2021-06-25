@@ -19,12 +19,12 @@ import java.util.Set;
 
 public abstract class AbstractServiceTest {
 
-    protected static final int SUGGESTION_ID = 1;
-    protected static final long EXCHANGE_POINT_ID = 1;
+    protected static final String SUGGESTION_ID = "1";
+    protected static final String EXCHANGE_POINT_ID = "1";
     protected static final int VOTES_ON_ACCEPTED_SCENARIO = 20;
-    protected static final long USER_ID = 1;
+    protected static final String USER_ID = "1";
     protected static final int USER_SCORE = 0;
-    protected static final long EXCHANGE_RATE_ID = 1;
+    protected static final String EXCHANGE_RATE_ID = "1";
     private static final int LATITUDE = 0;
     private static final int LONGITUDE = 0;
     private static final int HONEST_BUY_VALUE = 2;

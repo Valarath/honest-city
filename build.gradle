@@ -57,6 +57,7 @@ dependencies {
     compile project(':endpoints')
     compile project(':crawling')
     compile project(':database')
+    compile project(':facebook')
 }
 
 compileJava {

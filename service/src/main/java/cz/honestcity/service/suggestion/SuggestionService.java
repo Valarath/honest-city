@@ -18,7 +18,7 @@ public abstract class SuggestionService {
 
     public abstract void suggest(List<? extends Suggestion> suggestions);
 
-    public abstract Suggestion getSuggestion(long suggestionId);
+    public abstract Suggestion getSuggestion(String suggestionId);
 
-    public abstract List<? extends Suggestion> getUserSuggestions(long userId);
+    public abstract List<? extends Suggestion> getUserSuggestions(String userId);
 }

@@ -22,15 +22,15 @@ public class UserService {
         this.userGateway = userGateway;
     }
 
-    public User getUser(long userId) {
+    public User getUser(String userId) {
         return userGateway.getUser(userId);
     }
 
-    public int getUserScore(long userId) {
+    public int getUserScore(String userId) {
         return userGateway.getUserScore(userId);
     }
 
-    public Map<Class<? extends Suggestion>, List<? extends Suggestion>> getUserSuggestions(long userId) {
+    public Map<Class<? extends Suggestion>, List<? extends Suggestion>> getUserSuggestions(String userId) {
         var userSuggestions = new HashMap<Class<? extends Suggestion>,List<? extends Suggestion>>();
         suggestionServices.entrySet().forEach( entry -> {
             if(!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
@@ -39,7 +39,7 @@ public class UserService {
         return  userSuggestions;
     }
 
-    private Map<Class<? extends Suggestion>,List<? extends Suggestion>> addUserSuggestions(long userId, Map.Entry<String, SuggestionService> entry) {
+    private Map<Class<? extends Suggestion>,List<? extends Suggestion>> addUserSuggestions(String userId, Map.Entry<String, SuggestionService> entry) {
         var userSuggestions = new HashMap<Class<? extends Suggestion>,List<? extends Suggestion>>();
         var suggestions = entry.getValue().getUserSuggestions(userId);
         if(!suggestions.isEmpty())

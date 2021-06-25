@@ -20,12 +20,12 @@ public class BaseSuggestionService extends SuggestionService {
     }
 
     @Override
-    public Suggestion getSuggestion(long suggestionId) {
+    public Suggestion getSuggestion(String suggestionId) {
         return null;
     }
 
     @Override
-    public List<? extends Suggestion> getUserSuggestions(long userId) {
+    public List<? extends Suggestion> getUserSuggestions(String userId) {
         return null;
     }
 

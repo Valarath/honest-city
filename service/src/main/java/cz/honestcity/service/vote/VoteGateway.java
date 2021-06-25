@@ -1,7 +1,7 @@
 package cz.honestcity.service.vote;
 
 public interface VoteGateway {
-    int getNumberOfVotes(long suggestionId);
+    int getNumberOfVotes(String suggestionId);
 
-    void recordVote(long suggestionId, long userId);
+    void recordVote(String suggestionId, String userId);
 }

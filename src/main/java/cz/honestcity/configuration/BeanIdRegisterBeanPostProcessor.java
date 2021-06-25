@@ -56,9 +56,8 @@ public class BeanIdRegisterBeanPostProcessor implements BeanDefinitionRegistryPo
         Class newId = (Class) beanDefinition.getMetadata().getAnnotationAttributes(HonestCityService.class.getName()).get("beanId");
         String[] split = beanDefinition.getMetadata().getClassName().split("\\.");
         String oldId = deCapitalize(split[split.length - 1]);
-        System.out.println(newId);
-        //registry.removeBeanDefinition(oldId);
-        //registry.registerBeanDefinition(newId.getSimpleName(), beanDefinition);
+        registry.removeBeanDefinition(oldId);
+        registry.registerBeanDefinition(newId.getSimpleName(), beanDefinition);
 
     }
 }

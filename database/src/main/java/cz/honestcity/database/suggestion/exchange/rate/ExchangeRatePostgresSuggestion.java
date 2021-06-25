@@ -7,7 +7,7 @@ import cz.honestcity.model.user.User;
 
 public class ExchangeRatePostgresSuggestion extends ExchangeRateSuggestion {
 
-    public ExchangeRatePostgresSuggestion(Long exchangePointId, Long suggestionId, Long suggesterId, String suggesterUsername, Integer suggesterScore, Integer votes, State state, Long exchangeRateId ) {
+    public ExchangeRatePostgresSuggestion(String exchangePointId, String suggestionId, String suggesterId, String suggesterUsername, Integer suggesterScore, Integer votes, State state, String exchangeRateId ) {
         setExchangePointId(exchangePointId);
         setId(suggestionId);
         setState(state);
@@ -16,7 +16,7 @@ public class ExchangeRatePostgresSuggestion extends ExchangeRateSuggestion {
         initializeSuggester(suggesterId, suggesterUsername, suggesterScore);
     }
 
-    private void initializeSuggester(Long suggesterId, String suggesterUsername, Integer suggesterScore) {
+    private void initializeSuggester(String suggesterId, String suggesterUsername, Integer suggesterScore) {
         setSuggestedBy(
                 new User().setId(suggesterId)
                         .setScore(suggesterScore)

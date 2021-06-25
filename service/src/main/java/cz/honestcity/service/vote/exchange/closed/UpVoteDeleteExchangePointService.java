@@ -13,7 +13,7 @@ public class UpVoteDeleteExchangePointService extends VoteExchangeService {
     public UpVoteDeleteExchangePointService() {
     }
 
-    public void upVote(Suggestion suggestion, long userId) {
+    public void upVote(Suggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion.getId(), userId))
             acceptDeleteExchangePoint((ClosedExchangePointSuggestion) suggestion);
         recordVote(suggestion.getId(), userId);

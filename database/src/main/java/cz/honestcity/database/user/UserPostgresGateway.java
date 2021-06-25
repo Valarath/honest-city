@@ -14,7 +14,7 @@ public class UserPostgresGateway implements UserGateway {
     }
 
     @Override
-    public User getUser(long userId) {
+    public User getUser(String userId) {
         return userPostgresMapper.getUser(userId);
     }
 
@@ -24,7 +24,7 @@ public class UserPostgresGateway implements UserGateway {
     }
 
     @Override
-    public int getUserScore(long userId) {
+    public int getUserScore(String userId) {
         return userPostgresMapper.getUserScore(userId);
     }
 

@@ -11,11 +11,11 @@ public interface ExchangeGateway {
 
 	void createExchange(ExchangePoint newExchangePoint);
 
-	void deActivateOldExchangeRate(long exchangePointId);
+	void deActivateOldExchangeRate(String exchangePointId);
 
-    void changeExchangeRate(long newExchangeRateId, long exchangePointId);
+    void changeExchangeRate(String newExchangeRateId, String exchangePointId);
 
-    void deleteExchangePoint(long exchangePointId);
+    void deleteExchangePoint(String exchangePointId);
 
-    void setHonestyStatus(long exchangePointId, HonestyStatus calculateHonestyStatus);
+    void setHonestyStatus(String exchangePointId, HonestyStatus calculateHonestyStatus);
 }

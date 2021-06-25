@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface UserGateway {
 
-    User getUser(long userId);
+    User getUser(String userId);
 
     void setUserScore(User user);
 
-    int getUserScore(long userId);
+    int getUserScore(String userId);
 
     void saveNewUser(User user);
 

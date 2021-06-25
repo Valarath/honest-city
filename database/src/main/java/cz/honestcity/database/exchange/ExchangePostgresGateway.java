@@ -27,22 +27,22 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	}
 
 	@Override
-	public void deActivateOldExchangeRate(long exchangePointId) {
+	public void deActivateOldExchangeRate(String exchangePointId) {
 		exchangeMapper.deActivateOldExchangeRate(exchangePointId);
 	}
 
 	@Override
-	public void changeExchangeRate(long newExchangeRateId, long exchangePointId) {
+	public void changeExchangeRate(String newExchangeRateId, String exchangePointId) {
 		exchangeMapper.setNewExchangeRate(newExchangeRateId,exchangePointId);
 	}
 
 	@Override
-	public void deleteExchangePoint(long exchangePointId) {
+	public void deleteExchangePoint(String exchangePointId) {
 		exchangeMapper.deleteExchangePoint(exchangePointId);
 	}
 
 	@Override
-	public void setHonestyStatus(long exchangePointId, HonestyStatus honestyStatus) {
+	public void setHonestyStatus(String exchangePointId, HonestyStatus honestyStatus) {
 		exchangeMapper.setHonestyStatus(exchangePointId,honestyStatus);
 	}
 }

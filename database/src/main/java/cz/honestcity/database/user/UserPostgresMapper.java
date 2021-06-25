@@ -24,7 +24,7 @@ public interface UserPostgresMapper {
             @Result(property = "score",column = "score"),
             @Result(property = "username",column = "username")
     })
-    User getUser(@Param("userId") long userId);
+    User getUser(@Param("userId") String userId);
 
     @Update("UPDATE \"user\"\n" +
             "SET score = #{user.score}\n" +
@@ -34,7 +34,7 @@ public interface UserPostgresMapper {
     @Select("SELECT score\n" +
             "FROM \"user\"\n" +
             "WHERE user_id = #{userId};")
-    int getUserScore(@Param("userId") long userId);
+    int getUserScore(@Param("userId") String userId);
 
     @Insert("INSERT INTO \"user\" (username, score) VALUES (#{user.username}, #{user.score});")
     void saveNewUser(@Param("user")User user);

@@ -8,7 +8,7 @@ public interface RateDatabaseGateway extends RateGateway {
 
     ExchangeRate getCentralAuthorityRate();
 
-    ExchangeRate getExchangePointRate(long exchangePointId);
+    ExchangeRate getExchangePointRate(String exchangePointId);
 
 
 }

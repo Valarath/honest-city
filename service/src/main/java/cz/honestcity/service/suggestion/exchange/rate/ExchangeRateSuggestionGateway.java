@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ExchangeRateSuggestionGateway extends SuggestionGateway {
 
-    List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(long exchangePointId);
+    List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(String exchangePointId);
 
 }

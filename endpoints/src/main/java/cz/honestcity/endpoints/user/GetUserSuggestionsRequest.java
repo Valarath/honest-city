@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class GetUserSuggestionsRequest {
-    private long userId;
+    private String userId;
 }

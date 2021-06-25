@@ -6,7 +6,7 @@
 
     <changeSet id="create_exchange_rates_table" author="michal_keder">
         <createTable tableName="exchange_rates">
-            <column autoIncrement="true" name="exchange_rates_id" type="bigint">
+            <column name="exchange_rates_id" type="varchar">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>

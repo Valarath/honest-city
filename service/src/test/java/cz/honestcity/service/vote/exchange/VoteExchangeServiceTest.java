@@ -57,7 +57,7 @@ public abstract class VoteExchangeServiceTest extends AbstractServiceTest {
 
     protected void upVote_suggestionNotAccepted(VoteExchangeService service){
         setCommonVoteGatewayEnvironment();
-        service.upVote(SUGGESTION_ID,USER_ID);
+        service.upVote(getClosedExchangePointSuggestionForTest(),USER_ID);
     }
 
 }

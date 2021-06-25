@@ -31,13 +31,13 @@ public interface NewExchangePointSuggestionPostgresMapper {
     @ConstructorArgs(value = {
             @Arg(column = "longitude",javaType = Double.class),
             @Arg(column = "latitude",javaType = Double.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
-    NewExchangePointPostgresSuggestion getNewExchangePointSuggestion(@Param("suggestionId") long suggestionId);
+    NewExchangePointPostgresSuggestion getNewExchangePointSuggestion(@Param("suggestionId") String suggestionId);
 
     @Select("SELECT suggestion.suggestion_id,\n" +
             "       votes,\n" +
@@ -54,12 +54,12 @@ public interface NewExchangePointSuggestionPostgresMapper {
     @ConstructorArgs(value = {
             @Arg(column = "longitude",javaType = Double.class),
             @Arg(column = "latitude",javaType = Double.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class)
     })
-    List<NewExchangePointPostgresSuggestion> getUserNewExchangePointSuggestions(@Param("userId") long userId);
+    List<NewExchangePointPostgresSuggestion> getUserNewExchangePointSuggestions(@Param("userId") String userId);
 
 }

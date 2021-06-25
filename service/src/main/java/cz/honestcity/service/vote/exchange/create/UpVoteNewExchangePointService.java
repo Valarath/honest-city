@@ -16,7 +16,7 @@ public class UpVoteNewExchangePointService extends VoteExchangeService {
     public UpVoteNewExchangePointService() {
     }
 
-    public void upVote(Suggestion suggestion, long userId) {
+    public void upVote(Suggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion.getId(), userId))
             acceptNewExchangePoint((NewExchangePointSuggestion) suggestion);
         recordVote(suggestion.getId(), userId);

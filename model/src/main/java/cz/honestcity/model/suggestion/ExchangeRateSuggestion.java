@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class ExchangeRateSuggestion extends Suggestion {
-    private long exchangePointId;
+    private String exchangePointId;
     private ExchangeRate suggestedExchangeRate;
 
 }

@@ -38,13 +38,12 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService {
         suggesterVotesForHisSuggestions(suggestions, upVoteExchangePointRateChangeService);
     }
 
-
     @Override
-    public Suggestion getSuggestion(long suggestionId) {
+    public Suggestion getSuggestion(String suggestionId) {
         return gateway.getSuggestion(suggestionId);
     }
 
-    public List<ExchangeRateSuggestion> getScoredSuggestions(long exchangePointId) {
+    public List<ExchangeRateSuggestion> getScoredSuggestions(String exchangePointId) {
         return gateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
                 .collect(Collectors.toList());
@@ -55,7 +54,7 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService {
     }
 
     @Override
-    public List<? extends Suggestion> getUserSuggestions(long userId) {
+    public List<? extends Suggestion> getUserSuggestions(String userId) {
         return gateway.getUserSuggestions(userId);
     }
 }

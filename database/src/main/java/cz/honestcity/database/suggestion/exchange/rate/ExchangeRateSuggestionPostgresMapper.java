@@ -33,16 +33,16 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +
             "WHERE suggestion2.suggestion_id =#{suggestionId}")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "exchange_point_id",javaType = String.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "votes",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
-            @Arg(column = "exchange_rates_id",javaType = Long.class)
+            @Arg(column = "exchange_rates_id",javaType = String.class)
     })
-    ExchangeRatePostgresSuggestion getExchangeRateSuggestion(@Param("suggestionId")long suggestionId);
+    ExchangeRatePostgresSuggestion getExchangeRateSuggestion(@Param("suggestionId")String suggestionId);
 
     @Select("SELECT\n" +
             "  suggestion2.suggestion_id,\n" +
@@ -58,16 +58,16 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +
             "WHERE exchange_point_id = #{exchangePointId};")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "exchange_point_id",javaType = String.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "votes",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
-            @Arg(column = "exchange_rates_id",javaType = Long.class)
+            @Arg(column = "exchange_rates_id",javaType = String.class)
     })
-    List<ExchangeRatePostgresSuggestion> getExchangePointSuggestions(@Param("exchangePointId") long exchangePointId);
+    List<ExchangeRatePostgresSuggestion> getExchangePointSuggestions(@Param("exchangePointId") String exchangePointId);
 
     @Select("SELECT\n" +
             "  buy,\n" +
@@ -78,7 +78,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             @Arg(column = "currency", javaType = Currency.class, typeHandler = EnumTypeHandler.class),
             @Arg(column = "buy", javaType = Integer.class)
     })
-    Set<PostgresRate> getSuggestedRates(@Param("exchangeRatesId") long exchangeRatesId);
+    Set<PostgresRate> getSuggestedRates(@Param("exchangeRatesId") String exchangeRatesId);
 
     @Select("SELECT\n" +
             "  suggestion2.suggestion_id,\n" +
@@ -94,14 +94,14 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +
             "WHERE u.user_id = #{userId};")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = Long.class),
-            @Arg(column = "suggestion_id",javaType = Long.class),
-            @Arg(column = "user_id",javaType = Long.class),
+            @Arg(column = "exchange_point_id",javaType = String.class),
+            @Arg(column = "suggestion_id",javaType = String.class),
+            @Arg(column = "user_id",javaType = String.class),
             @Arg(column = "username",javaType = String.class),
             @Arg(column = "score",javaType = Integer.class),
             @Arg(column = "votes",javaType = Integer.class),
             @Arg(column = "status",javaType = State.class, typeHandler = EnumTypeHandler.class),
-            @Arg(column = "exchange_rates_id",javaType = Long.class)
+            @Arg(column = "exchange_rates_id",javaType = String.class)
     })
-    List<ExchangeRatePostgresSuggestion> getUserExchangeRateSuggestions(@Param("userId") long userId);
+    List<ExchangeRatePostgresSuggestion> getUserExchangeRateSuggestions(@Param("userId") String userId);
 }

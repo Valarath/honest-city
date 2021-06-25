@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class PostUpVoteRequest {
     private List<? extends Vote> votes;
-    private long userId;
+    private String userId;
 }
