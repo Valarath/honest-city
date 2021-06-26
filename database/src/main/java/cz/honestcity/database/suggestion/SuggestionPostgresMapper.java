@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface SuggestionPostgresMapper {
 
-    @Insert("INSERT INTO suggestion(user_id, status, votes)\n" +
-            "values (#{suggestion.suggestedBy.id},#{suggestion.state},0);")
+    @Insert("INSERT INTO suggestion(suggestion_id,user_id, status, votes)\n" +
+            "values (#{suggestion.id},#{suggestion.suggestedBy.id},#{suggestion.state},0);")
     @Options(useGeneratedKeys = true, keyProperty = "suggestion.id", keyColumn = "suggestion_id")
     String suggest(@Param("suggestion") Suggestion suggestion);
 

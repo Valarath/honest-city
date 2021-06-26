@@ -10,6 +10,9 @@ module cz.honestcity.endpoints {
     requires spring.security.core;
     requires org.apache.tomcat.embed.core;
     requires spring.security.config;
+    requires jjwt;
+    requires spring.boot;
+    requires java.xml;
 
     exports cz.honestcity.endpoints.subject;
     exports cz.honestcity.endpoints.suggestion;

@@ -11,6 +11,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class PostRegisterResponse {
 
-    private User user;
+    private String accessToken;
 
 }

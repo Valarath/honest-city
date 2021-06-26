@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,17 +22,21 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
-    private final UserDetailsService userDetailsService;
+    private final JwtUserDetailsService userDetailsService;
     private final AuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtTokenService jwtTokenService;
+    private final AuthenticationService authenticationService;
 
-    public WebSecurityConfiguration(UserDetailsService userDetailsService, AuthenticationEntryPoint jwtAuthenticationEntryPoint) {
+    public WebSecurityConfiguration(JwtUserDetailsService userDetailsService, AuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtTokenService jwtTokenService, AuthenticationService authenticationService) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtTokenService = jwtTokenService;
+        this.authenticationService = authenticationService;
     }
 
     @Bean
     public OncePerRequestFilter authenticationJwtTokenFilter() {
-        return new JwtAuthenticationTokenFilter(userDetailsService);
+        return new JwtAuthenticationTokenFilter(jwtTokenService, authenticationService);
     }
 
     @Override

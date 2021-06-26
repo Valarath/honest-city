@@ -25,8 +25,8 @@ public interface ExchangePostgresMapper {
 	})
 	List<ExchangePostgresPoint> getAllExchanges();
 
-	@Insert("INSERT into exchange_point(honesty_status, latitude, longitude)\n" +
-			"values (#{exchangePoint.honestyStatus},#{exchangePoint.latitude},#{exchangePoint.longitude});")
+	@Insert("INSERT into exchange_point(exchange_point_id, honesty_status, latitude, longitude)\n" +
+			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.latitude},#{exchangePoint.longitude});")
 	void createNewExchange(@Param("exchangePoint") ExchangePoint newExchangePoint);
 
 	@Update("UPDATE exchange_point_rate\n" +

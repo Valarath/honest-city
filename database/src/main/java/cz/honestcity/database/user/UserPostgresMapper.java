@@ -31,11 +31,12 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{userId};")
     int getUserScore(@Param("userId") String userId);
 
-    @Insert("INSERT INTO \"user\" (username, score) VALUES (#{user.username}, #{user.score});")
+    @Insert("INSERT INTO \"user\" (user_id, username, score,email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email});")
     void saveNewUser(@Param("user")User user);
 
     @Update("UPDATE \"user\"\n" +
             "SET username = #{user.username}\n" +
+            "email = #{user.email}\n" +
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
 
