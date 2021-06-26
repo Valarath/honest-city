@@ -50,7 +50,9 @@ configure(allprojects.findAll { it.name != 'model' }) {
         compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.9.RELEASE')
         compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.9.RELEASE'){
             exclude(module: 'javax.annotation-api')
+            exclude(module: 'tomcat-annotations-api')
         }
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.9.RELEASE')
     }
 }
 dependencies {

@@ -26,6 +26,10 @@ public class UserService {
         return userGateway.getUser(userId);
     }
 
+    public User getUserByUsername(String username) {
+        return userGateway.getUserByUsername(username);
+    }
+
     public int getUserScore(String userId) {
         return userGateway.getUserScore(userId);
     }

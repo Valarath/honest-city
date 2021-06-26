@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/vote")
 public class VoteController {
 
     private final Map<String, VoteService> voteServices;
@@ -18,7 +17,7 @@ public class VoteController {
         this.voteServices = voteServices;
     }
 
-    @PostMapping("/up-vote")
+    @PostMapping(VoteUrl.UP_VOTE)
     public void upVote(@RequestBody PostUpVoteRequest request) {
         request.getVotes().forEach(vote -> voteServices.get(vote.getClass()).upVote(vote.getSuggestion(), request.getUserId()));
     }

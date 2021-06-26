@@ -1,4 +1,4 @@
-package cz.honestcity.endpoints.login;
+package cz.honestcity.endpoints.authorization;
 
 import cz.honestcity.model.login.LoginData;
 import lombok.Data;
@@ -7,9 +7,8 @@ import lombok.Data;
  * @author michal.keder
  */
 @Data
-public class PostLoginRequest {
+public class PostRegisterRequest {
 
-    private String test;
     private LoginData loginData;
 
 }

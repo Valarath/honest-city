@@ -1,4 +1,4 @@
-package cz.honestcity.endpoints.login;
+package cz.honestcity.endpoints.authorization;
 
 import cz.honestcity.model.user.User;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class PostLoginResponse {
+public class PostRegisterResponse {
 
     private User user;
 

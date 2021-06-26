@@ -1,17 +1,12 @@
 package cz.honestcity.database.user;
 
-import cz.honestcity.database.suggestion.exchange.closed.ClosedExchangePointPostgresSuggestion;
-import cz.honestcity.database.suggestion.exchange.create.NewExchangePointPostgresSuggestion;
-import cz.honestcity.database.suggestion.exchange.rate.ExchangeRatePostgresSuggestion;
-import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.user.User;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.EnumTypeHandler;
-
-import java.util.List;
 
 @Mapper
 public interface UserPostgresMapper {
+
+    String TO_USER ="toUser";
 
     @Select("SELECT\n" +
             "  user_id,\n" +
@@ -19,7 +14,7 @@ public interface UserPostgresMapper {
             "  username\n" +
             "FROM \"user\"\n" +
             "WHERE user_id = #{userId}")
-    @Results(value = {
+    @Results(id = TO_USER, value = {
             @Result(property = "id",column = "user_id"),
             @Result(property = "score",column = "score"),
             @Result(property = "username",column = "username")
@@ -44,4 +39,12 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
 
+    @Select("SELECT\n" +
+            "  user_id,\n" +
+            "  score,\n" +
+            "  username\n" +
+            "FROM \"user\"\n" +
+            "WHERE username = #{username}")
+    @ResultMap(TO_USER)
+    User getUserByUsername(@Param("username") String username);
 }

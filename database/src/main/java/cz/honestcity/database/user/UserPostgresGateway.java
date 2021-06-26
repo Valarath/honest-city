@@ -38,4 +38,9 @@ public class UserPostgresGateway implements UserGateway {
         userPostgresMapper.updateUserData(user);
     }
 
+    @Override
+    public User getUserByUsername(String username) {
+        return userPostgresMapper.getUserByUsername(username);
+    }
+
 }
