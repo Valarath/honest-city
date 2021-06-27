@@ -77,7 +77,7 @@ public class UserService {
         return user;
     }
 
-    public User register(User user){
+    public User login(User user){
         User updatedUserData = getLoginGateway(user.getLoginData()).getUser(user.getLoginData());
         User updatedUser = updateUser(user, updatedUserData);
         updateUserData(updatedUser);

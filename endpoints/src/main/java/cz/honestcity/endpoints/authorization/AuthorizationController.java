@@ -31,6 +31,7 @@ public class AuthorizationController {
         User newUser = getNewUser(requestData);
         setSecurityContext(request, newUser);
         return new PostRegisterResponse()
+                .setUser(newUser)
                 .setAccessToken(getAccessToken(newUser));
     }
 
@@ -39,6 +40,7 @@ public class AuthorizationController {
         User loggedUser = getLoggedUser(requestData);
         setSecurityContext(request, loggedUser);
         return new PostLoginResponse()
+                .setUser(loggedUser)
                 .setAccessToken(getAccessToken(loggedUser));
     }
 
@@ -55,6 +57,6 @@ public class AuthorizationController {
     }
 
     private User getLoggedUser(PostLoginRequest request) {
-        return userService.register(request.getUser());
+        return userService.login(request.getUser());
     }
 }

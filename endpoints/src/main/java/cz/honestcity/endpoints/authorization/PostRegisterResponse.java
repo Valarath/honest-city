@@ -12,5 +12,6 @@ import lombok.experimental.Accessors;
 public class PostRegisterResponse {
 
     private String accessToken;
+    private User user;
 
 }
