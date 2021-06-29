@@ -18,7 +18,7 @@ public class SubjectController {
         this.subjectServices = subjectServices;
     }
 
-    @GetMapping(SubjectUrl.SUBJECT_IN_AREA)
+    @GetMapping(SubjectEndpointsUrl.SUBJECT_IN_AREA)
     public GetSubjectsResponse getSubjects(GetSubjectsRequest getSubjectsRequest) {
         Map<Class<? extends WatchedSubject>, List<? extends WatchedSubject>> subjects = new HashMap<>();
         subjectServices.values().forEach(subjectService -> subjects.put((Class<? extends WatchedSubject>) subjectService.getClass().arrayType(), subjectService.getSubjectsInArea(getSubjectsRequest.getUserPosition())));

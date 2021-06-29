@@ -17,13 +17,13 @@ public class SuggestionController {
         this.suggestionServices = suggestionServices;
     }
 
-    @PostMapping(SuggestionUrl.SUGGEST)
+    @PostMapping(SuggestionEndpointsUrl.SUGGEST)
     public void suggest(@RequestBody PostSuggestRequest request) {
         if (!request.getNewExchangePointSuggestions().isEmpty())
             suggestionServices.get(request.getNewExchangePointSuggestions().get(0).getClass().getSimpleName()).suggest(request.getNewExchangePointSuggestions());
     }
 
-    @PostMapping(SuggestionUrl.REMOVE)
+    @PostMapping(SuggestionEndpointsUrl.REMOVE)
     public void remove(@RequestBody RemoveSuggestionRequest request) {
         if (!request.getSuggestions().isEmpty())
             ((BaseSuggestionService) suggestionServices.get(request.getSuggestions().get(0).getClass())).removeSuggestions(request.getSuggestions());

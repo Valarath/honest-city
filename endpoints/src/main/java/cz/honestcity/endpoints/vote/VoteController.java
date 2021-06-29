@@ -3,7 +3,6 @@ package cz.honestcity.endpoints.vote;
 import cz.honestcity.service.vote.VoteService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -17,7 +16,7 @@ public class VoteController {
         this.voteServices = voteServices;
     }
 
-    @PostMapping(VoteUrl.UP_VOTE)
+    @PostMapping(VoteEndpointsUrl.UP_VOTE)
     public void upVote(@RequestBody PostUpVoteRequest request) {
         request.getVotes().forEach(vote -> voteServices.get(vote.getClass()).upVote(vote.getSuggestion(), request.getUserId()));
     }

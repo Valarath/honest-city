@@ -3,7 +3,7 @@ package cz.honestcity.endpoints;
 /**
  * @author michal.keder
  */
-public class UrlPrefix {
+public class EndpointsUrl {
 
     private static final String API = "/api";
     public static final String PUBLIC = API + "/public";

@@ -26,7 +26,7 @@ public class AuthorizationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping(AuthorizationUrl.REGISTER)
+    @PostMapping(AuthorizationEndpointsUrl.REGISTER)
     public PostRegisterResponse register(@RequestBody PostRegisterRequest requestData, HttpServletRequest request){
         User newUser = getNewUser(requestData);
         setSecurityContext(request, newUser);
@@ -35,7 +35,7 @@ public class AuthorizationController {
                 .setAccessToken(getAccessToken(newUser));
     }
 
-    @PostMapping(AuthorizationUrl.LOGIN)
+    @PostMapping(AuthorizationEndpointsUrl.LOGIN)
     public PostLoginResponse login(@RequestBody PostLoginRequest requestData, HttpServletRequest request){
         User loggedUser = getLoggedUser(requestData);
         setSecurityContext(request, loggedUser);

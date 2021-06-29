@@ -1,6 +1,6 @@
 package cz.honestcity.endpoints.configuration.authorization;
 
-import cz.honestcity.endpoints.UrlPrefix;
+import cz.honestcity.endpoints.EndpointsUrl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,7 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers(UrlPrefix.PUBLIC+"/**").permitAll()
+                .authorizeRequests().antMatchers(EndpointsUrl.PUBLIC+"/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

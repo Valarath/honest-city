@@ -13,7 +13,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(UserUrl.USER_SUGGESTIONS)
+    @GetMapping(UserEndpointsUrl.USER_SUGGESTIONS)
     public GetUserSuggestionsResponse getUserSuggestions(GetUserSuggestionsRequest request) {
         return new GetUserSuggestionsResponse()
                 .setUserSuggestions(userService.getUserSuggestions(request.getUserId()));

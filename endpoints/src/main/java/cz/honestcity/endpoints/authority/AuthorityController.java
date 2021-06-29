@@ -13,7 +13,7 @@ public class AuthorityController {
         this.rateService = rateService;
     }
 
-    @GetMapping(AuthorityUrl.GET_RATE)
+    @GetMapping(AuthorityEndpointsUrl.GET_RATE)
     public GetCentralAuthorityRateResponse getCentralAuthorityRate() {
         return new GetCentralAuthorityRateResponse().setExchangeRate(rateService.getCentralAuthorityRate());
     }
