@@ -1,6 +1,7 @@
 package cz.honestcity.endpoints.subject;
 
 import cz.honestcity.model.subject.WatchedSubject;
+import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.subject.SubjectService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +21,17 @@ public class SubjectController {
 
     @GetMapping(SubjectEndpointsUrl.SUBJECT_IN_AREA)
     public GetSubjectsResponse getSubjects(GetSubjectsRequest getSubjectsRequest) {
-        Map<Class<? extends WatchedSubject>, List<? extends WatchedSubject>> subjects = new HashMap<>();
-        subjectServices.values().forEach(subjectService -> subjects.put((Class<? extends WatchedSubject>) subjectService.getClass().arrayType(), subjectService.getSubjectsInArea(getSubjectsRequest.getUserPosition())));
+        Map<Class<? extends WatchedSubject>, List<? extends WatchedSubject>> subjects =new HashMap<>();
+        subjectServices.values().forEach(subjectService -> subjects.put(getWatchedSubjectClass(subjectService), getSubjectsInArea(getSubjectsRequest, subjectService)));
         return new GetSubjectsResponse().setSubjects(subjects);
+    }
+
+    private List<? extends WatchedSubject> getSubjectsInArea(GetSubjectsRequest getSubjectsRequest, SubjectService subjectService) {
+        return subjectService.getSubjectsInArea(getSubjectsRequest.getUserPosition());
+    }
+
+    private Class<? extends WatchedSubject> getWatchedSubjectClass(SubjectService subjectService) {
+        return (subjectService.getClass().getDeclaredAnnotation(HonestCityService.class)).beanId();
     }
 
 }
