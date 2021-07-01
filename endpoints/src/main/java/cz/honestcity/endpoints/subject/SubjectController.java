@@ -22,8 +22,8 @@ public class SubjectController extends BaseController {
 
     @GetMapping(SubjectEndpointsUrl.SUBJECT_IN_AREA)
     public GetSubjectsResponse getSubjects(GetSubjectsRequest getSubjectsRequest) {
-        Map<Class<? extends WatchedSubject>, List<? extends WatchedSubject>> subjects =new HashMap<>();
-        subjectServices.values().forEach(subjectService -> subjects.put(getWatchedSubjectClass(subjectService), getSubjectsInArea(getSubjectsRequest, subjectService)));
+        Map<String, List<? extends WatchedSubject>> subjects =new HashMap<>();
+        subjectServices.values().forEach(subjectService -> subjects.put(getWatchedSubjectClassName(subjectService), getSubjectsInArea(getSubjectsRequest, subjectService)));
         return new GetSubjectsResponse().setSubjects(subjects);
     }
 
@@ -31,8 +31,8 @@ public class SubjectController extends BaseController {
         return subjectService.getSubjectsInArea(getSubjectsRequest.getUserPosition());
     }
 
-    private Class<? extends WatchedSubject> getWatchedSubjectClass(SubjectService subjectService) {
-        return (subjectService.getClass().getDeclaredAnnotation(HonestCityService.class)).beanId();
+    private String getWatchedSubjectClassName(SubjectService subjectService) {
+        return (subjectService.getClass().getDeclaredAnnotation(HonestCityService.class)).beanId().getSimpleName();
     }
 
 }

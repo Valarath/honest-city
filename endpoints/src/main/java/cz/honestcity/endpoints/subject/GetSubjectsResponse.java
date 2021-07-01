@@ -10,5 +10,5 @@ import java.util.Map;
 @Data
 @Accessors(chain = true)
 public class GetSubjectsResponse {
-    private Map<Class<? extends WatchedSubject>, List<? extends WatchedSubject>> subjects;
+    private Map<String, List<? extends WatchedSubject>> subjects;
 }
