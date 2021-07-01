@@ -10,5 +10,5 @@ import java.util.Map;
 @Data
 @Accessors(chain = true)
 public class GetUserSuggestionsResponse {
-    private Map<Class<? extends Suggestion>,List<? extends Suggestion>> userSuggestions;
+    private Map<String,List<? extends Suggestion>> userSuggestions;
 }

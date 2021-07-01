@@ -82,11 +82,11 @@ public class UserServiceTest extends AbstractServiceTest {
     }
 
     private void checkResultOfGetUserSuggestionsOneSuggestion(ClosedExchangePointSuggestion suggestion) {
-        Map<Class<? extends Suggestion>, List<? extends Suggestion>> userSuggestions = service.getUserSuggestions(USER_ID);
+        Map<String, List<? extends Suggestion>> userSuggestions = service.getUserSuggestions(USER_ID);
         assertFalse(userSuggestions.isEmpty());
         assertEquals(NUMBER_OF_EXPECTED_SUGGESTION_TYPES, userSuggestions.size());
-        assertEquals(NUMBER_OF_EXPECTED_SUGGESTIONS, userSuggestions.get(ClosedExchangePointSuggestion.class).size());
-        assertTrue(userSuggestions.get(ClosedExchangePointSuggestion.class).contains(suggestion));
+        assertEquals(NUMBER_OF_EXPECTED_SUGGESTIONS, userSuggestions.get(ClosedExchangePointSuggestion.class.getSimpleName()).size());
+        assertTrue(userSuggestions.get(ClosedExchangePointSuggestion.class.getSimpleName()).contains(suggestion));
     }
 
     private void prepareEnvironmentForGetUserSuggestionsOneSuggestion(ClosedExchangePointSuggestion suggestion) {
