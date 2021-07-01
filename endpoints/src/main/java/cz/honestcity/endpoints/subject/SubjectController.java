@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.subject;
 
+import cz.honestcity.endpoints.BaseController;
 import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.subject.SubjectService;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class SubjectController {
+public class SubjectController extends BaseController {
 
     private final Map<String, SubjectService> subjectServices;
 

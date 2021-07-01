@@ -1,11 +1,12 @@
 package cz.honestcity.endpoints.authority;
 
+import cz.honestcity.endpoints.BaseController;
 import cz.honestcity.service.rate.RateService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthorityController {
+public class AuthorityController extends BaseController {
 
     private final RateService rateService;
 

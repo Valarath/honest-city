@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.authorization;
 
+import cz.honestcity.endpoints.BaseController;
 import cz.honestcity.endpoints.configuration.authorization.AuthenticationService;
 import cz.honestcity.endpoints.configuration.authorization.JwtTokenService;
 import cz.honestcity.model.user.User;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author michal.keder
  */
 @RestController
-public class AuthorizationController {
+public class AuthorizationController extends BaseController {
 
     private final UserService userService;
     private final JwtTokenService jwtTokenService;
