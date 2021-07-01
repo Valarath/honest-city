@@ -13,7 +13,7 @@ import java.util.Set;
 public interface RatePostgresMapper {
 
     @Insert("INSERT INTO exchange_rates(exchange_rates_id) \n" +
-            "values (#{exchangeRatesId})")
+            "values (#{exchangeRatesId});")
     void saveExchangeRates(@Param("exchangeRatesId") String exchangeRatesId);
 
     @Insert("<script> \n" +
@@ -21,11 +21,22 @@ public interface RatePostgresMapper {
             "VALUES \n" +
             "<foreach collection='exchangeRate.rates' item='rate' index='index' open='(' separator = '),(' close=')' > #{exchangeRatesId}, #{exchangeRatesId}, #{rate.rateValues.buy}, #{rate.currency}</foreach> \n" +
             "</script>")
-    void saveCentralAuthorityRate(@Param("rates") Set<? extends Rate> rates, @Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
+    void saveCentralAuthorityRates(@Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
+
+    @Insert("INSERT INTO central_authority_rate (exchange_rates_id, central_authority_id, active_from, active_to) \n" +
+            "VALUES(#{exchangeRatesId},(SELECT central_authority_id from central_authority LIMIT 1),#{exchangeRate.watched.from},#{exchangeRate.watched.to});")
+    void saveCentralAuthorityRate(@Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
+
+    @Update("UPDATE central_authority_rate \n" +
+            "set active_to = #{to} \n" +
+            "WHERE active_to ISNULL")
+    void disableRate(@Param("to") LocalDate to);
 
     @Select("SELECT central_authority_id, active_from, active_to\n" +
             "FROM central_authority_rate\n" +
-            "where active_to ISNULL;")
+            "where active_to ISNULL " +
+            "ORDER BY active_from DESC " +
+            "LIMIT 1;")
     @ConstructorArgs(value = {
             @Arg(column = "central_authority_id", javaType = String.class),
             @Arg(column = "active_from", javaType = LocalDate.class),
@@ -52,10 +63,10 @@ public interface RatePostgresMapper {
             "       FROM exchange_rates\n" +
             "         join central_authority_rate c2 on exchange_rates.exchange_rates_id = c2.exchange_rates_id\n" +
             "         join central_authority a on c2.central_authority_id = a.central_authority_id\n" +
-            "       where a.central_authority_id notnull and active_to isnull);")
+            "       where a.central_authority_id notnull and active_to is null);")
 
     @ConstructorArgs(value = {
-            @Arg(column = "currency", javaType = Currency.class, typeHandler = EnumTypeHandler.class),
+            @Arg(column = "currency_shortcut", javaType = Currency.class, typeHandler = EnumTypeHandler.class),
             @Arg(column = "buy", javaType = Integer.class)
     })
     Set<PostgresRate> getCentralAuthorityRates();

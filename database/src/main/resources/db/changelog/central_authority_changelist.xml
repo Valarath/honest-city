@@ -14,4 +14,11 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet author="michal_keder" id="insert-czech-national-bank-as-central-authority">
+        <insert tableName="central_authority">
+            <column name="central_authority_id" value="czechnationalbankid"/>
+            <column name="name" value="Czech national bank"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
