@@ -1,6 +1,7 @@
 package cz.honestcity.service.rate;
 
 import cz.honestcity.model.exchange.ExchangeRate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,17 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Service
-public class RateService {
+public class RateService implements InitializingBean {
 
     private final Map<String, ? extends RateGateway> rateGateways;
 
     public RateService(Map<String, ? extends RateGateway> rateGateways) {
         this.rateGateways = rateGateways;
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
     }
 
     @Scheduled(cron = "0 0 3 * * ?")

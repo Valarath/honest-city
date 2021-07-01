@@ -70,7 +70,11 @@ public class CzechNationalBankCrawling implements RateCrawlingGateway {
 
     private ExchangeRateValues getRateValues(String value) {
         return new ExchangeRateValues()
-                .setBuy(Integer.parseInt(value));
+                .setBuy(Double.parseDouble(getFormatedValue(value)));
+    }
+
+    private String getFormatedValue(String value) {
+        return value.replace(",", ".");
     }
 
     private Currency getCurrency(String value) {

@@ -12,22 +12,24 @@ import java.util.Set;
 @Mapper
 public interface RatePostgresMapper {
 
-    @Insert("INSERT INTO exchange_rates")
-    @Options(useGeneratedKeys = true, keyColumn = "exchange_rates_id")
-    String saveExchangeRates();
+    @Insert("INSERT INTO exchange_rates(exchange_rates_id) \n" +
+            "values (#{exchangeRatesId})")
+    void saveExchangeRates(@Param("exchangeRatesId") String exchangeRatesId);
 
-    @Insert("INSERT INTO exchange_rate (exchange_rates_id, buy, currency_shortcut) \n" +
-            "\"<foreach collection='rates' item='rate' index='index' open='(' separator = '),(' close=')' >#{exchangeRatesId},#{rate.exchangeRateValues.buy},#{rate.currency}</foreach>\" +\n" +
-            "\"</script>\"")
-    void saveCentralAuthorityRate(@Param("rates") Set<? extends Rate> rates,@Param("exchangeRatesId") String exchangeRatesId);
+    @Insert("<script> \n" +
+            "INSERT INTO exchange_rate (exchange_rate_id, exchange_rates_id, buy, currency_shortcut) \n" +
+            "VALUES \n" +
+            "<foreach collection='exchangeRate.rates' item='rate' index='index' open='(' separator = '),(' close=')' > #{exchangeRatesId}, #{exchangeRatesId}, #{rate.rateValues.buy}, #{rate.currency}</foreach> \n" +
+            "</script>")
+    void saveCentralAuthorityRate(@Param("rates") Set<? extends Rate> rates, @Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
 
     @Select("SELECT central_authority_id, active_from, active_to\n" +
             "FROM central_authority_rate\n" +
             "where active_to ISNULL;")
     @ConstructorArgs(value = {
-            @Arg(column = "central_authority_id",javaType = String.class),
-            @Arg(column = "active_from",javaType = LocalDate.class),
-            @Arg(column = "active_to",javaType = LocalDate.class)
+            @Arg(column = "central_authority_id", javaType = String.class),
+            @Arg(column = "active_from", javaType = LocalDate.class),
+            @Arg(column = "active_to", javaType = LocalDate.class)
     })
     ExchangePostgresRate getCentralAuthorityExchangeRate();
 
@@ -35,9 +37,9 @@ public interface RatePostgresMapper {
             "FROM exchange_point_rate\n" +
             "where active_to ISNULL AND exchange_point_id = #{exchangePointId};")
     @ConstructorArgs(value = {
-            @Arg(column = "exchange_point_id",javaType = String.class),
-            @Arg(column = "active_from",javaType = LocalDate.class),
-            @Arg(column = "active_to",javaType = LocalDate.class)
+            @Arg(column = "exchange_point_id", javaType = String.class),
+            @Arg(column = "active_from", javaType = LocalDate.class),
+            @Arg(column = "active_to", javaType = LocalDate.class)
     })
     ExchangePostgresRate getRate(@Param("exchangePointId") String exchangePointId);
 
