@@ -21,4 +21,6 @@ public abstract class SuggestionService {
     public abstract Suggestion getSuggestion(String suggestionId);
 
     public abstract List<? extends Suggestion> getUserSuggestions(String userId);
+
+    public abstract void removeSuggestions(List<? extends Suggestion> toRemove);
 }

@@ -1,15 +1,18 @@
 package cz.honestcity.endpoints.suggestion;
 
+import cz.honestcity.endpoints.BaseController;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.suggestion.SuggestionService;
-import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
-public class SuggestionController {
+public class SuggestionController extends BaseController {
 
     private final Map<String, SuggestionService> suggestionServices;
 
@@ -20,12 +23,23 @@ public class SuggestionController {
     @PostMapping(SuggestionEndpointsUrl.SUGGEST)
     public void suggest(@RequestBody PostSuggestRequest request) {
         if (!request.getNewExchangePointSuggestions().isEmpty())
-            suggestionServices.get(request.getNewExchangePointSuggestions().get(0).getClass().getSimpleName()).suggest(request.getNewExchangePointSuggestions());
+            suggest(request.getNewExchangePointSuggestions());
+    }
+
+    private void suggest( List<? extends Suggestion> suggestions){
+        var suggestionsByClass = getDtosByClass(suggestions);
+        suggestionsByClass.forEach((key, value) -> suggestionServices.get(key).suggest(value));
     }
 
     @PostMapping(SuggestionEndpointsUrl.REMOVE)
     public void remove(@RequestBody RemoveSuggestionRequest request) {
         if (!request.getSuggestions().isEmpty())
-            ((BaseSuggestionService) suggestionServices.get(request.getSuggestions().get(0).getClass())).removeSuggestions(request.getSuggestions());
+            remove(request.getSuggestions());
     }
+
+    private void remove( List<? extends Suggestion> suggestions){
+        var suggestionsByClass = getDtosByClass(suggestions);
+        suggestionsByClass.forEach((key, value) -> suggestionServices.get(key).removeSuggestions(value));
+    }
+
 }
