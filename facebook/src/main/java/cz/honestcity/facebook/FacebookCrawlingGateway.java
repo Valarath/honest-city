@@ -39,7 +39,13 @@ public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> 
     }
 
     private LoginData updateLoginData(FacebookLoginData loginData, String userId){
-        return loginData.setUserId(userId);
+        setLoginDataUserId(loginData, userId);
+        return loginData;
+    }
+
+    private void setLoginDataUserId(FacebookLoginData loginData, String userId) {
+        if(loginData.getUserId() == null || loginData.getUserId().isBlank())
+            loginData.setUserId(userId);
     }
 
     private org.springframework.social.facebook.api.User getUserProfile(FacebookTemplate facebookTemplate) {
