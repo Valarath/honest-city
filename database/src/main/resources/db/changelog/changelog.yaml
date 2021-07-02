@@ -8,7 +8,7 @@ databaseChangeLog:
   - include:
       file: classpath:db/changelog/exchange_point_changelist.xml
   - include:
-      file: classpath:db/changelog/exchange_rates_changelist.xml
+      file: classpath:db/changelog/currency_settings_changelist.xml
   - include:
       file: classpath:db/changelog/central_authority_changelist.xml
   - include:

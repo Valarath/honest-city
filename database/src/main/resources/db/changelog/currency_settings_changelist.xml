@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="create_currency_settings_table" author="michal_keder">
+        <createTable tableName="currency_settings">
+            <column name="currency_settings_id" type="varchar">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="currency" type="varchar(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="main_country_currency" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="michal_keder" id="insert-czech-currency-as-main-currency">
+        <insert tableName="currency_settings">
+            <column name="currency_settings_id" value="cze"/>
+            <column name="currency" value="CZE"/>
+            <column name="main_country_currency" value="true"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="michal_keder" id="insert-usa-dollar">
+        <insert tableName="currency_settings">
+            <column name="currency_settings_id" value="usd"/>
+            <column name="currency" value="USD"/>
+            <column name="main_country_currency" value="false"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
