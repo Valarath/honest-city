@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.configuration;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import cz.honestcity.endpoints.configuration.login.FacebookLoginDataDeserializer;
@@ -17,6 +18,7 @@ public class EndpointsConfiguration {
     public ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(getFacebookLoginDataModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
 

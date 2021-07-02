@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class FacebookLoginData implements LoginData{
+public class FacebookLoginData extends LoginData{
+    private String facebookUserId;
     private String accessToken;
 }

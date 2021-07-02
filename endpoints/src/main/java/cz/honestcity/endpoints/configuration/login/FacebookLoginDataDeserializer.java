@@ -15,9 +15,10 @@ import java.io.IOException;
 public class FacebookLoginDataDeserializer extends JsonDeserializer<FacebookLoginData> {
 
     @Override
-    public FacebookLoginData deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public FacebookLoginData deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         return new FacebookLoginData()
-                .setAccessToken(node.get("accessToken").asText());
+                .setAccessToken(node.get("accessToken").asText())
+                .setFacebookUserId(node.get("facebookUserId").asText());
     }
 }

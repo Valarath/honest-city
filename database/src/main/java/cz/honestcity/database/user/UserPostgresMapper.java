@@ -34,9 +34,9 @@ public interface UserPostgresMapper {
     @Insert("INSERT INTO \"user\" (user_id, username, score,email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email});")
     void saveNewUser(@Param("user")User user);
 
-    @Update("UPDATE \"user\"\n" +
-            "SET username = #{user.username}\n" +
-            "email = #{user.email}\n" +
+    @Update("UPDATE \"user\" \n" +
+            "SET username = #{user.username}, \n" +
+            "email = #{user.email} \n" +
             "WHERE user_id = #{user.id};")
     void updateUserData(@Param("user")User user);
 
@@ -45,7 +45,7 @@ public interface UserPostgresMapper {
             "  score,\n" +
             "  username\n" +
             "FROM \"user\"\n" +
-            "WHERE username = #{username}")
+            "WHERE username = #{username};")
     @ResultMap(TO_USER)
     User getUserByUsername(@Param("username") String username);
 }

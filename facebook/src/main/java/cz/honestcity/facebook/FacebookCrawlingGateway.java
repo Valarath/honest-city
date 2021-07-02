@@ -1,6 +1,7 @@
 package cz.honestcity.facebook;
 
 import cz.honestcity.model.login.FacebookLoginData;
+import cz.honestcity.model.login.LoginData;
 import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
@@ -25,10 +26,20 @@ public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> 
     public User getUser(FacebookLoginData loginData){
         FacebookTemplate facebookTemplate = new FacebookTemplate(loginData.getAccessToken());
         org.springframework.social.facebook.api.User userProfile = getUserProfile(facebookTemplate);
+        String userId = idProvider.provideNewId();
+        return getNewUser(loginData, userProfile, userId);
+    }
+
+    private User getNewUser(FacebookLoginData loginData, org.springframework.social.facebook.api.User userProfile, String userId) {
         return new User()
-                .setId(idProvider.provideNewId())
+                .setId(userId)
                 .setEmail(userProfile.getEmail())
-                .setUsername(userProfile.getName());
+                .setUsername(userProfile.getName())
+                .setLoginData(updateLoginData(loginData, userId));
+    }
+
+    private LoginData updateLoginData(FacebookLoginData loginData, String userId){
+        return loginData.setUserId(userId);
     }
 
     private org.springframework.social.facebook.api.User getUserProfile(FacebookTemplate facebookTemplate) {
