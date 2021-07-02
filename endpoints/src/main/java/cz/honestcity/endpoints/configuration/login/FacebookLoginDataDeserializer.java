@@ -19,6 +19,7 @@ public class FacebookLoginDataDeserializer extends JsonDeserializer<FacebookLogi
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         return new FacebookLoginData()
                 .setAccessToken(node.get("accessToken").asText())
-                .setFacebookUserId(node.get("facebookUserId").asText());
+                .setFacebookUserId(node.get("facebookUserId").asText())
+                .setUserId(node.get("userId").asText());
     }
 }
