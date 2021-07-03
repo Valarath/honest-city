@@ -1,12 +1,13 @@
 package cz.honestcity.model.login;
 
+import cz.honestcity.model.HonestCitySerializable;
+
 /**
  * @author michal.keder
  */
-public abstract class LoginData {
+public abstract class LoginData extends HonestCitySerializable {
 
     private String userId;
-    private String className;
 
     public String getUserId() {
         return userId;
@@ -17,11 +18,4 @@ public abstract class LoginData {
         return this;
     }
 
-    public String getClassName() {
-        return getClass().getSimpleName();
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
 }

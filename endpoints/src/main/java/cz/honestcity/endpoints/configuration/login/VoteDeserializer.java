@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.configuration.login;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.honestcity.model.vote.Vote;
 
 /**
@@ -7,11 +8,12 @@ import cz.honestcity.model.vote.Vote;
  */
 public class VoteDeserializer extends DataDeserializer<Vote>{
 
-    public VoteDeserializer() {
-        super(Vote.class);
+    public VoteDeserializer(ObjectMapper objectMapper) {
+        super(objectMapper, Vote.class);
     }
 
-    public VoteDeserializer(String packagePath) {
-        super(Vote.class, packagePath);
+    public VoteDeserializer(ObjectMapper objectMapper, String packagePath) {
+        super(objectMapper, Vote.class, packagePath);
     }
+
 }

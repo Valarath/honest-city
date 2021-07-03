@@ -1,5 +1,6 @@
 package cz.honestcity.model.currency.settings;
 
+import cz.honestcity.model.HonestCitySerializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -8,7 +9,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class CurrencySettings {
+public class CurrencySettings extends HonestCitySerializable {
 
     private String id;
     private Boolean mainCountryCurrency;

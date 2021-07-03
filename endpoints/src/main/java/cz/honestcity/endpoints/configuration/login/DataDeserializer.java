@@ -20,13 +20,16 @@ public abstract class DataDeserializer<DATA> extends JsonDeserializer<DATA> {
 
     private static final String CLASS_NAME_PROPERTY = "className";
 
+    private final ObjectMapper objectMapper;
     private final Map<String,Class<? extends DATA>> classesByClassNames;
 
-    public DataDeserializer(Class<DATA> deserializerType) {
+    public DataDeserializer(ObjectMapper objectMapper, Class<DATA> deserializerType) {
+        this.objectMapper = objectMapper;
         this.classesByClassNames = getClassesByNames(deserializerType,"cz.honestcity.model");
     }
 
-    public DataDeserializer(Class<DATA> deserializerType, String packagePath) {
+    public DataDeserializer(ObjectMapper objectMapper, Class<DATA> deserializerType, String packagePath) {
+        this.objectMapper = objectMapper;
         this.classesByClassNames = getClassesByNames(deserializerType,packagePath);
     }
 
@@ -39,7 +42,7 @@ public abstract class DataDeserializer<DATA> extends JsonDeserializer<DATA> {
     @Override
     public DATA deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        return new ObjectMapper().readValue(node.toString(), getClass(node));
+        return objectMapper.readValue(node.toString(), getClass(node));
     }
 
     private Class<? extends DATA> getClass(JsonNode node) {

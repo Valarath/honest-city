@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.configuration.login;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.honestcity.model.suggestion.Suggestion;
 
 /**
@@ -7,11 +8,11 @@ import cz.honestcity.model.suggestion.Suggestion;
  */
 public class SuggestionDeserializer extends DataDeserializer<Suggestion> {
 
-    public SuggestionDeserializer() {
-        super(Suggestion.class);
+    public SuggestionDeserializer(ObjectMapper objectMapper) {
+        super(objectMapper, Suggestion.class);
     }
 
-    public SuggestionDeserializer(String packagePath) {
-        super(Suggestion.class, packagePath);
+    public SuggestionDeserializer(ObjectMapper objectMapper, String packagePath) {
+        super(objectMapper, Suggestion.class, packagePath);
     }
 }

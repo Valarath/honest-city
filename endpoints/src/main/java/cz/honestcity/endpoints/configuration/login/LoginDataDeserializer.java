@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.configuration.login;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.honestcity.model.login.LoginData;
 
 /**
@@ -7,12 +8,12 @@ import cz.honestcity.model.login.LoginData;
  */
 public class LoginDataDeserializer extends DataDeserializer<LoginData> {
 
-    public LoginDataDeserializer() {
-        super(LoginData.class);
+    public LoginDataDeserializer(ObjectMapper objectMapper) {
+        super(objectMapper, LoginData.class);
     }
 
-    public LoginDataDeserializer(String packagePath) {
-        super(LoginData.class,packagePath);
+    public LoginDataDeserializer(ObjectMapper objectMapper, String packagePath) {
+        super(objectMapper, LoginData.class,packagePath);
     }
 
 }

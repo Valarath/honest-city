@@ -1,5 +1,6 @@
 package cz.honestcity.endpoints.configuration.login;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.honestcity.model.subject.WatchedSubject;
 
 /**
@@ -7,11 +8,11 @@ import cz.honestcity.model.subject.WatchedSubject;
  */
 public class WatchedSubjectDeserializer extends DataDeserializer<WatchedSubject>{
 
-    public WatchedSubjectDeserializer() {
-        super(WatchedSubject.class);
+    public WatchedSubjectDeserializer(ObjectMapper objectMapper) {
+        super(objectMapper, WatchedSubject.class);
     }
 
-    public WatchedSubjectDeserializer(String packagePath) {
-        super(WatchedSubject.class, packagePath);
+    public WatchedSubjectDeserializer(ObjectMapper objectMapper,String packagePath) {
+        super(objectMapper, WatchedSubject.class, packagePath);
     }
 }

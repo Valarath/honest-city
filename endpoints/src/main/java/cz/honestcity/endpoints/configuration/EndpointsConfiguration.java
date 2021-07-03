@@ -22,17 +22,17 @@ public class EndpointsConfiguration {
     @Bean
     public ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(getFacebookLoginDataModule());
+        objectMapper.registerModule(getFacebookLoginDataModule(objectMapper));
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
 
-    private SimpleModule getFacebookLoginDataModule(){
+    private SimpleModule getFacebookLoginDataModule(ObjectMapper objectMapper){
         SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addDeserializer(LoginData.class,new LoginDataDeserializer());
-        simpleModule.addDeserializer(Vote.class,new VoteDeserializer());
-        simpleModule.addDeserializer(Suggestion.class,new SuggestionDeserializer());
-        simpleModule.addDeserializer(WatchedSubject.class,new WatchedSubjectDeserializer());
+        simpleModule.addDeserializer(LoginData.class,new LoginDataDeserializer(objectMapper));
+        simpleModule.addDeserializer(Vote.class,new VoteDeserializer(objectMapper));
+        simpleModule.addDeserializer(Suggestion.class,new SuggestionDeserializer(objectMapper));
+        simpleModule.addDeserializer(WatchedSubject.class,new WatchedSubjectDeserializer(objectMapper));
         return simpleModule;
     }
 }
