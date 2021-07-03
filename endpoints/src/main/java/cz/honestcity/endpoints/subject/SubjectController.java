@@ -1,7 +1,6 @@
 package cz.honestcity.endpoints.subject;
 
 import cz.honestcity.endpoints.BaseController;
-import cz.honestcity.model.HonestCitySerializable;
 import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
@@ -10,7 +9,6 @@ import cz.honestcity.service.suggestion.NewSubjectSuggestionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +29,7 @@ public class SubjectController extends BaseController {
     public GetSubjectsResponse getSubjects(GetSubjectsRequest getSubjectsRequest) {
         return new GetSubjectsResponse()
                 .setSubjects(getSubjectsByClassName(getSubjectsRequest))
-                .setSuggestions(getSuggestionsByClassName(getSubjectsRequest));
+                .setNewSubjectSuggestions(getSuggestionsByClassName(getSubjectsRequest));
     }
 
     private Map<String, List<? extends WatchedSubject>> getSubjectsByClassName(GetSubjectsRequest getSubjectsRequest) {

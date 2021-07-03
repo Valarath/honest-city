@@ -12,5 +12,5 @@ import java.util.Map;
 @Accessors(chain = true)
 public class GetSubjectsResponse {
     private Map<String, List<? extends WatchedSubject>> subjects;
-    private Map<String, List<? extends Suggestion>> suggestions;
+    private Map<String, List<? extends Suggestion>> newSubjectSuggestions;
 }
