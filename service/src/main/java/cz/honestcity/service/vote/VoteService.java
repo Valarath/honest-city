@@ -26,7 +26,8 @@ public abstract class VoteService {
     }
 
     protected boolean isSuggestionAcceptable(String suggestionId, String userId) {
-        return voteGateway.getNumberOfVotes(suggestionId)*calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
+        Integer suggestionVotes = voteGateway.getNumberOfVotes(suggestionId);
+        return suggestionVotes != null && suggestionVotes *calculateUserTrustworthiness(userId)> LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 
     private double calculateUserTrustworthiness(String userId){

@@ -1,8 +1,6 @@
 package cz.honestcity.service.suggestion.exchange.rate;
 
-import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.service.base.AbstractServiceTest;
 import cz.honestcity.service.suggestion.SuggestionServiceTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class ExchangeRateSuggestionServiceTest extends SuggestionServiceTest {
     public void suggest() {
         var suggestions = getSuggestionsForTest(ExchangeRateSuggestion.class);
         prepareEnvironmentForSuggestTest(suggestions);
-        service.suggest(suggestions);
+        service.suggest(suggestions, loggedUser);
     }
 
     @Test

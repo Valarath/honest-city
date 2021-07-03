@@ -1,6 +1,7 @@
 package cz.honestcity.service.suggestion.base;
 
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.vote.VoteService;

@@ -1,21 +1,13 @@
 package cz.honestcity.service.suggestion.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.service.base.AbstractServiceTest;
 import cz.honestcity.service.suggestion.SuggestionServiceTest;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class ClosedExchangePointSuggestionServiceTest extends SuggestionServiceTest {
 
@@ -35,7 +27,7 @@ public class ClosedExchangePointSuggestionServiceTest extends SuggestionServiceT
     public void suggest() {
         var suggestions = getSuggestionsForTest(ClosedExchangePointSuggestion.class);
         prepareEnvironmentForSuggestTest(suggestions);
-        service.suggest(suggestions);
+        service.suggest(suggestions, loggedUser);
     }
 
     @Test

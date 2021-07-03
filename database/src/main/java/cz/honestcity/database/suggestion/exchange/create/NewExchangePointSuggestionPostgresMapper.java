@@ -11,10 +11,8 @@ import java.util.List;
 public interface NewExchangePointSuggestionPostgresMapper {
 
     @Insert("INSERT INTO new_exchange_point_suggestion(suggestion_id, latitude, longitude)\n" +
-            "VALUES (#{suggestion.id},#{suggestion.latitude},#{suggestion.longitude});")
+            "VALUES (#{suggestion.id},#{suggestion.position.latitude},#{suggestion.position.longitude});")
     void suggestsNewExchangePoint(@Param("suggestion")NewExchangePointSuggestion suggestions);
-
-
 
     @Select("SELECT suggestion.suggestion_id,\n" +
             "       votes,\n" +

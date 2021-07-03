@@ -2,6 +2,7 @@ package cz.honestcity.service.suggestion.exchange.create;
 
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;

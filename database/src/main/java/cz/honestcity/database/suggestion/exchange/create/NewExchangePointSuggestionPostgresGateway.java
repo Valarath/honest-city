@@ -22,7 +22,7 @@ public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgre
     @Override
     public void suggests(List<? extends Suggestion> suggestions) {
         suggestions.forEach(suggestion -> {
-            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
+            suggestionPostgresMapper.suggest(suggestion);
             mapper.suggestsNewExchangePoint((NewExchangePointSuggestion) suggestion);
         });
     }

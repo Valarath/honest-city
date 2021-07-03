@@ -23,7 +23,7 @@ public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPost
     @Override
     public void suggests(List<? extends Suggestion> closedExchangePointSuggestions) {
         closedExchangePointSuggestions.forEach(suggestion -> {
-            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
+            suggestionPostgresMapper.suggest(suggestion);
             mapper.reportNonExistingPoint((ClosedExchangePointSuggestion) suggestion);
         });
     }

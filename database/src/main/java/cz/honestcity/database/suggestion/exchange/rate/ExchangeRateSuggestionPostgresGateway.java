@@ -29,7 +29,7 @@ public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGat
     @Override
     public void suggests(List<? extends Suggestion> suggestions) {
         suggestions.forEach(suggestion ->{
-            suggestion.setId(suggestionPostgresMapper.suggest(suggestion));
+            suggestionPostgresMapper.suggest(suggestion);
             mapper.suggestsExchangeRateChange((ExchangeRateSuggestion) suggestion);
         });
     }

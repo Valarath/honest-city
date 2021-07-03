@@ -13,7 +13,7 @@ public class VotePostgresGateway implements VoteGateway {
     }
 
     @Override
-    public int getNumberOfVotes(String suggestionId) {
+    public Integer getNumberOfVotes(String suggestionId) {
         return votePostgresMapper.getNumberOfVotes(suggestionId);
     }
 

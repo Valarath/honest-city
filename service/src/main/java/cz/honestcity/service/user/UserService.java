@@ -50,7 +50,7 @@ public class UserService {
     private Map<String,List<? extends Suggestion>> addUserSuggestions(String userId, Map.Entry<String, SuggestionService> entry) {
         var userSuggestions = new HashMap<String,List<? extends Suggestion>>();
         var suggestions = entry.getValue().getUserSuggestions(userId);
-        if(!suggestions.isEmpty())
+        if(suggestions !=null && !suggestions.isEmpty())
             userSuggestions.put(entry.getKey(),suggestions);
         return userSuggestions;
     }
