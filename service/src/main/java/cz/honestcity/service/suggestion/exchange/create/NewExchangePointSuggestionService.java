@@ -5,6 +5,7 @@ import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.DistanceCalculator;
 import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.suggestion.NewSubjectSuggestionService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 //@Service(SuggestionServiceType.SuggestionServiceTypeNames.NEW_EXCHANGE_POINT)
 @HonestCityService(beanId = NewExchangePointSuggestion.class)
-public class NewExchangePointSuggestionService extends BaseSuggestionService implements NewSubjectSuggestionService<NewExchangePointSuggestion> {
+public class NewExchangePointSuggestionService extends BaseSuggestionService<NewExchangePointSuggestion> implements NewSubjectSuggestionService<NewExchangePointSuggestion> {
 
     private final NewExchangePointSuggestionGateway gateway;
     private final UpVoteNewExchangePointService upVoteNewExchangePointService;
@@ -47,6 +48,7 @@ public class NewExchangePointSuggestionService extends BaseSuggestionService imp
     public List<? extends NewExchangePointSuggestion> getAllInArea(Position position) {
         return gateway.getAll().stream()
                 .filter(exchange -> DistanceCalculator.isInArea(position, exchange.getPosition()))
+                .map(this::setSuggestorLoginData)
                 .collect(Collectors.toList());
     }
 }

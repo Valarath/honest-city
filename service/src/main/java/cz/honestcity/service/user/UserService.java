@@ -3,6 +3,7 @@ package cz.honestcity.service.user;
 import cz.honestcity.model.login.LoginData;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
+import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.login.LoginGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.SuggestionServiceType;
@@ -20,18 +21,22 @@ public class UserService {
     private final Map<String, LoginGateway> loginGateways;
     private Map<String, SuggestionService> suggestionServices;
     private final UserGateway userGateway;
+    private final LoginDataService loginDataService;
 
-    public UserService(Map<String, LoginGateway> loginGateways, UserGateway userGateway) {
+    public UserService(Map<String, LoginGateway> loginGateways, UserGateway userGateway, LoginDataService loginDataService) {
         this.loginGateways = loginGateways;
         this.userGateway = userGateway;
+        this.loginDataService = loginDataService;
     }
 
     public User getUser(String userId) {
-        return userGateway.getUser(userId);
+        return userGateway.getUser(userId)
+                .setLoginData(loginDataService.get(userId));
     }
 
     public User getUserByUsername(String username) {
-        return userGateway.getUserByUsername(username);
+        User user = userGateway.getUserByUsername(username);
+        return user.setLoginData(loginDataService.get(user.getId()));
     }
 
     public int getUserScore(String userId) {
@@ -65,6 +70,7 @@ public class UserService {
 
     public void saveNewUser(User user){
         userGateway.saveNewUser(user);
+        loginDataService.save(user.getLoginData());
     }
 
     public void updateUserData(User user){

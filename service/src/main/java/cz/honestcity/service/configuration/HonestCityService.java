@@ -12,4 +12,6 @@ import java.lang.annotation.*;
 public @interface HonestCityService {
 
     Class beanId();
+
+    Class beanIdSpecification() default Object.class;
 }

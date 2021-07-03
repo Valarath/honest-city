@@ -12,12 +12,14 @@ public interface UserPostgresMapper {
             "  user_id,\n" +
             "  score,\n" +
             "  username\n" +
+            "  email\n" +
             "FROM \"user\"\n" +
             "WHERE user_id = #{userId}")
     @Results(id = TO_USER, value = {
             @Result(property = "id",column = "user_id"),
             @Result(property = "score",column = "score"),
-            @Result(property = "username",column = "username")
+            @Result(property = "username",column = "username"),
+            @Result(property = "email",column = "email")
     })
     User getUser(@Param("userId") String userId);
 
@@ -31,7 +33,7 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{userId};")
     int getUserScore(@Param("userId") String userId);
 
-    @Insert("INSERT INTO \"user\" (user_id, username, score,email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email});")
+    @Insert("INSERT INTO \"user\" (user_id, username, score, email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email});")
     void saveNewUser(@Param("user")User user);
 
     @Update("UPDATE \"user\" \n" +
@@ -44,6 +46,7 @@ public interface UserPostgresMapper {
             "  user_id,\n" +
             "  score,\n" +
             "  username\n" +
+            "  email\n" +
             "FROM \"user\"\n" +
             "WHERE username = #{username};")
     @ResultMap(TO_USER)

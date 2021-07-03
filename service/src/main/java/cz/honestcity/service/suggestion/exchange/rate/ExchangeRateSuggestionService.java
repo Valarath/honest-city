@@ -2,8 +2,8 @@ package cz.honestcity.service.suggestion.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.vote.exchange.rate.UpVoteExchangePointRateChangeService;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 //@Service(SuggestionServiceType.SuggestionServiceTypeNames.EXCHANGE_RATE_CHANGE)
 @HonestCityService(beanId = ExchangeRateSuggestion.class)
-public class ExchangeRateSuggestionService extends BaseSuggestionService {
+public class ExchangeRateSuggestionService extends BaseSuggestionService<ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionGateway gateway;
 

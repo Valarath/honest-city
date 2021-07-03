@@ -1,16 +1,19 @@
 package cz.honestcity.service.suggestion.base;
 
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.vote.VoteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
 @HonestCityService(beanId = Suggestion.class)
-public class BaseSuggestionService extends SuggestionService {
+public class BaseSuggestionService<SUGGESTION extends Suggestion> extends SuggestionService {
+
+    protected LoginDataService loginDataService;
 
     public BaseSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway) {
         super(suggestionGateway);
@@ -40,4 +43,13 @@ public class BaseSuggestionService extends SuggestionService {
         );
     }
 
+    protected SUGGESTION setSuggestorLoginData(SUGGESTION suggestion){
+        suggestion.getSuggestedBy().setLoginData(loginDataService.get(suggestion.getSuggestedBy().getId()));
+        return suggestion;
+    }
+
+    @Autowired
+    public void setLoginDataService(LoginDataService loginDataService) {
+        this.loginDataService = loginDataService;
+    }
 }

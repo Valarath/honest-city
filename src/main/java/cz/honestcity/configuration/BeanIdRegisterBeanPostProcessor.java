@@ -8,6 +8,8 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.context.annotation.ScannedGenericBeanDefinition;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 public class BeanIdRegisterBeanPostProcessor implements BeanDefinitionRegistryPostProcessor {
     /*
@@ -53,11 +55,17 @@ public class BeanIdRegisterBeanPostProcessor implements BeanDefinitionRegistryPo
 
 
     private void changeBeansIds(BeanDefinitionRegistry registry, ScannedGenericBeanDefinition beanDefinition) {
-        Class newId = (Class) beanDefinition.getMetadata().getAnnotationAttributes(HonestCityService.class.getName()).get("beanId");
+        Map<String, Object> annotationAttributes = beanDefinition.getMetadata().getAnnotationAttributes(HonestCityService.class.getName());
         String[] split = beanDefinition.getMetadata().getClassName().split("\\.");
         String oldId = deCapitalize(split[split.length - 1]);
         registry.removeBeanDefinition(oldId);
-        registry.registerBeanDefinition(newId.getSimpleName(), beanDefinition);
+        registry.registerBeanDefinition(getNewId(annotationAttributes), beanDefinition);
 
+    }
+
+    private String getNewId(Map<String, Object> annotationAttributes) {
+        Class newId = (Class) annotationAttributes.get("beanId");
+        Class newIdSpecification = (Class) annotationAttributes.get("beanIdSpecification");
+        return newIdSpecification.equals(Object.class)? newId.getSimpleName(): newId.getSimpleName()+newIdSpecification.getSimpleName();
     }
 }

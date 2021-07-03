@@ -2,8 +2,8 @@ package cz.honestcity.service.suggestion.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
-import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.vote.exchange.closed.UpVoteDeleteExchangePointService;
@@ -13,7 +13,7 @@ import java.util.List;
 
 //@Service(SuggestionServiceType.SuggestionServiceTypeNames.CLOSED_EXCHANGE_POINT)
 @HonestCityService(beanId = ClosedExchangePointSuggestion.class)
-public class ClosedExchangePointSuggestionService extends BaseSuggestionService {
+public class ClosedExchangePointSuggestionService extends BaseSuggestionService<ClosedExchangePointSuggestion> {
 
     private final ClosedExchangePointSuggestionGateway gateway;
 

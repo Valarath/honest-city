@@ -19,3 +19,5 @@ databaseChangeLog:
       file: classpath:db/changelog/user_votes_changelist.xml
   - include:
       file: classpath:db/changelog/central_authority_rate_changelist.xml
+  - include:
+      file: classpath:db/changelog/facebook_login_data_changelist.xml
