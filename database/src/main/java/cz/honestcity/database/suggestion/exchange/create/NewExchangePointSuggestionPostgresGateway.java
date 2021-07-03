@@ -36,4 +36,9 @@ public class NewExchangePointSuggestionPostgresGateway extends SuggestionPostgre
     public List<? extends NewExchangePointSuggestion> getUserSuggestions(String userId) {
         return mapper.getUserNewExchangePointSuggestions(userId);
     }
+
+    @Override
+    public List<? extends NewExchangePointSuggestion> getAll() {
+        return mapper.getAllNewExchangePointSuggestions();
+    }
 }

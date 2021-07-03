@@ -10,10 +10,10 @@ import java.awt.*;
 
 public class NewExchangePointPostgresSuggestion extends NewExchangePointSuggestion {
 
-    public NewExchangePointPostgresSuggestion(Double longitude, Double latitude, String suggestionId, String suggesterId, String suggesterUsername, Integer suggesterScore, State state ) {
+    public NewExchangePointPostgresSuggestion(Double longitude, Double latitude, String suggestionId, String suggesterId, String suggesterUsername, Integer suggesterScore, String state ) {
         initializePosition(longitude, latitude);
         setId(suggestionId);
-        setState(state);
+        setState(State.valueOf(state));
         initializeSuggester(suggesterId, suggesterUsername, suggesterScore);
     }
 

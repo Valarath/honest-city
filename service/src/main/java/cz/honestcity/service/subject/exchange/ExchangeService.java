@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 @HonestCityService(beanId = ExchangePoint.class)
 public class ExchangeService extends SubjectService {
 
-    private static final int AREA_RANGE_IN_METERS = 22000;
-
     private final ExchangeGateway exchangeGateway;
 
     private final ExchangeRateSuggestionService suggestionService;
@@ -43,7 +41,7 @@ public class ExchangeService extends SubjectService {
     @Override
     public List<? extends WatchedSubject> getSubjectsInArea(Position position) {
         return exchangeGateway.getAllExchanges().stream()
-                .filter(exchange -> isInArea(AREA_RANGE_IN_METERS, position, exchange.getPosition()))
+                .filter(exchange -> isInArea(position, exchange.getPosition()))
                 .map(this::getFullyInitializeExchangePoint)
                 .collect(Collectors.toList());
     }
