@@ -13,6 +13,7 @@ module cz.honestcity.endpoints {
     requires jjwt;
     requires spring.boot;
     requires java.xml;
+    requires reflections;
 
     exports cz.honestcity.endpoints.subject;
     exports cz.honestcity.endpoints.suggestion;
