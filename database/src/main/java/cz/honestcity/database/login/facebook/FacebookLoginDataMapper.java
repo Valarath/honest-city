@@ -17,7 +17,7 @@ public interface FacebookLoginDataMapper {
     FacebookLoginData get(@Param("userId") String userId);
 
     @Insert("INSERT into facebook_login_data(user_id,facebook_user_id) \n" +
-            "values(#{facebookLoginData.facebookUserId},#{facebookLoginData.userId})")
+            "values(#{facebookLoginData.userId},#{facebookLoginData.facebookUserId})")
     void insert(@Param("facebookLoginData") FacebookLoginData facebookLoginData);
 
 }
