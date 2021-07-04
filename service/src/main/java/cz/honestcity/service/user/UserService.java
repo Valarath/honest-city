@@ -79,7 +79,8 @@ public class UserService {
 
     public User register(LoginData loginData) {
         String userId = loginDataService.getUserIdIfAlreadyExist(loginData);
-        return userId == null ? performRegistration(loginData) : login(getUser(userId));
+        loginData.setUserId(userId);
+        return userId == null ? performRegistration(loginData) : login(getUser(userId),loginData);
     }
 
     private User performRegistration(LoginData loginData) {
@@ -89,7 +90,10 @@ public class UserService {
     }
 
     public User login(User user) {
-        User updatedUserData = getLoginGateway(user.getLoginData()).getUser(user.getLoginData());
+        return login(user,user.getLoginData());
+    }
+    public User login(User user,LoginData loginData) {
+        User updatedUserData = getLoginGateway(loginData).getUser(loginData);
         User updatedUser = updateUser(getUser(user.getId()), updatedUserData);
         updateUserData(updatedUser);
         return updatedUser;
