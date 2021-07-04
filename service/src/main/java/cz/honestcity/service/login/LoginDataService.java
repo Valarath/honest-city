@@ -24,6 +24,10 @@ public class LoginDataService {
                 .orElseThrow();
     }
 
+    public String getUserIdIfAlreadyExist(LoginData loginData) {
+        return getGatewayByLoginData(loginData).findUserId(loginData);
+    }
+
     public void save(LoginData loginData) {
         getGatewayByLoginData(loginData).save(loginData);
     }

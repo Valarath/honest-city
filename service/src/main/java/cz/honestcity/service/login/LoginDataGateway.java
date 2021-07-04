@@ -11,4 +11,5 @@ public interface LoginDataGateway<LOGIN_DATA extends LoginData> {
 
     void save(LOGIN_DATA loginData);
 
+    String findUserId(LOGIN_DATA loginData);
 }

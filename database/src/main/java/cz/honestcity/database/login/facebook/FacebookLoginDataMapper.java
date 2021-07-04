@@ -20,4 +20,6 @@ public interface FacebookLoginDataMapper {
             "values(#{facebookLoginData.userId},#{facebookLoginData.facebookUserId})")
     void insert(@Param("facebookLoginData") FacebookLoginData facebookLoginData);
 
+    @Select("SELECT user_id from facebook_login_data WHERE facebook_user_id = #{facebookLoginData.facebookUserId}")
+    String findUserId(@Param("facebookLoginData")FacebookLoginData loginData);
 }

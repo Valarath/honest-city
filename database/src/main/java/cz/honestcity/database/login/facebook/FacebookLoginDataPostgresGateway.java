@@ -25,4 +25,9 @@ public class FacebookLoginDataPostgresGateway implements LoginDataGateway<Facebo
     public void save(FacebookLoginData loginData) {
         facebookLoginDataMapper.insert(loginData);
     }
+
+    @Override
+    public String findUserId(FacebookLoginData loginData) {
+        return facebookLoginDataMapper.findUserId(loginData);
+    }
 }

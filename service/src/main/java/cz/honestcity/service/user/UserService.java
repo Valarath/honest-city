@@ -44,19 +44,19 @@ public class UserService {
     }
 
     public Map<String, List<? extends Suggestion>> getUserSuggestions(String userId) {
-        var userSuggestions = new HashMap<String,List<? extends Suggestion>>();
-        suggestionServices.entrySet().forEach( entry -> {
-            if(!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
-                userSuggestions.putAll(addUserSuggestions(userId,entry));
+        var userSuggestions = new HashMap<String, List<? extends Suggestion>>();
+        suggestionServices.entrySet().forEach(entry -> {
+            if (!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
+                userSuggestions.putAll(addUserSuggestions(userId, entry));
         });
-        return  userSuggestions;
+        return userSuggestions;
     }
 
-    private Map<String,List<? extends Suggestion>> addUserSuggestions(String userId, Map.Entry<String, SuggestionService> entry) {
-        var userSuggestions = new HashMap<String,List<? extends Suggestion>>();
+    private Map<String, List<? extends Suggestion>> addUserSuggestions(String userId, Map.Entry<String, SuggestionService> entry) {
+        var userSuggestions = new HashMap<String, List<? extends Suggestion>>();
         var suggestions = entry.getValue().getUserSuggestions(userId);
-        if(suggestions !=null && !suggestions.isEmpty())
-            userSuggestions.put(entry.getKey(),suggestions);
+        if (suggestions != null && !suggestions.isEmpty())
+            userSuggestions.put(entry.getKey(), suggestions);
         return userSuggestions;
     }
 
@@ -65,35 +65,41 @@ public class UserService {
     }
 
     private User getIncreasedScore(User user) {
-        return user.setScore(user.getScore()+1);
+        return user.setScore(user.getScore() + 1);
     }
 
-    public void saveNewUser(User user){
+    public void saveNewUser(User user) {
         userGateway.saveNewUser(user);
         loginDataService.save(user.getLoginData());
     }
 
-    public void updateUserData(User user){
+    public void updateUserData(User user) {
         userGateway.updateUserData(user);
     }
 
-    public User register(LoginData loginData){
+    public User register(LoginData loginData) {
+        String userId = loginDataService.getUserIdIfAlreadyExist(loginData);
+        return userId == null ? performRegistration(loginData) : login(getUser(userId));
+    }
+
+    private User performRegistration(LoginData loginData) {
         User user = getLoginGateway(loginData).getUser(loginData);
         saveNewUser(user);
         return user;
     }
 
-    public User login(User user){
+    public User login(User user) {
         User updatedUserData = getLoginGateway(user.getLoginData()).getUser(user.getLoginData());
-        User updatedUser = updateUser(user, updatedUserData);
+        User updatedUser = updateUser(getUser(user.getId()), updatedUserData);
         updateUserData(updatedUser);
         return updatedUser;
     }
 
-    private User updateUser(User actualUser, User updatedUser){
+    private User updateUser(User actualUser, User updatedUser) {
         return actualUser
                 .setEmail(updatedUser.getEmail())
-                .setUsername(updatedUser.getUsername());
+                .setUsername(updatedUser.getUsername())
+                .setLoginData(updatedUser.getLoginData());
     }
 
     private LoginGateway<? super LoginData> getLoginGateway(LoginData loginData) {
