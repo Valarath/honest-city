@@ -1,4 +1,4 @@
-package cz.honestcity.endpoints.configuration.login;
+package cz.honestcity.endpoints.configuration.deserializers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.honestcity.model.suggestion.Suggestion;

@@ -1,4 +1,4 @@
-package cz.honestcity.endpoints.configuration.login;
+package cz.honestcity.endpoints.configuration.deserializers;
 
 /**
  * @author michal.keder

@@ -3,10 +3,11 @@ package cz.honestcity.endpoints.configuration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cz.honestcity.endpoints.configuration.login.LoginDataDeserializer;
-import cz.honestcity.endpoints.configuration.login.SuggestionDeserializer;
-import cz.honestcity.endpoints.configuration.login.VoteDeserializer;
-import cz.honestcity.endpoints.configuration.login.WatchedSubjectDeserializer;
+import cz.honestcity.endpoints.configuration.deserializers.LoginDataDeserializer;
+import cz.honestcity.endpoints.configuration.deserializers.SuggestionDeserializer;
+import cz.honestcity.endpoints.configuration.deserializers.VoteDeserializer;
+import cz.honestcity.endpoints.configuration.deserializers.WatchedSubjectDeserializer;
+import cz.honestcity.endpoints.configuration.serializer.LocalDateSerializer;
 import cz.honestcity.model.login.LoginData;
 import cz.honestcity.model.subject.WatchedSubject;
 import cz.honestcity.model.suggestion.Suggestion;
@@ -14,6 +15,8 @@ import cz.honestcity.model.vote.Vote;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDate;
 
 @ComponentScan(basePackages = "cz.honestcity.endpoints")
 @Configuration
@@ -33,6 +36,7 @@ public class EndpointsConfiguration {
         simpleModule.addDeserializer(Vote.class,new VoteDeserializer(objectMapper));
         simpleModule.addDeserializer(Suggestion.class,new SuggestionDeserializer(objectMapper));
         simpleModule.addDeserializer(WatchedSubject.class,new WatchedSubjectDeserializer(objectMapper));
+        simpleModule.addSerializer(LocalDate.class,new LocalDateSerializer(objectMapper));
         return simpleModule;
     }
 }
