@@ -36,9 +36,10 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
         voteGateway.recordVote(suggestionId, userId);
     }
 
-    protected boolean isSuggestionAcceptable(String suggestionId, String userId) {
-        Integer suggestionVotes = voteGateway.getNumberOfVotes(suggestionId);
-        return suggestionVotes != null && suggestionVotes * calculateUserTrustworthiness(userId) > LOWEST_VALUE_FOR_ACCEPTENCE;
+    protected boolean isSuggestionAcceptable(SUGGESTION suggestion, String userId) {
+        Integer suggestionVotes = voteGateway.getNumberOfVotes(suggestion.getId());
+        SUGGESTION persistedSuggestion = getService(suggestion).getSuggestion(suggestion.getId());
+        return persistedSuggestion.getState() == State.IN_PROGRESS && suggestionVotes != null && suggestionVotes * calculateUserTrustworthiness(userId) > LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 
     private double calculateUserTrustworthiness(String userId) {
