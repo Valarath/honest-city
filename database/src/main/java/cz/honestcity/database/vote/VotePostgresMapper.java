@@ -1,9 +1,12 @@
 package cz.honestcity.database.vote;
 
+import cz.honestcity.model.vote.Vote;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 interface VotePostgresMapper {
@@ -17,9 +20,9 @@ interface VotePostgresMapper {
             "values (#{userId},#{suggestionId});")
     void recordVote(@Param("suggestionId") String suggestionId,@Param("userId") String userId);
 
-    @Select("SELECT COUNT (user_id,suggestion_id)\n" +
+    @Select("SELECT * " +
             "FROM user_votes\n" +
             "where suggestion_id = #{suggestionId} " +
-            "AND user_id = #{userId}")
-    int isVoteRecorded(@Param("suggestionId")String suggestionId,@Param("userId") String userId);
+            "AND user_id = #{userId}) FROM user_votes")
+    List<Vote> isVoteRecorded(@Param("suggestionId")String suggestionId, @Param("userId") String userId);
 }
