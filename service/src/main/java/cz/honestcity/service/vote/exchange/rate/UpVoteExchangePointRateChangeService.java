@@ -29,7 +29,7 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
     }
 
     private void acceptExchangeRateChange(ExchangeRateSuggestion suggestion) {
-        exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getExchangePointId());
+        exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getSubjectId());
         removeDeclinedSuggestions(suggestion);
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }
@@ -37,12 +37,11 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
     private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion){
         List<ExchangeRateSuggestion> scoredSuggestions = getInProgressSuggestions(suggestion);
         scoredSuggestions.remove(suggestion);
-        //Tohle bude muset být vlastnost  exchange servisy jako m8 to smysl a nebudeš muset posílat parametr
         exchangeRateSuggestionService.removeSuggestions(scoredSuggestions);
     }
 
     private List<ExchangeRateSuggestion> getInProgressSuggestions(ExchangeRateSuggestion suggestion) {
-        return exchangeRateSuggestionService.getScoredSuggestions(suggestion.getExchangePointId()).stream()
+        return exchangeRateSuggestionService.getScoredSuggestions(suggestion.getSubjectId()).stream()
                 .filter(suggestionIsInProgressState())
                 .collect(Collectors.toList());
     }

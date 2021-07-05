@@ -19,7 +19,7 @@ public class UpVoteDeleteExchangePointService extends VoteService<VoteForExchang
     }
 
     private void acceptDeleteExchangePoint(ClosedExchangePointSuggestion suggestion) {
-        exchangeService.deleteExchangePoint(suggestion.getExchangePointId());
+        exchangeService.deleteExchangePoint(suggestion.getSubjectId());
         increaseSuggesterScore(suggestion.getSuggestedBy());
     }
 }
