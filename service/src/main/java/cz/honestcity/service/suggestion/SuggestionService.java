@@ -7,7 +7,6 @@ import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.vote.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -51,5 +50,9 @@ public abstract class SuggestionService<SUGGESTION extends Suggestion> {
     @Autowired
     public void setLoginDataService(LoginDataService loginDataService) {
         this.loginDataService = loginDataService;
+    }
+
+    public void update(SUGGESTION suggestion) {
+        suggestionGateway.update(suggestion);
     }
 }

@@ -46,4 +46,9 @@ public class NewExchangePointSuggestionPostgresGateway implements NewExchangePoi
     public List<NewExchangePointSuggestion> getAll() {
         return mapper.getAllNewExchangePointSuggestions();
     }
+
+    @Override
+    public void update(NewExchangePointSuggestion suggestion) {
+        mapper.update(suggestion);
+    }
 }

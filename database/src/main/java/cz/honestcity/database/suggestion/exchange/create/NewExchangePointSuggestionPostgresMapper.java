@@ -90,4 +90,9 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "where exchange_point_id = #{exchangePointId};")
     @ResultMap(TO_NEW_EXCHANGE_POINT_SUGGESTION)
     List<NewExchangePointSuggestion> getExchangePointSuggestions(@Param("exchangePointId")String exchangePointId);
+
+    @Update("UPDATE new_exchange_point_suggestion \n"+
+            "SET exchange_point_id = #{suggestion.subjectId} \n" +
+            "WHERE suggestion_id = #{suggestion.id} ")
+    void update(@Param("suggestion") NewExchangePointSuggestion suggestion);
 }

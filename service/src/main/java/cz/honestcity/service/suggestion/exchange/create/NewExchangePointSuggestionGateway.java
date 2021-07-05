@@ -10,4 +10,6 @@ public interface NewExchangePointSuggestionGateway extends SuggestionGateway<New
     List<NewExchangePointSuggestion> getAll();
 
     List<NewExchangePointSuggestion> getExchangePointSuggestions(String exchangePointId);
+
+    void update(NewExchangePointSuggestion suggestion);
 }

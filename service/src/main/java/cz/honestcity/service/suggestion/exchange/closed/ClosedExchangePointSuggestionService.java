@@ -36,6 +36,7 @@ public class ClosedExchangePointSuggestionService extends SuggestionService<Clos
         return gateway.getSuggestion(suggestionId);
     }
 
+    @Override
     public List<ClosedExchangePointSuggestion> getScoredSuggestions(String exchangePointId) {
         return gateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)

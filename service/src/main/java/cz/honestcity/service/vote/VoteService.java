@@ -50,6 +50,10 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
                 .getSuggestedBy();
     }
 
+    protected SuggestionService<SUGGESTION> getService(Suggestion suggestion){
+        return suggestionServices.get(suggestion.getClassName());
+    }
+
     @Autowired
     @Lazy
     public void setSuggestionServices(Map<String, SuggestionService> suggestionServices) {

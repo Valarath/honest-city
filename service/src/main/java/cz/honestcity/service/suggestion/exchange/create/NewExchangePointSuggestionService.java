@@ -50,6 +50,11 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
     }
 
     @Override
+    public void update(NewExchangePointSuggestion suggestion) {
+        gateway.update(suggestion);
+    }
+
+    @Override
     public List<NewExchangePointSuggestion> getAllInArea(Position position) {
         return gateway.getAll().stream()
                 .filter(exchange -> DistanceCalculator.isInArea(position, exchange.getPosition()))

@@ -35,4 +35,9 @@ public class SuggestionPostgresGateway implements BaseSuggestionGateway {
     public List<Suggestion> getUserSuggestions(String userId) {
         return null;
     }
+
+    @Override
+    public void update(Suggestion suggestion) {
+        suggestionPostgresMapper.update(suggestion);
+    }
 }

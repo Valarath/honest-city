@@ -8,4 +8,6 @@ import java.util.List;
 public interface BaseSuggestionGateway extends SuggestionGateway<Suggestion> {
 
     void removeSuggestions(List<? extends Suggestion> toRemove);
+
+    void update(Suggestion suggestion);
 }

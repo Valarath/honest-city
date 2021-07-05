@@ -22,6 +22,10 @@ public interface SuggestionPostgresMapper {
             "</script>")
     void removeSuggestions(@Param("toRemove") List<? extends Suggestion> toRemove);
 
-
+    @Update({"UPDATE suggestion \n" +
+            "SET votes = #{suggestion.votes}, \n" +
+            "SET status = #{suggestion.state}, \n" +
+            " WHERE suggestion_id = #{suggestion.id}"})
+    void update(@Param("suggestion")Suggestion suggestion);
 
 }
