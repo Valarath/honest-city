@@ -28,7 +28,7 @@ public class SuggestionPostgresGateway implements BaseSuggestionGateway {
 
     @Override
     public Suggestion getSuggestion(String suggestionId) {
-        return null;
+        return suggestionPostgresMapper.get(suggestionId);
     }
 
     @Override

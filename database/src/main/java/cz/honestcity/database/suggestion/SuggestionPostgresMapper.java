@@ -24,8 +24,20 @@ public interface SuggestionPostgresMapper {
 
     @Update({"UPDATE suggestion \n" +
             "SET votes = #{suggestion.votes}, \n" +
-            "SET status = #{suggestion.state}, \n" +
+            " status = #{suggestion.state} \n" +
             " WHERE suggestion_id = #{suggestion.id}"})
     void update(@Param("suggestion")Suggestion suggestion);
 
+
+    @Select("SELECT " +
+            "suggestion_id, " +
+            "status, " +
+            "votes " +
+            "FROM suggestion WHERE suggestion_id = #{suggestionId}")
+    @Results(value = {
+            @Result(property = "id",column = "suggestion_id"),
+            @Result(property = "state",column = "status"),
+            @Result(property = "votes",column = "votes")
+    })
+    Suggestion get(@Param("suggestionId")String suggestionId);
 }

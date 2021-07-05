@@ -16,6 +16,7 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
 
     //TODO to config file
     private static final int LOWEST_VALUE_FOR_ACCEPTENCE = 5;
+    public static final double SCORE_MODIFICATOR = 0.5;
 
     @Autowired
     private VoteGateway voteGateway;
@@ -32,24 +33,30 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
         userService.increaseUserScore(user);
     }
 
-    protected void recordVote(String suggestionId, String userId) {
-        voteGateway.recordVote(suggestionId, userId);
+    protected void recordVote(SUGGESTION suggestion, String userId) {
+        voteGateway.recordVote(suggestion.getId(), userId);
+        getService(suggestion).increaseVotes(suggestion.getId());
     }
 
     protected boolean isSuggestionAcceptable(SUGGESTION suggestion, String userId) {
         Integer suggestionVotes = voteGateway.getNumberOfVotes(suggestion.getId());
-        SUGGESTION persistedSuggestion = getService(suggestion).getSuggestion(suggestion.getId());
-        return persistedSuggestion.getState() == State.IN_PROGRESS && suggestionVotes != null && suggestionVotes * calculateUserTrustworthiness(userId) > LOWEST_VALUE_FOR_ACCEPTENCE;
+        return suggestion.getState() == State.IN_PROGRESS
+                && suggestionVotes != null
+                && suggestionVotes* calculateUserTrustworthiness(userId) > LOWEST_VALUE_FOR_ACCEPTENCE;
     }
 
     private double calculateUserTrustworthiness(String userId) {
-        return Math.atan(userService.getUserScore(userId) + Double.MIN_VALUE);
+        return Math.atan(userService.getUserScore(userId))+ SCORE_MODIFICATOR;
     }
 
     protected User getUser(Suggestion suggestion) {
         return suggestionServices.get(suggestion.getClassName())
                 .getSuggestion(suggestion.getId())
                 .getSuggestedBy();
+    }
+
+    protected SUGGESTION getSuggestion(SUGGESTION suggestion){
+        return getService(suggestion).getSuggestion(suggestion.getId());
     }
 
     protected void updateSuggestion(SUGGESTION suggestion) {

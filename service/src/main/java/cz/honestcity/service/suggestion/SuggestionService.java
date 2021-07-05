@@ -43,6 +43,12 @@ public abstract class SuggestionService<SUGGESTION extends Suggestion> {
         return suggestion;
     }
 
+    public void increaseVotes(String suggestionId){
+        Suggestion suggestion = suggestionGateway.getSuggestion(suggestionId);
+        suggestion.setVotes(suggestion.getVotes()+1);
+        suggestionGateway.update(suggestion);
+    }
+
     public void removeSuggestions(List<SUGGESTION> toRemove){
         suggestionGateway.removeSuggestions(toRemove);
     }

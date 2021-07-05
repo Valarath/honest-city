@@ -2,7 +2,6 @@ package cz.honestcity.service.vote.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.State;
-import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteForExchangePointRateChange;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
@@ -23,16 +22,22 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
     }
 
     public void upVote(ExchangeRateSuggestion suggestion, String userId) {
+        ExchangeRateSuggestion persistedSuggestion = getSuggestion(suggestion);
+        if (persistedSuggestion !=null)
+            performVote(persistedSuggestion,userId);
+    }
+
+    public void performVote(ExchangeRateSuggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion, userId))
             acceptExchangeRateChange( suggestion);
-        recordVote(suggestion.getId(), userId);
+        recordVote(suggestion, userId);
     }
 
     private void acceptExchangeRateChange(ExchangeRateSuggestion suggestion) {
         exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getSubjectId());
         removeDeclinedSuggestions(suggestion);
-        updateSuggestion(suggestion);
         increaseSuggesterScore(suggestion.getSuggestedBy());
+        updateSuggestion(suggestion);
     }
 
     private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion){
