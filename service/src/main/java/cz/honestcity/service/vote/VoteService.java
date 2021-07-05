@@ -1,9 +1,10 @@
 package cz.honestcity.service.vote;
 
+import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.suggestion.Suggestion;
+import cz.honestcity.model.user.User;
 import cz.honestcity.model.vote.Vote;
 import cz.honestcity.service.subject.exchange.ExchangeService;
-import cz.honestcity.model.user.User;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,15 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
         return suggestionServices.get(suggestion.getClassName())
                 .getSuggestion(suggestion.getId())
                 .getSuggestedBy();
+    }
+
+    protected void updateSuggestion(SUGGESTION suggestion) {
+        updateSuggestion(suggestion,suggestion.getSubjectId());
+    }
+
+    protected void updateSuggestion(SUGGESTION suggestion, String id) {
+        suggestion.setSubjectId(id);
+        suggestion.setState(State.ACCEPTED);
     }
 
     protected SuggestionService<SUGGESTION> getService(Suggestion suggestion){

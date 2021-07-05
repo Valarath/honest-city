@@ -3,6 +3,7 @@ package cz.honestcity.service.vote.exchange.create;
 import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.vote.VoteForNewExchangePoint;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
@@ -31,10 +32,11 @@ public class UpVoteNewExchangePointService extends VoteService<VoteForNewExchang
 
     private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {
         String id = idProvider.provideNewId();
-        suggestion.setSubjectId(id);
+        updateSuggestion(suggestion, id);
         return (ExchangePoint) new ExchangePoint()
                 .setPosition(suggestion.getPosition())
                 .setId(id)
                 .setHonestyStatus(HonestyStatus.UNKNOWN);
     }
+
 }

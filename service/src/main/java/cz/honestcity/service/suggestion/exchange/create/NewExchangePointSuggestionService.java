@@ -51,6 +51,7 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
 
     @Override
     public void update(NewExchangePointSuggestion suggestion) {
+        super.update(suggestion);
         gateway.update(suggestion);
     }
 
