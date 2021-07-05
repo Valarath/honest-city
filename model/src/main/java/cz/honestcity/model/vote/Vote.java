@@ -8,6 +8,5 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public abstract class Vote extends HonestCitySerializable {
-    //private VoteType voteType;
     private Suggestion suggestion;
 }
