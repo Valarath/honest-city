@@ -7,6 +7,7 @@ import cz.honestcity.service.rate.RateGatewayType;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @Service(RateGatewayType.RateGatewayConstants.RATE_DATABASE_GATEWAY)
 public class RatePostgresGateway implements RateDatabaseGateway {
@@ -41,8 +42,7 @@ public class RatePostgresGateway implements RateDatabaseGateway {
 
     @Override
     public ExchangeRate getExchangePointRate(String exchangePointId) {
-        return ratePostgresMapper
-                .getRate(exchangePointId)
-                .setRates(ratePostgresMapper.getExchangePointRates(exchangePointId));
+        ExchangePostgresRate rate = ratePostgresMapper.getRate(exchangePointId);
+        return rate == null ? null : rate.setRates(ratePostgresMapper.getExchangePointRates(exchangePointId));
     }
 }

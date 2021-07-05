@@ -3,9 +3,8 @@ package cz.honestcity.service.suggestion.exchange.rate;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
-import cz.honestcity.service.login.LoginDataService;
+import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
-import cz.honestcity.service.suggestion.base.BaseSuggestionService;
 import cz.honestcity.service.vote.exchange.rate.UpVoteExchangePointRateChangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 
 //@Service(SuggestionServiceType.SuggestionServiceTypeNames.EXCHANGE_RATE_CHANGE)
 @HonestCityService(beanId = ExchangeRateSuggestion.class)
-public class ExchangeRateSuggestionService extends BaseSuggestionService<ExchangeRateSuggestion> {
+public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionGateway gateway;
 
@@ -34,13 +33,13 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService<Exchang
     }
 
     @Override
-    public void suggest(List<? extends Suggestion> suggestions) {
+    public void suggest(List<ExchangeRateSuggestion> suggestions) {
         gateway.suggests(suggestions);
         suggesterVotesForHisSuggestions(suggestions, upVoteExchangePointRateChangeService);
     }
 
     @Override
-    public Suggestion getSuggestion(String suggestionId) {
+    public ExchangeRateSuggestion getSuggestion(String suggestionId) {
         return gateway.getSuggestion(suggestionId);
     }
 
@@ -50,12 +49,8 @@ public class ExchangeRateSuggestionService extends BaseSuggestionService<Exchang
                 .collect(Collectors.toList());
     }
 
-    private int compareUserScore(Suggestion userSuggestion1, Suggestion userSuggestion2) {
-        return Integer.compare(userSuggestion1.getSuggestedBy().getScore(), userSuggestion2.getSuggestedBy().getScore());
-    }
-
     @Override
-    public List<? extends Suggestion> getUserSuggestions(String userId) {
+    public List<ExchangeRateSuggestion> getUserSuggestions(String userId) {
         return gateway.getUserSuggestions(userId);
     }
 }

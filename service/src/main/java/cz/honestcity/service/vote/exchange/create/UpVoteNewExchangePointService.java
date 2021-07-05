@@ -6,30 +6,34 @@ import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteForNewExchangePoint;
 import cz.honestcity.service.configuration.HonestCityService;
-import cz.honestcity.service.vote.exchange.VoteExchangeService;
+import cz.honestcity.service.configuration.IdProvider;
+import cz.honestcity.service.vote.VoteService;
 
 //@Service(VoteType.VoteConstants.NEW_EXCHANGE_POINT)
 @HonestCityService(beanId = VoteForNewExchangePoint.class)
-public class UpVoteNewExchangePointService extends VoteExchangeService {
+public class UpVoteNewExchangePointService extends VoteService<VoteForNewExchangePoint,NewExchangePointSuggestion> {
 
+    private final IdProvider idProvider;
 
-    public UpVoteNewExchangePointService() {
+    public UpVoteNewExchangePointService(IdProvider idProvider) {
+        this.idProvider = idProvider;
     }
 
-    public void upVote(Suggestion suggestion, String userId) {
+    public void upVote(NewExchangePointSuggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion.getId(), userId))
-            acceptNewExchangePoint((NewExchangePointSuggestion) suggestion);
+            acceptNewExchangePoint( suggestion);
         recordVote(suggestion.getId(), userId);
     }
 
     private void acceptNewExchangePoint(NewExchangePointSuggestion suggestion) {
         exchangeService.createSubject(getNewExchangePoint(suggestion));
-        increaseSuggesterScore(suggestion.getSuggestedBy());
+        increaseSuggesterScore(getUser(suggestion));
     }
 
     private ExchangePoint getNewExchangePoint(NewExchangePointSuggestion suggestion) {
         return (ExchangePoint) new ExchangePoint()
                 .setPosition(suggestion.getPosition())
+                .setId(idProvider.provideNewId())
                 .setHonestyStatus(HonestyStatus.UNKNOWN);
     }
 }

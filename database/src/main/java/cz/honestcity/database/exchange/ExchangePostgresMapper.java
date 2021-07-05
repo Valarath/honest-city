@@ -1,32 +1,28 @@
 package cz.honestcity.database.exchange;
 
 import cz.honestcity.model.exchange.ExchangePoint;
+import cz.honestcity.model.subject.HonestyStatus;
+import org.apache.ibatis.annotations.*;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
-
-import cz.honestcity.model.subject.HonestyStatus;
-import cz.honestcity.model.suggestion.State;
-import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.EnumTypeHandler;
 
 @Mapper
 public interface ExchangePostgresMapper {
 
-	@Select("SELECT exchange_point_id, active_to, longitude, longitude, honesty_status\n" +
+	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status\n" +
 			"FROM exchange_point;")
 	@ConstructorArgs(value = {
 			@Arg(column = "longitude",javaType = Double.class),
 			@Arg(column = "latitude",javaType = Double.class),
 			@Arg(column = "exchange_point_id",javaType = String.class),
 			@Arg(column = "active_to",javaType = LocalDate.class),
-			@Arg(column = "honesty_status",javaType = HonestyStatus.class, typeHandler = EnumTypeHandler.class)
+			@Arg(column = "honesty_status",javaType = HonestyStatus.class)
 	})
 	List<ExchangePostgresPoint> getAllExchanges();
 
 	@Insert("INSERT into exchange_point(exchange_point_id, honesty_status, latitude, longitude)\n" +
-			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.latitude},#{exchangePoint.longitude});")
+			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.position.latitude},#{exchangePoint.position.longitude});")
 	void createNewExchange(@Param("exchangePoint") ExchangePoint newExchangePoint);
 
 	@Update("UPDATE exchange_point_rate\n" +

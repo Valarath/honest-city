@@ -2,9 +2,7 @@ package cz.honestcity.database.rate;
 
 import cz.honestcity.model.exchange.Currency;
 import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.model.exchange.Rate;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.EnumTypeHandler;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -66,7 +64,7 @@ public interface RatePostgresMapper {
             "       where a.central_authority_id notnull and active_to is null);")
 
     @ConstructorArgs(value = {
-            @Arg(column = "currency_shortcut", javaType = Currency.class, typeHandler = EnumTypeHandler.class),
+            @Arg(column = "currency_shortcut", javaType = Currency.class),
             @Arg(column = "buy", javaType = Integer.class)
     })
     Set<PostgresRate> getCentralAuthorityRates();
@@ -81,7 +79,7 @@ public interface RatePostgresMapper {
             "                               on exchange_point_rate.exchange_rates_id = exchange_rates.exchange_rates_id\n" +
             "                           where exchange_point_id = #{exchangePointId} and active_to isnull);")
     @ConstructorArgs(value = {
-            @Arg(column = "currency", javaType = Currency.class, typeHandler = EnumTypeHandler.class),
+            @Arg(column = "currency", javaType = Currency.class),
             @Arg(column = "buy", javaType = Integer.class)
     })
     Set<PostgresRate> getExchangePointRates(@Param("exchangePointId") String exchangePointId);

@@ -26,7 +26,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
-            "where ceps.suggestion_id = #{suggestionId} AND status = 'IN_PROGRESS';")
+            "where neps.suggestion_id = #{suggestionId} AND status = 'IN_PROGRESS';")
     @ResultMap(TO_NEW_EXCHANGE_POINT_SUGGESTION)
     NewExchangePointSuggestion getNewExchangePointSuggestion(@Param("suggestionId") String suggestionId);
 
@@ -39,6 +39,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       score,\n" +
             "       latitude,\n" +
             "       longitude\n" +
+            "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
@@ -55,6 +56,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       score,\n" +
             "       latitude,\n" +
             "       longitude\n" +
+            "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id;")
@@ -68,8 +70,24 @@ public interface NewExchangePointSuggestionPostgresMapper {
             @Result(property = "suggestedBy.email",column = "email"),
             @Result(property = "position.latitude",column = "latitude"),
             @Result(property = "position.longitude",column = "longitude"),
-
+            @Result(property = "subjectId",column = "exchange_point_id")
     })
     List<NewExchangePointSuggestion> getAllNewExchangePointSuggestions();
 
+    @Select("SELECT suggestion.suggestion_id,\n" +
+            "       votes,\n" +
+            "       suggestion.user_id,\n" +
+            "       status,\n" +
+            "       username,\n" +
+            "       email,\n" +
+            "       score,\n" +
+            "       latitude,\n" +
+            "       longitude\n" +
+            "       exchange_point_id\n" +
+            "FROM suggestion\n" +
+            "         join \"user\" u on suggestion.user_id = u.user_id\n" +
+            "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
+            "where exchange_point_id = #{exchangePointId};")
+    @ResultMap(TO_NEW_EXCHANGE_POINT_SUGGESTION)
+    List<NewExchangePointSuggestion> getExchangePointSuggestions(@Param("exchangePointId")String exchangePointId);
 }

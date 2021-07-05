@@ -7,13 +7,16 @@ import cz.honestcity.model.exchange.Rate;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.subject.WatchedSubject;
+import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.subject.SubjectService;
-import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
+import cz.honestcity.service.suggestion.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 //@Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
@@ -22,14 +25,14 @@ public class ExchangeService extends SubjectService {
 
     private final ExchangeGateway exchangeGateway;
 
-    private final ExchangeRateSuggestionService suggestionService;
+    private final Map<String, SuggestionService<? extends Suggestion>> suggestionServices;
 
     private final RateService rateService;
 
     @Autowired
-    public ExchangeService(ExchangeGateway exchangeGateway, ExchangeRateSuggestionService suggestionService, RateService rateService) {
+    public ExchangeService(ExchangeGateway exchangeGateway, Map<String, SuggestionService<? extends Suggestion>> suggestionServices, RateService rateService) {
         this.exchangeGateway = exchangeGateway;
-        this.suggestionService = suggestionService;
+        this.suggestionServices = suggestionServices;
         this.rateService = rateService;
     }
 
@@ -55,7 +58,14 @@ public class ExchangeService extends SubjectService {
     private ExchangePoint getFullyInitializeExchangePoint(ExchangePoint exchangePoint) {
         return exchangePoint
                 .setExchangePointRate(rateService.getExchangePointRate(exchangePoint.getId()))
-                .setExchangeRateSuggestions(suggestionService.getScoredSuggestions(exchangePoint.getId()));
+                .setSuggestions(getAllSuggestions(exchangePoint));
+    }
+
+    private List<Suggestion> getAllSuggestions(ExchangePoint exchangePoint){
+        return suggestionServices.values().stream()
+                .map(it -> it.getScoredSuggestions(exchangePoint.getId()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     public void deleteExchangePoint(String exchangePointId) {

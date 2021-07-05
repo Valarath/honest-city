@@ -1,16 +1,15 @@
 package cz.honestcity.service.suggestion;
 
-import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 
 import java.util.List;
 
-public interface SuggestionGateway {
+public interface SuggestionGateway<SUGGESTION extends Suggestion> {
 
-    void suggests(List<? extends Suggestion> suggestions);
+    void suggests(List<SUGGESTION> suggestions);
 
-    Suggestion getSuggestion(String suggestionId);
+    SUGGESTION getSuggestion(String suggestionId);
 
-    List<? extends Suggestion> getUserSuggestions(String userId);
+    List<SUGGESTION> getUserSuggestions(String userId);
 
 }

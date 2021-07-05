@@ -5,8 +5,9 @@ import cz.honestcity.service.suggestion.SuggestionGateway;
 
 import java.util.List;
 
-public interface NewExchangePointSuggestionGateway extends SuggestionGateway {
+public interface NewExchangePointSuggestionGateway extends SuggestionGateway<NewExchangePointSuggestion> {
 
-    List<? extends NewExchangePointSuggestion> getAll();
+    List<NewExchangePointSuggestion> getAll();
 
+    List<NewExchangePointSuggestion> getExchangePointSuggestions(String exchangePointId);
 }

@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 public class Suggestion extends HonestCitySerializable {
     private String id;
     private User suggestedBy;
+    private String subjectId;
     private State state;
     private int votes;
 }

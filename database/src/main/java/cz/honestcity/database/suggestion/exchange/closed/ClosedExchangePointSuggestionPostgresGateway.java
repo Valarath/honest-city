@@ -10,21 +10,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPostgresGateway implements ClosedExchangePointSuggestionGateway {
+public class ClosedExchangePointSuggestionPostgresGateway implements ClosedExchangePointSuggestionGateway {
 
     private final ClosedExchangePointSuggestionPostgresMapper mapper;
+    protected final SuggestionPostgresMapper suggestionPostgresMapper;
 
     public ClosedExchangePointSuggestionPostgresGateway(SuggestionPostgresMapper suggestionPostgresMapper, ClosedExchangePointSuggestionPostgresMapper mapper) {
-        super(suggestionPostgresMapper);
         this.mapper = mapper;
+        this.suggestionPostgresMapper = suggestionPostgresMapper;
     }
 
+    @Override
+    public List<ClosedExchangePointSuggestion> getExchangePointSuggestions(String exchangePointId) {
+        return mapper.getExchangePointSuggestions(exchangePointId);
+    }
 
     @Override
-    public void suggests(List<? extends Suggestion> closedExchangePointSuggestions) {
+    public void suggests(List<ClosedExchangePointSuggestion> closedExchangePointSuggestions) {
         closedExchangePointSuggestions.forEach(suggestion -> {
             suggestionPostgresMapper.suggest(suggestion);
-            mapper.reportNonExistingPoint((ClosedExchangePointSuggestion) suggestion);
+            mapper.reportNonExistingPoint( suggestion);
         });
     }
 
@@ -34,7 +39,7 @@ public class ClosedExchangePointSuggestionPostgresGateway extends SuggestionPost
     }
 
     @Override
-    public List<? extends ClosedExchangePointSuggestion> getUserSuggestions(String userId) {
+    public List<ClosedExchangePointSuggestion> getUserSuggestions(String userId) {
         return mapper.getUserClosedExchangePointSuggestions(userId);
     }
 }

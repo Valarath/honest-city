@@ -22,7 +22,7 @@ public class SuggestionPostgresGateway implements BaseSuggestionGateway {
     }
 
     @Override
-    public void suggests(List<? extends Suggestion> suggestions) {
+    public void suggests(List<Suggestion> suggestions) {
 
     }
 
@@ -32,7 +32,7 @@ public class SuggestionPostgresGateway implements BaseSuggestionGateway {
     }
 
     @Override
-    public List<? extends Suggestion> getUserSuggestions(String userId) {
+    public List<Suggestion> getUserSuggestions(String userId) {
         return null;
     }
 }

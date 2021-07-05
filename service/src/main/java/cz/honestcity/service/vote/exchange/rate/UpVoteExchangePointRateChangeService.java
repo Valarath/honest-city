@@ -6,7 +6,7 @@ import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.vote.VoteForExchangePointRateChange;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionService;
-import cz.honestcity.service.vote.exchange.VoteExchangeService;
+import cz.honestcity.service.vote.VoteService;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 //@Service(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE)
 @HonestCityService(beanId = VoteForExchangePointRateChange.class)
-public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
+public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExchangePointRateChange,ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionService exchangeRateSuggestionService;
 
@@ -22,9 +22,9 @@ public class UpVoteExchangePointRateChangeService extends VoteExchangeService {
         this.exchangeRateSuggestionService = exchangeRateSuggestionService;
     }
 
-    public void upVote(Suggestion suggestion, String userId) {
+    public void upVote(ExchangeRateSuggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion.getId(), userId))
-            acceptExchangeRateChange((ExchangeRateSuggestion) suggestion);
+            acceptExchangeRateChange( suggestion);
         recordVote(suggestion.getId(), userId);
     }
 

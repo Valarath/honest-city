@@ -40,6 +40,9 @@
             <column name="suggestion_id" type="varchar">
                 <constraints foreignKeyName="fk_suggestion_id" references="suggestion(suggestion_id)" nullable="false"/>
             </column>
+            <column name="exchange_point_id" type="varchar">
+                <constraints foreignKeyName="fk_exchange_point_id" references="exchange_point(exchange_point_id)" nullable="true"/>
+            </column>
             <column name="latitude" type="float">
                 <constraints nullable="false"/>
             </column>

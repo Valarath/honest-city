@@ -10,45 +10,46 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ExchangeRateSuggestionPostgresGateway extends SuggestionPostgresGateway implements ExchangeRateSuggestionGateway {
+public class ExchangeRateSuggestionPostgresGateway implements ExchangeRateSuggestionGateway {
 
     private final ExchangeRateSuggestionPostgresMapper mapper;
+    protected final SuggestionPostgresMapper suggestionPostgresMapper;
 
     public ExchangeRateSuggestionPostgresGateway(SuggestionPostgresMapper suggestionPostgresMapper, ExchangeRateSuggestionPostgresMapper mapper) {
-        super(suggestionPostgresMapper);
         this.mapper = mapper;
+        this.suggestionPostgresMapper = suggestionPostgresMapper;
     }
 
     @Override
-    public List<? extends ExchangeRateSuggestion> getExchangePointSuggestions(String exchangePointId) {
-        List<ExchangeRatePostgresSuggestion> suggestions = mapper.getExchangePointSuggestions(exchangePointId);
+    public List<ExchangeRateSuggestion> getExchangePointSuggestions(String exchangePointId) {
+        List<ExchangeRateSuggestion> suggestions = mapper.getExchangePointSuggestions(exchangePointId);
         suggestions.forEach(this::setRates);
         return suggestions;
     }
 
     @Override
-    public void suggests(List<? extends Suggestion> suggestions) {
+    public void suggests(List<ExchangeRateSuggestion> suggestions) {
         suggestions.forEach(suggestion ->{
             suggestionPostgresMapper.suggest(suggestion);
-            mapper.suggestsExchangeRateChange((ExchangeRateSuggestion) suggestion);
+            mapper.suggestsExchangeRateChange(suggestion);
         });
     }
 
     @Override
     public ExchangeRateSuggestion getSuggestion(String suggestionId) {
-        ExchangeRatePostgresSuggestion exchangeRateSuggestion = mapper.getExchangeRateSuggestion(suggestionId);
+        ExchangeRateSuggestion exchangeRateSuggestion = mapper.getExchangeRateSuggestion(suggestionId);
         setRates(exchangeRateSuggestion);
         return exchangeRateSuggestion;
     }
 
     @Override
-    public List<? extends ExchangeRateSuggestion> getUserSuggestions(String userId) {
-        List<ExchangeRatePostgresSuggestion> suggestions = mapper.getUserExchangeRateSuggestions(userId);
+    public List<ExchangeRateSuggestion> getUserSuggestions(String userId) {
+        List<ExchangeRateSuggestion> suggestions = mapper.getUserExchangeRateSuggestions(userId);
         suggestions.forEach(this::setRates);
         return suggestions;
     }
 
-    private void setRates(ExchangeRatePostgresSuggestion exchangeRateSuggestion) {
+    private void setRates(ExchangeRateSuggestion exchangeRateSuggestion) {
         exchangeRateSuggestion.getSuggestedExchangeRate().setRates(mapper.getSuggestedRates(exchangeRateSuggestion.getSuggestedExchangeRate().getId()));
     }
 
