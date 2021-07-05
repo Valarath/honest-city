@@ -2,6 +2,7 @@ module cz.honestcity.service {
 	requires transitive cz.honestcity.model;
     requires spring.beans;
     requires spring.context;
+    requires spring.boot;
 
     exports cz.honestcity.service.subject.exchange;
     exports cz.honestcity.service.suggestion;

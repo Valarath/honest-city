@@ -1,7 +1,8 @@
 package cz.honestcity.service.rate;
 
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import cz.honestcity.model.exchange.ExchangeRate;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Service
-public class RateService implements InitializingBean {
+public class RateService {
 
     private final Map<String, ? extends RateGateway> rateGateways;
 
@@ -17,13 +18,13 @@ public class RateService implements InitializingBean {
         this.rateGateways = rateGateways;
     }
 
-    @Override
-    public void afterPropertiesSet() {
-        getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
-    }
-
+    @EventListener(ApplicationReadyEvent.class)
     @Scheduled(cron = "0 0 3 * * ?")
     public void crawlRate() {
+        getAuthorityRate();
+    }
+
+    private void getAuthorityRate() {
         getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
     }
 
