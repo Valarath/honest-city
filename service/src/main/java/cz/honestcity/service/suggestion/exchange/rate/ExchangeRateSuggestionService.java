@@ -46,6 +46,7 @@ public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRat
     public List<ExchangeRateSuggestion> getScoredSuggestions(String exchangePointId) {
         return gateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
+                .map(this::setSuggestorLoginData)
                 .collect(Collectors.toList());
     }
 

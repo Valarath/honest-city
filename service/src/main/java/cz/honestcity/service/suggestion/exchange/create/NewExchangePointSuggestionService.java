@@ -41,6 +41,7 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
     public List<NewExchangePointSuggestion> getScoredSuggestions(String exchangePointId) {
         return gateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
+                .map(this::setSuggestorLoginData)
                 .collect(Collectors.toList());
     }
 

@@ -40,6 +40,7 @@ public class ClosedExchangePointSuggestionService extends SuggestionService<Clos
     public List<ClosedExchangePointSuggestion> getScoredSuggestions(String exchangePointId) {
         return gateway.getExchangePointSuggestions(exchangePointId).stream()
                 .sorted(this::compareUserScore)
+                .map(this::setSuggestorLoginData)
                 .collect(Collectors.toList());
     }
 
