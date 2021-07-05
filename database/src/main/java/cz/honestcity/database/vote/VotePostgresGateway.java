@@ -18,6 +18,11 @@ public class VotePostgresGateway implements VoteGateway {
     }
 
     @Override
+    public boolean isVoteRecorded(String suggestionId, String userId) {
+        return votePostgresMapper.isVoteRecorded(suggestionId,userId) >0;
+    }
+
+    @Override
     public void recordVote(String suggestionId, String userId) {
         votePostgresMapper.recordVote(suggestionId, userId);
     }

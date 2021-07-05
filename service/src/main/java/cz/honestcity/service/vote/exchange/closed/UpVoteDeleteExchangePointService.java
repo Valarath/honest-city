@@ -13,7 +13,7 @@ public class UpVoteDeleteExchangePointService extends VoteService<VoteForExchang
 
     public void upVote(ClosedExchangePointSuggestion suggestion, String userId) {
         ClosedExchangePointSuggestion persistedSuggestion = getSuggestion(suggestion);
-        if (persistedSuggestion != null)
+        if (persistedSuggestion != null && voteGateway.isVoteRecorded(persistedSuggestion.getId(),userId))
             performVote(persistedSuggestion, userId);
     }
 

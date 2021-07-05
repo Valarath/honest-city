@@ -19,7 +19,7 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
     public static final double SCORE_MODIFICATOR = 0.5;
 
     @Autowired
-    private VoteGateway voteGateway;
+    protected VoteGateway voteGateway;
 
     protected ExchangeService exchangeService;
 

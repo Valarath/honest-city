@@ -2,6 +2,7 @@ package cz.honestcity.service.suggestion.exchange.create;
 
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
+import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.DistanceCalculator;
 import cz.honestcity.service.configuration.HonestCityService;
@@ -59,7 +60,8 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
     @Override
     public List<NewExchangePointSuggestion> getAllInArea(Position position) {
         return gateway.getAll().stream()
-                .filter(exchange -> DistanceCalculator.isInArea(position, exchange.getPosition()))
+                .filter(it -> it.getState() == State.IN_PROGRESS)
+                .filter(it -> DistanceCalculator.isInArea(position, it.getPosition()))
                 .map(this::setSuggestorLoginData)
                 .collect(Collectors.toList());
     }

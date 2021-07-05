@@ -23,7 +23,7 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
 
     public void upVote(ExchangeRateSuggestion suggestion, String userId) {
         ExchangeRateSuggestion persistedSuggestion = getSuggestion(suggestion);
-        if (persistedSuggestion !=null)
+        if (persistedSuggestion !=null && voteGateway.isVoteRecorded(persistedSuggestion.getId(),userId))
             performVote(persistedSuggestion,userId);
     }
 

@@ -19,7 +19,7 @@ public class UpVoteNewExchangePointService extends VoteService<VoteForNewExchang
 
     public void upVote(NewExchangePointSuggestion suggestion, String userId) {
         NewExchangePointSuggestion persistedSuggestion = getSuggestion(suggestion);
-        if(persistedSuggestion !=null)
+        if(persistedSuggestion !=null && voteGateway.isVoteRecorded(persistedSuggestion.getId(),userId))
             performVote(persistedSuggestion,userId);
     }
 
