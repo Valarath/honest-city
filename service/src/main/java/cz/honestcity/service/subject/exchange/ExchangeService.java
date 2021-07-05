@@ -43,7 +43,7 @@ public class ExchangeService extends SubjectService {
 
     @Override
     public List<? extends WatchedSubject> getSubjectsInArea(Position position) {
-        return exchangeGateway.getAllExchanges().stream()
+        return exchangeGateway.getExchangePoints().stream()
                 .filter(exchange -> isInArea(position, exchange.getPosition()))
                 .map(this::getFullyInitializeExchangePoint)
                 .collect(Collectors.toList());

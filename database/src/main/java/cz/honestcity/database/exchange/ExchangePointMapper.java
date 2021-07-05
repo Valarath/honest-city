@@ -8,18 +8,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
-public interface ExchangePostgresMapper {
+public interface ExchangePointMapper {
 
-	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status\n" +
+	String TO_EXCHANGE_POINT ="toExchangePoint";
+
+	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status \n" +
 			"FROM exchange_point;")
-	@ConstructorArgs(value = {
-			@Arg(column = "longitude",javaType = Double.class),
-			@Arg(column = "latitude",javaType = Double.class),
-			@Arg(column = "exchange_point_id",javaType = String.class),
-			@Arg(column = "active_to",javaType = LocalDate.class),
-			@Arg(column = "honesty_status",javaType = HonestyStatus.class)
+	@Results(id = TO_EXCHANGE_POINT,value = {
+			@Result(property = "id",column = "exchange_point_id"),
+			@Result(property = "honestyStatus",column = "honesty_status"),
+			@Result(property = "watchedTo",column = "active_to"),
+			@Result(property = "position.longitude",column = "longitude"),
+			@Result(property = "position.latitude",column = "latitude")
 	})
-	List<ExchangePostgresPoint> getAllExchanges();
+	List<ExchangePoint> getExchangePoints();
 
 	@Insert("INSERT into exchange_point(exchange_point_id, honesty_status, latitude, longitude)\n" +
 			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.position.latitude},#{exchangePoint.position.longitude});")

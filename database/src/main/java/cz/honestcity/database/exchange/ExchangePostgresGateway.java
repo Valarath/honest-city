@@ -10,39 +10,39 @@ import java.util.List;
 @Service
 public class ExchangePostgresGateway implements ExchangeGateway {
 
-	private final ExchangePostgresMapper exchangeMapper;
+	private final ExchangePointMapper exchangePointMapper;
 
-	public ExchangePostgresGateway(ExchangePostgresMapper exchangeMapper) {
-		this.exchangeMapper = exchangeMapper;
+	public ExchangePostgresGateway(ExchangePointMapper exchangePointMapper) {
+		this.exchangePointMapper = exchangePointMapper;
 	}
 
 	@Override
-	public List<? extends ExchangePoint> getAllExchanges() {
-		return exchangeMapper.getAllExchanges();
+	public List<ExchangePoint> getExchangePoints() {
+		return exchangePointMapper.getExchangePoints();
 	}
 
 	@Override
 	public void createExchange(ExchangePoint newExchangePoint) {
-		exchangeMapper.createNewExchange(newExchangePoint);
+		exchangePointMapper.createNewExchange(newExchangePoint);
 	}
 
 	@Override
 	public void deActivateOldExchangeRate(String exchangePointId) {
-		exchangeMapper.deActivateOldExchangeRate(exchangePointId);
+		exchangePointMapper.deActivateOldExchangeRate(exchangePointId);
 	}
 
 	@Override
 	public void changeExchangeRate(String newExchangeRateId, String exchangePointId) {
-		exchangeMapper.setNewExchangeRate(newExchangeRateId,exchangePointId);
+		exchangePointMapper.setNewExchangeRate(newExchangeRateId,exchangePointId);
 	}
 
 	@Override
 	public void deleteExchangePoint(String exchangePointId) {
-		exchangeMapper.deleteExchangePoint(exchangePointId);
+		exchangePointMapper.deleteExchangePoint(exchangePointId);
 	}
 
 	@Override
 	public void setHonestyStatus(String exchangePointId, HonestyStatus honestyStatus) {
-		exchangeMapper.setHonestyStatus(exchangePointId,honestyStatus);
+		exchangePointMapper.setHonestyStatus(exchangePointId,honestyStatus);
 	}
 }
