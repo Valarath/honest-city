@@ -29,7 +29,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
-            "  exchange_rates_id\n" +
+            "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -57,7 +57,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
-            "  exchange_rates_id\n" +
+            "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -67,8 +67,8 @@ public interface ExchangeRateSuggestionPostgresMapper {
 
     @Select("SELECT\n" +
             "  buy,\n" +
-            "  currency_shortcut\n" +
-            "FROM exchange_rate\n" +
+            "  currency_shortcut \n" +
+            "FROM exchange_rate \n" +
             "where exchange_rates_id = #{exchangeRatesId}")
     @ConstructorArgs(value = {
             @Arg(column = "currency", javaType = Currency.class),
@@ -85,7 +85,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
-            "  exchange_rates_id\n" +
+            "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +
             "  JOIN \"user\" u on suggestion.user_id = u.user_id\n" +

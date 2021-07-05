@@ -22,7 +22,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
-            "       longitude\n" +
+            "       longitude,\n" +
+            "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
             "         join new_exchange_point_suggestion neps on suggestion.suggestion_id = neps.suggestion_id\n" +
@@ -38,7 +39,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
-            "       longitude\n" +
+            "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -55,7 +56,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
-            "       longitude\n" +
+            "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -82,7 +83,7 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
-            "       longitude\n" +
+            "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
