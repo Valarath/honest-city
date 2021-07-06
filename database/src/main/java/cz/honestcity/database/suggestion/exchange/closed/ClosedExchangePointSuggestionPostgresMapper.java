@@ -12,7 +12,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
     String TO_CLOSED_EXCHANGE_POINT_SUGGESTION ="toClosedExchangePointSuggestion";
 
     @Insert("INSERT INTO closed_exchange_point_suggestion(exchange_point_id, suggestion_id)\n" +
-            "VALUES (#{suggestion.exchangePointId},#{suggestion.id});")
+            "VALUES (#{suggestion.subjectId},#{suggestion.id});")
     void reportNonExistingPoint(@Param("suggestion")ClosedExchangePointSuggestion closedExchangePointSuggestions);
 
     @Select("SELECT suggestion.suggestion_id,\n" +

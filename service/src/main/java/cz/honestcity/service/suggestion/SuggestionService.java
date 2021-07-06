@@ -42,7 +42,7 @@ public abstract class SuggestionService<SUGGESTION extends Suggestion> {
 
     protected List<SUGGESTION> getSuggestibleSuggestions(List<SUGGESTION> suggestions, SuggestionGateway<SUGGESTION> gateway) {
         return suggestions.stream()
-                .filter(it -> gateway.getSuggestion(it.getId()) != null)
+                .filter(it -> gateway.getSuggestion(it.getId()) == null)
                 .collect(Collectors.toList());
     }
 

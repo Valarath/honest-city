@@ -17,7 +17,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
     String TO_EXCHANGE_RATE_SUGGESTION ="toExchangeRateSuggestion";
 
     @Insert("INSERT INTO exchange_rate_suggestion(exchange_point_id, suggestion_id, exchange_rate_id)\n" +
-            "values(#{suggestion.exchangePointId},#{suggestion.id},#{suggestion.suggestedExchangeRate.id});")
+            "values(#{suggestion.subjectId},#{suggestion.id},#{suggestion.suggestedExchangeRate.id});")
     void suggestsExchangeRateChange(@Param("suggestion")ExchangeRateSuggestion suggestions);
 
     @Select("SELECT\n" +
