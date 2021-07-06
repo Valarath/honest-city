@@ -34,7 +34,7 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
     }
 
     private void acceptExchangeRateChange(ExchangeRateSuggestion suggestion) {
-        exchangeService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getSubjectId());
+        exchangePointService.changeExchangeRate(suggestion.getSuggestedExchangeRate().getId(), suggestion.getSubjectId());
         removeDeclinedSuggestions(suggestion);
         increaseSuggesterScore(suggestion.getSuggestedBy());
         updateSuggestion(suggestion);

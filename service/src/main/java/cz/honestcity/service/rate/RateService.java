@@ -1,5 +1,6 @@
 package cz.honestcity.service.rate;
 
+import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import cz.honestcity.model.exchange.ExchangeRate;
 import org.springframework.context.event.EventListener;
@@ -30,6 +31,10 @@ public class RateService {
 
     public ExchangeRate getExchangePointRate(String exchangePointId) {
         return getRateDatabaseGateway().getExchangePointRate(exchangePointId);
+    }
+
+    public void saveSuggestionRate(ExchangeRate exchangeRate){
+        getRateDatabaseGateway().saveSubjectRate(exchangeRate);
     }
 
     public ExchangeRate getCentralAuthorityRate() {

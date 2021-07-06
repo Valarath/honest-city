@@ -19,7 +19,7 @@ public interface RatePostgresMapper {
             "VALUES \n" +
             "<foreach collection='exchangeRate.rates' item='rate' index='index' open='(' separator = '),(' close=')' > #{exchangeRatesId}, #{exchangeRatesId}, #{rate.rateValues.buy}, #{rate.currency}</foreach> \n" +
             "</script>")
-    void saveCentralAuthorityRates(@Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
+    void saveRates(@Param("exchangeRatesId") String exchangeRatesId, @Param("exchangeRate") ExchangeRate exchangeRate);
 
     @Insert("INSERT INTO central_authority_rate (exchange_rates_id, central_authority_id, active_from, active_to) \n" +
             "VALUES(#{exchangeRatesId},(SELECT central_authority_id from central_authority LIMIT 1),#{exchangeRate.watched.from},#{exchangeRate.watched.to});")
@@ -28,7 +28,7 @@ public interface RatePostgresMapper {
     @Update("UPDATE central_authority_rate \n" +
             "set active_to = #{to} \n" +
             "WHERE active_to ISNULL")
-    void disableRate(@Param("to") LocalDate to);
+    void disableCentralAuthorityRate(@Param("to") LocalDate to);
 
     @Select("SELECT central_authority_id, active_from, active_to\n" +
             "FROM central_authority_rate\n" +

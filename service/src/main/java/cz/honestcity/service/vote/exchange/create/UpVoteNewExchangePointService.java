@@ -30,7 +30,7 @@ public class UpVoteNewExchangePointService extends VoteService<VoteForNewExchang
     }
 
     private void acceptNewExchangePoint(NewExchangePointSuggestion suggestion) {
-        exchangeService.createSubject(getNewExchangePoint(suggestion));
+        exchangePointService.createSubject(getNewExchangePoint(suggestion));
         increaseSuggesterScore(getUser(suggestion));
         getService(suggestion).update(suggestion);
     }

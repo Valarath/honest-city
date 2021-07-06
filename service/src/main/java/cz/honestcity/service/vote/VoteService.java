@@ -4,7 +4,7 @@ import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
 import cz.honestcity.model.vote.Vote;
-import cz.honestcity.service.subject.exchange.ExchangeService;
+import cz.honestcity.service.subject.exchange.ExchangePointService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
     @Autowired
     protected VoteGateway voteGateway;
 
-    protected ExchangeService exchangeService;
+    protected ExchangePointService exchangePointService;
 
     protected Map<String, SuggestionService> suggestionServices;
 
@@ -80,8 +80,8 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
 
     @Autowired
     @Lazy
-    public void setExchangeService(ExchangeService exchangeService) {
-        this.exchangeService = exchangeService;
+    public void setExchangeService(ExchangePointService exchangePointService) {
+        this.exchangePointService = exchangePointService;
     }
 
     @Autowired

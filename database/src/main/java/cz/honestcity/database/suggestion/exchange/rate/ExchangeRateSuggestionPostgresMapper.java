@@ -2,6 +2,8 @@ package cz.honestcity.database.suggestion.exchange.rate;
 
 import cz.honestcity.database.rate.PostgresRate;
 import cz.honestcity.model.exchange.Currency;
+import cz.honestcity.model.exchange.ExchangeRateValues;
+import cz.honestcity.model.exchange.Rate;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.State;
 import org.apache.ibatis.annotations.*;
@@ -43,7 +45,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             @Result(property = "suggestedBy.username",column = "username"),
             @Result(property = "suggestedBy.score",column = "score"),
             @Result(property = "suggestedBy.email",column = "email"),
-            @Result(property = "exchangeRate.id",column = "exchange_rates_id"),
+            @Result(property = "suggestedExchangeRate.id",column = "exchange_rates_id"),
             @Result(property = "subjectId",column = "exchange_point_id"),
     })
     ExchangeRateSuggestion getExchangeRateSuggestion(@Param("suggestionId")String suggestionId);
@@ -70,11 +72,11 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  currency_shortcut \n" +
             "FROM exchange_rate \n" +
             "where exchange_rates_id = #{exchangeRatesId}")
-    @ConstructorArgs(value = {
-            @Arg(column = "currency", javaType = Currency.class),
-            @Arg(column = "buy", javaType = Integer.class)
+    @Results(value = {
+            @Result(column = "currency_shortcut",property = "currency"),
+            @Result(column = "buy",property = "rateValues.buy")
     })
-    Set<PostgresRate> getSuggestedRates(@Param("exchangeRatesId") String exchangeRatesId);
+    Set<Rate> getSuggestedRates(@Param("exchangeRatesId") String exchangeRatesId);
 
     @Select("SELECT\n" +
             "  suggestion2.suggestion_id,\n" +

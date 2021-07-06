@@ -1,8 +1,8 @@
 package cz.honestcity.service.suggestion.exchange.rate;
 
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
+import cz.honestcity.service.rate.RateService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.vote.exchange.rate.UpVoteExchangePointRateChangeService;
@@ -18,12 +18,14 @@ import java.util.stream.Collectors;
 public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionGateway gateway;
+    private final RateService rateService;
 
     private UpVoteExchangePointRateChangeService upVoteExchangePointRateChangeService;
 
-    public ExchangeRateSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway, ExchangeRateSuggestionGateway gateway) {
+    public ExchangeRateSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway, ExchangeRateSuggestionGateway gateway, RateService rateService) {
         super(suggestionGateway);
         this.gateway = gateway;
+        this.rateService = rateService;
     }
 
     @Lazy
@@ -35,6 +37,7 @@ public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRat
     @Override
     public void suggest(List<ExchangeRateSuggestion> suggestions) {
         List<ExchangeRateSuggestion> suggestibleSuggestions = getSuggestibleSuggestions(suggestions, gateway);
+        suggestibleSuggestions.forEach(it -> rateService.saveSuggestionRate(it.getSuggestedExchangeRate()));
         gateway.suggests(suggestibleSuggestions);
         suggesterVotesForHisSuggestions(suggestibleSuggestions, upVoteExchangePointRateChangeService);
     }

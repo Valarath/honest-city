@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 //@Service(SubjectServiceType.SubjectTypeConstants.EXCHANGE)
 @HonestCityService(beanId = ExchangePoint.class)
-public class ExchangeService extends SubjectService {
+public class ExchangePointService extends SubjectService {
 
     private final ExchangeGateway exchangeGateway;
 
@@ -30,7 +30,7 @@ public class ExchangeService extends SubjectService {
     private final RateService rateService;
 
     @Autowired
-    public ExchangeService(ExchangeGateway exchangeGateway, Map<String, SuggestionService<? extends Suggestion>> suggestionServices, RateService rateService) {
+    public ExchangePointService(ExchangeGateway exchangeGateway, Map<String, SuggestionService<? extends Suggestion>> suggestionServices, RateService rateService) {
         this.exchangeGateway = exchangeGateway;
         this.suggestionServices = suggestionServices;
         this.rateService = rateService;
