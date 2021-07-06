@@ -29,7 +29,7 @@ public class ExchangeRateSuggestionPostgresGateway implements ExchangeRateSugges
 
     @Override
     public void suggests(List<ExchangeRateSuggestion> suggestions) {
-        suggestions.forEach(suggestion ->{
+        suggestions.forEach(suggestion -> {
             suggestionPostgresMapper.suggest(suggestion);
             mapper.suggestsExchangeRateChange(suggestion);
         });
@@ -38,7 +38,8 @@ public class ExchangeRateSuggestionPostgresGateway implements ExchangeRateSugges
     @Override
     public ExchangeRateSuggestion getSuggestion(String suggestionId) {
         ExchangeRateSuggestion exchangeRateSuggestion = mapper.getExchangeRateSuggestion(suggestionId);
-        setRates(exchangeRateSuggestion);
+        if (exchangeRateSuggestion != null)
+            setRates(exchangeRateSuggestion);
         return exchangeRateSuggestion;
     }
 

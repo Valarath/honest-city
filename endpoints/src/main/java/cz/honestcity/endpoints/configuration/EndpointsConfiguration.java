@@ -3,10 +3,7 @@ package cz.honestcity.endpoints.configuration;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cz.honestcity.endpoints.configuration.deserializers.LoginDataDeserializer;
-import cz.honestcity.endpoints.configuration.deserializers.SuggestionDeserializer;
-import cz.honestcity.endpoints.configuration.deserializers.VoteDeserializer;
-import cz.honestcity.endpoints.configuration.deserializers.WatchedSubjectDeserializer;
+import cz.honestcity.endpoints.configuration.deserializers.*;
 import cz.honestcity.endpoints.configuration.serializer.LocalDateSerializer;
 import cz.honestcity.model.login.LoginData;
 import cz.honestcity.model.subject.WatchedSubject;
@@ -36,6 +33,7 @@ public class EndpointsConfiguration {
         simpleModule.addDeserializer(Vote.class,new VoteDeserializer(objectMapper));
         simpleModule.addDeserializer(Suggestion.class,new SuggestionDeserializer(objectMapper));
         simpleModule.addDeserializer(WatchedSubject.class,new WatchedSubjectDeserializer(objectMapper));
+        simpleModule.addDeserializer(LocalDate.class,new LocalDateDeserializer(objectMapper));
         simpleModule.addSerializer(LocalDate.class,new LocalDateSerializer(objectMapper));
         return simpleModule;
     }

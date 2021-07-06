@@ -23,7 +23,6 @@ public class SuggestionController extends BaseController {
 
     @PostMapping(SuggestionEndpointsUrl.SUGGEST)
     public void suggest(@RequestBody PostSuggestRequest request) {
-        getUser();
         if (!request.getNewExchangePointSuggestions().isEmpty())
             suggest(request.getNewExchangePointSuggestions());
     }
