@@ -42,7 +42,7 @@ public interface RatePostgresMapper {
     })
     ExchangePostgresRate getCentralAuthorityExchangeRate();
 
-    @Select("SELECT exchange_point_id, active_from\n" +
+    @Select("SELECT exchange_point_id, active_from, active_to\n" +
             "FROM exchange_point_rate\n" +
             "where active_to ISNULL AND exchange_point_id = #{exchangePointId};")
     @ConstructorArgs(value = {
@@ -79,7 +79,7 @@ public interface RatePostgresMapper {
             "                               on exchange_point_rate.exchange_rates_id = exchange_rates.exchange_rates_id\n" +
             "                           where exchange_point_id = #{exchangePointId} and active_to isnull);")
     @ConstructorArgs(value = {
-            @Arg(column = "currency", javaType = Currency.class),
+            @Arg(column = "currency_shortcut", javaType = Currency.class),
             @Arg(column = "buy", javaType = Integer.class)
     })
     Set<PostgresRate> getExchangePointRates(@Param("exchangePointId") String exchangePointId);

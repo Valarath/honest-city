@@ -1,10 +1,8 @@
 package cz.honestcity.database.suggestion.exchange.rate;
 
-import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
 import cz.honestcity.database.suggestion.SuggestionPostgresMapper;
 import cz.honestcity.model.exchange.Watched;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
-import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionGateway;
 import org.springframework.stereotype.Service;
 

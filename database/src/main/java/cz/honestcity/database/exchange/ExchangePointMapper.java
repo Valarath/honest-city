@@ -28,9 +28,9 @@ public interface ExchangePointMapper {
 
 	@Update("UPDATE exchange_point_rate\n" +
 			"SET exchange_point_id = #{exchangePointId},\n" +
-			"    exchange_rate_id = #{newExchangeRateId},\n" +
+			"    exchange_rates_id = #{newExchangeRateId},\n" +
 			"    active_from = now()::date\n" +
-			"WHERE exchange_rate_id = #{newExchangeRateId}\n" +
+			"WHERE exchange_rates_id = #{newExchangeRateId}\n" +
 			"  and exchange_point_id = #{exchangePointId};")
 	void setNewExchangeRate(@Param("newExchangeRateId") String newExchangeRateId, @Param("exchangePointId") String exchangePointId);
 
@@ -38,6 +38,10 @@ public interface ExchangePointMapper {
 			"SET active_to = now()::date\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
 	void deActivateOldExchangeRate(@Param("exchangePointId") String exchangePointId);
+
+	@Update("INSERT into exchange_point_rate (exchange_point_id,exchange_rates_id,active_from) \n" +
+			"values(#{exchangePointId},#{newExchangeRateId}, now()::date);")
+	void addExchangeRateToExchangePoint(@Param("newExchangeRateId") String newExchangeRateId, @Param("exchangePointId") String exchangePointId);
 
 	@Update("UPDATE exchange_point\n" +
 			"SET active_to = now()::date\n" +
@@ -48,4 +52,9 @@ public interface ExchangePointMapper {
 			"SET honesty_status = #{honestyStatus}\n" +
 			"WHERE exchange_point_id = #{exchangePointId};")
     void setHonestyStatus(@Param("exchangePointId") String exchangePointId, @Param("honestyStatus") HonestyStatus honestyStatus);
+
+	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status \n" +
+			"FROM exchange_point where exchange_point_id = #{exchangePointId};")
+	@ResultMap(TO_EXCHANGE_POINT)
+	ExchangePoint getExchangePoint(@Param("exchangePointId")String exchangePointId);
 }

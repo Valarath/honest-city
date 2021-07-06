@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 //@Service(VoteType.VoteConstants.EXCHANGE_RATE_CHANGE)
 @HonestCityService(beanId = VoteForExchangePointRateChange.class)
-public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExchangePointRateChange,ExchangeRateSuggestion> {
+public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExchangePointRateChange, ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionService exchangeRateSuggestionService;
 
@@ -23,13 +23,13 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
 
     public void upVote(ExchangeRateSuggestion suggestion, String userId) {
         ExchangeRateSuggestion persistedSuggestion = getSuggestion(suggestion);
-        if (persistedSuggestion !=null && !voteGateway.isVoteRecorded(persistedSuggestion.getId(),userId))
-            performVote(persistedSuggestion,userId);
+        if (persistedSuggestion != null && !voteGateway.isVoteRecorded(persistedSuggestion.getId(), userId))
+            performVote(persistedSuggestion, userId);
     }
 
     public void performVote(ExchangeRateSuggestion suggestion, String userId) {
         if (isSuggestionAcceptable(suggestion, userId))
-            acceptExchangeRateChange( suggestion);
+            acceptExchangeRateChange(suggestion);
         recordVote(suggestion, userId);
     }
 
@@ -40,10 +40,11 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
         updateSuggestion(suggestion);
     }
 
-    private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion){
+    private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion) {
         List<ExchangeRateSuggestion> scoredSuggestions = getInProgressSuggestions(suggestion);
         scoredSuggestions.remove(suggestion);
-        exchangeRateSuggestionService.removeSuggestions(scoredSuggestions);
+        if (!scoredSuggestions.isEmpty())
+            exchangeRateSuggestionService.removeSuggestions(scoredSuggestions);
     }
 
     private List<ExchangeRateSuggestion> getInProgressSuggestions(ExchangeRateSuggestion suggestion) {
@@ -53,6 +54,6 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
     }
 
     private Predicate<ExchangeRateSuggestion> suggestionIsInProgressState() {
-        return scoredSuggestion ->scoredSuggestion.getState().equals(State.IN_PROGRESS);
+        return scoredSuggestion -> scoredSuggestion.getState().equals(State.IN_PROGRESS);
     }
 }

@@ -50,9 +50,18 @@ public class ExchangePointService extends SubjectService {
     }
 
     public void changeExchangeRate(String newExchangeRateId, String exchangePointId) {
+        ExchangePoint exchangePoint = exchangeGateway.getExchangePoint(exchangePointId);
         exchangeGateway.deActivateOldExchangeRate(exchangePointId);
-        exchangeGateway.changeExchangeRate(newExchangeRateId, exchangePointId);
-        exchangeGateway.setHonestyStatus(exchangePointId,calculateHonestyStatus(exchangePointId));
+        changeExchangePointRate(newExchangeRateId, exchangePointId);
+        exchangeGateway.setHonestyStatus(exchangePointId, calculateHonestyStatus(exchangePoint));
+    }
+
+    private void changeExchangePointRate(String newExchangeRateId, String exchangePointId) {
+        ExchangeRate exchangePointRate = rateService.getExchangePointRate(exchangePointId);
+        if (exchangePointRate == null)
+            exchangeGateway.addExchangeRateToExchangePoint(newExchangeRateId, exchangePointId);
+        else
+            exchangeGateway.changeExchangeRate(newExchangeRateId, exchangePointId);
     }
 
     private ExchangePoint getFullyInitializeExchangePoint(ExchangePoint exchangePoint) {
@@ -61,7 +70,7 @@ public class ExchangePointService extends SubjectService {
                 .setSuggestions(getAllSuggestions(exchangePoint));
     }
 
-    private List<Suggestion> getAllSuggestions(ExchangePoint exchangePoint){
+    private List<Suggestion> getAllSuggestions(ExchangePoint exchangePoint) {
         return suggestionServices.values().stream()
                 .map(it -> it.getScoredSuggestions(exchangePoint.getId()))
                 .flatMap(Collection::stream)
@@ -72,25 +81,37 @@ public class ExchangePointService extends SubjectService {
         exchangeGateway.deleteExchangePoint(exchangePointId);
     }
 
-    private HonestyStatus calculateHonestyStatus(String exchangePointId) {
-        double exchangePointEuroRate = getEurRate(rateService.getExchangePointRate(exchangePointId));
-        double centralAuthorityEuroRate = getEurRate(rateService.getCentralAuthorityRate());
-        if(1-exchangePointEuroRate/centralAuthorityEuroRate*100>10)
+    private HonestyStatus calculateHonestyStatus(ExchangePoint exchangePoint) {
+        Rate exchangePointEuroRate = getComparingRate(rateService.getExchangePointRate(exchangePoint.getId()));
+        Rate centralAuthorityEuroRate = getComparingRate(rateService.getCentralAuthorityRate());
+        if (isRateHonest(centralAuthorityEuroRate, exchangePointEuroRate))
             return HonestyStatus.DISHONEST;
         else
-            return HonestyStatus.DISHONEST;
+            return getHonestStatus(exchangePoint);
     }
 
+    private HonestyStatus getHonestStatus(ExchangePoint exchangePoint) {
+        HonestyStatus nextLevelOfHonesty = exchangePoint.getHonestyStatus().getNextLevelOfHonesty();
+        return nextLevelOfHonesty == null ? HonestyStatus.HONEST : nextLevelOfHonesty;
+    }
 
-    private double getEurRate(ExchangeRate exchangeRate) {
+    private boolean isRateHonest(Rate centralAuthorityRate, Rate exchangePointRate) {
+        return exchangePointRate == null || (1 - exchangePointRate.getRateValues().getBuy() / centralAuthorityRate.getRateValues().getBuy() * 100 > 10);
+    }
+
+    private Rate getComparingRate(ExchangeRate exchangeRate) {
+        return exchangeRate == null ? null : getUsdRate(exchangeRate);
+    }
+
+    private Rate getUsdRate(ExchangeRate exchangeRate) {
         return exchangeRate.getRates().stream()
-                .filter(this::isEuroRate)
-                .collect(Collectors.toList())
-                .get(0).getRateValues().getBuy();
+                .filter(this::isUsdRate)
+                .findAny()
+                .orElse(null);
     }
 
-    private boolean isEuroRate(Rate rate) {
-        return rate.getCurrency().equals(Currency.EU);
+    private boolean isUsdRate(Rate rate) {
+        return rate.getCurrency().equals(Currency.USD);
     }
 
 }

@@ -15,7 +15,11 @@ public interface ExchangeGateway {
 
     void changeExchangeRate(String newExchangeRateId, String exchangePointId);
 
+    void addExchangeRateToExchangePoint(String newExchangeRateId, String exchangePointId);
+
     void deleteExchangePoint(String exchangePointId);
 
     void setHonestyStatus(String exchangePointId, HonestyStatus calculateHonestyStatus);
+
+    ExchangePoint getExchangePoint(String exchangePointId);
 }

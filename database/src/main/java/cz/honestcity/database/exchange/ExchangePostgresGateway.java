@@ -22,6 +22,11 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	}
 
 	@Override
+	public ExchangePoint getExchangePoint(String exchangePointId) {
+		return exchangePointMapper.getExchangePoint(exchangePointId);
+	}
+
+	@Override
 	public void createExchange(ExchangePoint newExchangePoint) {
 		exchangePointMapper.createNewExchange(newExchangePoint);
 	}
@@ -34,6 +39,11 @@ public class ExchangePostgresGateway implements ExchangeGateway {
 	@Override
 	public void changeExchangeRate(String newExchangeRateId, String exchangePointId) {
 		exchangePointMapper.setNewExchangeRate(newExchangeRateId,exchangePointId);
+	}
+
+	@Override
+	public void addExchangeRateToExchangePoint(String newExchangeRateId, String exchangePointId) {
+		exchangePointMapper.addExchangeRateToExchangePoint(newExchangeRateId,exchangePointId);
 	}
 
 	@Override
