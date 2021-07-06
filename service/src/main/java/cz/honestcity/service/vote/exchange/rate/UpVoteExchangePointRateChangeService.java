@@ -38,6 +38,7 @@ public class UpVoteExchangePointRateChangeService extends VoteService<VoteForExc
         removeDeclinedSuggestions(suggestion);
         increaseSuggesterScore(suggestion.getSuggestedBy());
         updateSuggestion(suggestion);
+        getService(suggestion).update(suggestion);
     }
 
     private void removeDeclinedSuggestions(ExchangeRateSuggestion suggestion) {

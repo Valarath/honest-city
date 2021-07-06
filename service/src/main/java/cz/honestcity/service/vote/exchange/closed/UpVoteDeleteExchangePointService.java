@@ -27,5 +27,6 @@ public class UpVoteDeleteExchangePointService extends VoteService<VoteForExchang
         exchangePointService.deleteExchangePoint(suggestion.getSubjectId());
         increaseSuggesterScore(suggestion.getSuggestedBy());
         updateSuggestion(suggestion);
+        getService(suggestion).update(suggestion);
     }
 }
