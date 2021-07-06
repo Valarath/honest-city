@@ -27,8 +27,9 @@ public class ClosedExchangePointSuggestionService extends SuggestionService<Clos
 
     @Override
     public void suggest(List<ClosedExchangePointSuggestion> suggestions) {
-        gateway.suggests(suggestions);
-        suggesterVotesForHisSuggestions(suggestions, upVoteDeleteExchangePointService);
+        List<ClosedExchangePointSuggestion> suggestibleSuggestions = getSuggestibleSuggestions(suggestions,gateway);
+        gateway.suggests(suggestibleSuggestions);
+        suggesterVotesForHisSuggestions(suggestibleSuggestions, upVoteDeleteExchangePointService);
     }
 
     @Override

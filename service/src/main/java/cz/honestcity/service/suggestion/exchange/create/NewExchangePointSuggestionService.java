@@ -1,6 +1,7 @@
 package cz.honestcity.service.suggestion.exchange.create;
 
 import cz.honestcity.model.subject.Position;
+import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.suggestion.Suggestion;
@@ -30,8 +31,9 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
 
     @Override
     public void suggest(List<NewExchangePointSuggestion> suggestions) {
-        gateway.suggests(suggestions);
-        suggesterVotesForHisSuggestions(suggestions, upVoteNewExchangePointService);
+        List<NewExchangePointSuggestion> suggestibleSuggestions = getSuggestibleSuggestions(suggestions, gateway);
+        gateway.suggests(suggestibleSuggestions);
+        suggesterVotesForHisSuggestions(suggestibleSuggestions, upVoteNewExchangePointService);
     }
 
     @Override

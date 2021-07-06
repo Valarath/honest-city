@@ -4,7 +4,6 @@ import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.HonestyStatus;
 import org.apache.ibatis.annotations.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Mapper

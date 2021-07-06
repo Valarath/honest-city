@@ -1,5 +1,6 @@
 package cz.honestcity.service.suggestion;
 
+import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.login.LoginDataService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @HonestCityService(beanId = Suggestion.class)
 public abstract class SuggestionService<SUGGESTION extends Suggestion> {
@@ -36,6 +38,12 @@ public abstract class SuggestionService<SUGGESTION extends Suggestion> {
         suggestions.forEach(suggestion ->
                 service.upVote(suggestion, suggestion.getSuggestedBy().getId())
         );
+    }
+
+    protected List<SUGGESTION> getSuggestibleSuggestions(List<SUGGESTION> suggestions, SuggestionGateway<SUGGESTION> gateway) {
+        return suggestions.stream()
+                .filter(it -> gateway.getSuggestion(it.getId()) != null)
+                .collect(Collectors.toList());
     }
 
     protected SUGGESTION setSuggestorLoginData(SUGGESTION suggestion){

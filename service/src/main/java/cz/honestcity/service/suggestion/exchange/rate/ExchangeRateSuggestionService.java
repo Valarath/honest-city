@@ -34,8 +34,9 @@ public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRat
 
     @Override
     public void suggest(List<ExchangeRateSuggestion> suggestions) {
-        gateway.suggests(suggestions);
-        suggesterVotesForHisSuggestions(suggestions, upVoteExchangePointRateChangeService);
+        List<ExchangeRateSuggestion> suggestibleSuggestions = getSuggestibleSuggestions(suggestions, gateway);
+        gateway.suggests(suggestibleSuggestions);
+        suggesterVotesForHisSuggestions(suggestibleSuggestions, upVoteExchangePointRateChangeService);
     }
 
     @Override
