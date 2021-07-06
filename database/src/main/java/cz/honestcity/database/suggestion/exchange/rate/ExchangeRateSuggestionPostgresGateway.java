@@ -2,11 +2,13 @@ package cz.honestcity.database.suggestion.exchange.rate;
 
 import cz.honestcity.database.suggestion.SuggestionPostgresGateway;
 import cz.honestcity.database.suggestion.SuggestionPostgresMapper;
+import cz.honestcity.model.exchange.Watched;
 import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.suggestion.exchange.rate.ExchangeRateSuggestionGateway;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -51,7 +53,11 @@ public class ExchangeRateSuggestionPostgresGateway implements ExchangeRateSugges
     }
 
     private void setRates(ExchangeRateSuggestion exchangeRateSuggestion) {
+        exchangeRateSuggestion.getSuggestedExchangeRate().setWatched(getSuggestionWatched());
         exchangeRateSuggestion.getSuggestedExchangeRate().setRates(mapper.getSuggestedRates(exchangeRateSuggestion.getSuggestedExchangeRate().getId()));
     }
 
+    private Watched getSuggestionWatched(){
+        return new Watched().setFrom(LocalDate.now());
+    }
 }
