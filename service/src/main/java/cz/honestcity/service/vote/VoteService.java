@@ -14,14 +14,12 @@ import java.util.Map;
 
 public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestion> {
 
-    //TODO to config file
-    private static final int LOWEST_VALUE_FOR_ACCEPTENCE = 5;
-    public static final double SCORE_MODIFICATOR = 0.5;
-
     @Autowired
     protected VoteGateway voteGateway;
 
     protected ExchangePointService exchangePointService;
+
+    protected VoteCalculationGateway voteCalculationGateway;
 
     protected Map<String, SuggestionService> suggestionServices;
 
@@ -42,11 +40,7 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
         Integer suggestionVotes = voteGateway.getNumberOfVotes(suggestion.getId());
         return suggestion.getState() == State.IN_PROGRESS
                 && suggestionVotes != null
-                && suggestionVotes* calculateUserTrustworthiness(userId) > LOWEST_VALUE_FOR_ACCEPTENCE;
-    }
-
-    private double calculateUserTrustworthiness(String userId) {
-        return Math.atan(userService.getUserScore(userId))+ SCORE_MODIFICATOR;
+                && voteCalculationGateway.isAcceptable(userService.getUserScore(userId),suggestionVotes);
     }
 
     protected User getUser(Suggestion suggestion) {
@@ -87,5 +81,10 @@ public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestio
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setVoteCalculationGateway(VoteCalculationGateway voteCalculationGateway) {
+        this.voteCalculationGateway = voteCalculationGateway;
     }
 }

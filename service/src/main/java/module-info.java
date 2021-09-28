@@ -20,4 +20,5 @@ module cz.honestcity.service {
     exports cz.honestcity.service.configuration;
     exports cz.honestcity.service.login;
     exports cz.honestcity.service.currency.settings;
+    exports cz.honestcity.service.distance;
 }

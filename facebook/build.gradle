@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'cz.honestcity'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation  project(':model')
+    implementation  project(':service')
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation group: 'org.springframework.social', name: 'spring-social-facebook', version: '2.0.3.RELEASE'
+
+}
+
+test {
+    useJUnitPlatform()
+}

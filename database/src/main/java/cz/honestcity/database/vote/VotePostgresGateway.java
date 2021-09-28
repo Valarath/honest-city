@@ -1,10 +1,7 @@
 package cz.honestcity.database.vote;
 
-import cz.honestcity.model.vote.Vote;
 import cz.honestcity.service.vote.VoteGateway;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class VotePostgresGateway implements VoteGateway {

@@ -7,6 +7,7 @@ module cz.honestcity.model {
     exports cz.honestcity.model.login;
     exports cz.honestcity.model.currency.settings;
     exports cz.honestcity.model;
+	exports cz.honestcity.model.distance;
 
-    requires static lombok;
+	requires static lombok;
 }
