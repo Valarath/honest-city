@@ -57,6 +57,7 @@ configure(allprojects.findAll { it.name != 'model' }) {
 }
 dependencies {
     compile project(':endpoints')
+    compile project(':calculation')
     compile project(':crawling')
     compile project(':database')
     compile project(':facebook')

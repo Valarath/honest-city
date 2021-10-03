@@ -8,12 +8,14 @@ import cz.honestcity.service.vote.VoteCalculationGateway;
 import cz.honestcity.service.vote.VoteCalculationMetricGateway;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author michal.keder
  */
 @Configuration
+@ComponentScan("cz.honestcity.calculation")
 public class CalculationConfiguration {
 
 	@Bean
