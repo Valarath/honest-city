@@ -3,12 +3,10 @@ package cz.honestcity.calculation.vote;
 import cz.honestcity.model.vote.VoteCalculationMetric;
 import cz.honestcity.service.vote.VoteCalculationGateway;
 import cz.honestcity.service.vote.VoteCalculationMetricGateway;
-import org.springframework.stereotype.Service;
 
 /**
  * @author michal.keder
  */
-@Service
 public class VoteCalculationService implements VoteCalculationGateway {
 
 	private final VoteCalculationMetricGateway voteCalculationMetricGateway;

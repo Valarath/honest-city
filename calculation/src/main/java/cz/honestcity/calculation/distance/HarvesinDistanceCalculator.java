@@ -3,12 +3,10 @@ package cz.honestcity.calculation.distance;
 import cz.honestcity.model.subject.Position;
 import cz.honestcity.service.distance.DistanceCalculatorGateway;
 import cz.honestcity.service.distance.DistanceMetricGateway;
-import org.springframework.stereotype.Component;
 
 /**
  * @author michal.keder
  */
-@Component
 public class HarvesinDistanceCalculator implements DistanceCalculatorGateway {
 
 	private static final double EARTH_RADIUS=6372.797560856;
