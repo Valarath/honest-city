@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="create_central_authority_table" author="michal_keder">
+        <createTable tableName="central_authority">
+            <column name="central_authority_id" type="varchar">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="michal_keder" id="insert-czech-national-bank-as-central-authority">
+        <insert tableName="central_authority">
+            <column name="central_authority_id" value="czechnationalbankid"/>
+            <column name="name" value="Czech national bank"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

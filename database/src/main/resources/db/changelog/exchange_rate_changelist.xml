@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    
+
+    <changeSet id="create_exchange_rate_table" author="michal_keder">
+        <createTable tableName="exchange_rate">
+            <column name="exchange_rate_id" type="varchar">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="exchange_rates_id" type="varchar">
+                <constraints foreignKeyName="fk_exchange_rates_id" references="exchange_rates(exchange_rates_id)" nullable="false"/>
+            </column>
+            <column name="buy" type="int"/>
+            <column name="currency_shortcut" type="varchar(6)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

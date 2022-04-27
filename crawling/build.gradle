@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'cz.honestcity'
+version '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+ext.moduleName = 'cz.honestcity.crawling'
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
+dependencies {
+    compile project(':model')
+    compile project(':service')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

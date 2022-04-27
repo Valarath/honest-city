@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+	<changeSet id="create_vote_calculation_metric_table" author="michal_keder">
+		<createTable tableName="vote_calculation_metric">
+			<column name="score_modificator" type="double"/>
+			<column name="lowest_value_for_acceptance" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="michal_keder" id="insert_default_vote_calculation_metrics">
+		<insert tableName="vote_calculation_metric">
+			<column name="score_modificator" value="0.5"/>
+			<column name="lowest_value_for_acceptance" value="5"/>
+		</insert>
+
+	</changeSet>
+</databaseChangeLog>

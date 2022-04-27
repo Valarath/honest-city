@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/exchange_rates_changelist.xml
+  - include:
+      file: classpath:db/changelog/exchange_rate_changelist.xml
+  - include:
+      file: classpath:db/changelog/user_changelist.xml
+  - include:
+      file: classpath:db/changelog/exchange_point_changelist.xml
+  - include:
+      file: classpath:db/changelog/currency_settings_changelist.xml
+  - include:
+      file: classpath:db/changelog/central_authority_changelist.xml
+  - include:
+      file: classpath:db/changelog/suggestion_changelist.xml
+  - include:
+      file: classpath:db/changelog/exchange_point_rate_changelist.xml
+  - include:
+      file: classpath:db/changelog/user_votes_changelist.xml
+  - include:
+      file: classpath:db/changelog/central_authority_rate_changelist.xml
+  - include:
+      file: classpath:db/changelog/facebook_login_data_changelist.xml
+  - include:
+      file: classpath:db/changelog/vote_calculation_metric_changelist.xml
+  - include:
+      file: classpath:db/changelog/distance_calculation_metric_changelist.xml

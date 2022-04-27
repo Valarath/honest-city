@@ -1,39 +1,80 @@
-buildscript {
-    ext {
-        springBootVersion = '2.0.4.RELEASE'
-    }
+/**buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // You are telling gradle that this script (Not the project) depends on the 
+        // following plugin
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE"
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: "org.springframework.boot"
+**/
 
-group = 'cz.exchange'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 10
-
-repositories {
-    mavenCentral()
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.1.9.RELEASE'
 }
 
+/**task wrapper(type: Wrapper) {
+    gradleVersion = '4.10.3'
+}**/
 
+ext.moduleName = 'honest-city'
+
+allprojects{
+
+    apply plugin: 'java'
+    group = 'cz.honestcity'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 12
+    targetCompatibility = 12
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+}
+
+configure(allprojects.findAll { it.name != 'model' }) {
+    dependencies {
+        compile (group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE')
+        compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.9.RELEASE')
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.9.RELEASE'){
+            exclude(module: 'javax.annotation-api')
+            exclude(module: 'tomcat-annotations-api')
+        }
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.9.RELEASE')
+    }
+}
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-aop')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.liquibase:liquibase-core')
-    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
-    runtime('org.springframework.boot:spring-boot-devtools')
-    runtime('org.postgresql:postgresql')
-    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
-    compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.springframework.security:spring-security-test')
+    compile project(':endpoints')
+    compile project(':calculation')
+    compile project(':crawling')
+    compile project(':database')
+    compile project(':facebook')
 }
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
+jar {
+    exclude('java/datatransfer/**')
+}
+
+ext.moduleName = 'cz.honestcity.honestCity'
