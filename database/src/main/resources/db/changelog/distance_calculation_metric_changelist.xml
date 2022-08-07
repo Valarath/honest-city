@@ -12,7 +12,7 @@
 
 	<changeSet author="michal_keder" id="insert_default_distance_calculation_metrics">
 		<insert tableName="distance_calculation_metric">
-			<column name="area_range" value="2200"/>
+			<column name="area_range" value="${area.range.value}"/>
 		</insert>
 
 	</changeSet>
