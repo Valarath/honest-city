@@ -13,8 +13,10 @@
 
 	<changeSet author="michal_keder" id="insert_default_vote_calculation_metrics">
 		<insert tableName="vote_calculation_metric">
-			<column name="score_modificator" value="0.5"/>
-			<column name="lowest_value_for_acceptance" value="5"/>
+			<!--column name="score_modificator" value="0.5"/>
+			<column name="lowest_value_for_acceptance" value="5"/ -->
+			<column name="score_modificator" value="${metric.score.modificator}"/>
+			<column name="lowest_value_for_acceptance" value="${metric.acceptance.value}"/>
 		</insert>
 
 	</changeSet>
