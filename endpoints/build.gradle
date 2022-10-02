@@ -26,10 +26,12 @@ dependencies {
     compile project (':model')
     compile project (':service')
 
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: "$jsonwebtokenVersion"
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "$javaxVersion"
+    implementation group: 'org.reflections', name: 'reflections', version: "$reflectionsVersion"
 
-    compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
-    annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
+    //compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    //annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
 }

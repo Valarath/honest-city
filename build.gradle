@@ -14,7 +14,7 @@ apply plugin: "org.springframework.boot"
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.1.9.RELEASE'
+    id 'org.springframework.boot' version "$springBootVersion"
 }
 
 /**task wrapper(type: Wrapper) {
@@ -46,13 +46,13 @@ allprojects{
 
 configure(allprojects.findAll { it.name != 'model' }) {
     dependencies {
-        compile (group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE')
-        compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.9.RELEASE')
-        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.9.RELEASE'){
+        compile (group: 'org.springframework', name: 'spring-context', version: "$springVersion")
+        compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: "$springBootVersion")
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$springBootVersion"){
             exclude(module: 'javax.annotation-api')
             exclude(module: 'tomcat-annotations-api')
         }
-        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.9.RELEASE')
+        compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "$springBootVersion")
     }
 }
 dependencies {
