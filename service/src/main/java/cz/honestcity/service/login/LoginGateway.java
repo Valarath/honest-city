@@ -7,8 +7,9 @@ import cz.honestcity.model.user.User;
 /**
  * @author michal.keder
  */
-public  interface LoginGateway <LOGIN_DATA extends LoginData> {
+public interface LoginGateway<LOGIN_DATA extends LoginData> {
 
     User getUser(LOGIN_DATA loginData);
 
+    User getUser(LOGIN_DATA loginData, User user);
 }

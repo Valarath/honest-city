@@ -1,25 +1,7 @@
-/**buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        // You are telling gradle that this script (Not the project) depends on the 
-        // following plugin
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE"
-    }
-}
-
-apply plugin: "org.springframework.boot"
-**/
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
 }
-
-/**task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.3'
-}**/
 
 ext.moduleName = 'honest-city'
 

@@ -1,42 +1,9 @@
-/*
-plugins {
-    id 'java'
-    id 'net.ltgt.apt' version '0.19'
-}
-
-repositories {
-    maven { url 'https://projectlombok.org/edge-releases' }
-}
-
-ext.moduleName = 'cz.honestcity.model'
-
-compileJava {
-    inputs.property("moduleName", moduleName)
-    doFirst {
-        options.compilerArgs = [
-                '--module-path', classpath.asPath,
-        ]
-        classpath = files()
-    }
-}
-
-dependencies {
-    compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
-
-    apt 'org.projectlombok:lombok:edge-SNAPSHOT'
-}
-*/
-
 plugins {
     id 'net.ltgt.apt' version '0.10'
 }
 version '0.0.1-SNAPSHOT'
 
-
-
 apply plugin: 'java'
-
-
 
 repositories {
     mavenCentral()
@@ -59,8 +26,5 @@ ext.moduleName = 'cz.honestcity.model'
 dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
-    //compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
-    //annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
-    //apt 'org.projectlombok:lombok:edge-SNAPSHOT'
 }
 

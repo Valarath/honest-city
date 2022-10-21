@@ -30,8 +30,6 @@ dependencies {
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "$javaxVersion"
     implementation group: 'org.reflections', name: 'reflections', version: "$reflectionsVersion"
 
-    //compileOnly 'org.projectlombok:lombok:edge-SNAPSHOT'
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
-    //annotationProcessor 'org.projectlombok:lombok:edge-SNAPSHOT'
 }

@@ -93,7 +93,7 @@ public class UserService {
         return login(user,user.getLoginData());
     }
     public User login(User user,LoginData loginData) {
-        User updatedUserData = getLoginGateway(loginData).getUser(loginData);
+        User updatedUserData = getLoginGateway(loginData).getUser(loginData, user);
         User updatedUser = updateUser(getUser(user.getId()), updatedUserData);
         updateUserData(updatedUser);
         return updatedUser;

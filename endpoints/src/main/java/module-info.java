@@ -22,4 +22,5 @@ module cz.honestcity.endpoints {
     exports cz.honestcity.endpoints.authority;
     exports cz.honestcity.endpoints.authorization;
     exports cz.honestcity.endpoints.configuration.authorization;
+    exports cz.honestcity.endpoints.validation;
 }

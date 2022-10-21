@@ -6,6 +6,7 @@ import cz.honestcity.model.user.User;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
 import cz.honestcity.service.login.LoginGateway;
+import org.springframework.social.RateLimitExceededException;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.social.facebook.api.impl.FacebookTemplate;
 @HonestCityService(beanId = FacebookLoginData.class)
 public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> {
 
-    private static final String[] FETCHED_DATA = {"email","name"};
+    private static final String[] FETCHED_DATA = {"email", "name"};
 
     private final IdProvider idProvider;
 
@@ -23,7 +24,20 @@ public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> 
     }
 
     @Override
-    public User getUser(FacebookLoginData loginData){
+    public User getUser(FacebookLoginData loginData) {
+        return fetchUser(loginData);
+    }
+
+    @Override
+    public User getUser(FacebookLoginData loginData, User defaultUser) {
+        try {
+            return fetchUser(loginData);
+        } catch (RateLimitExceededException exception) {
+            return defaultUser;
+        }
+    }
+
+    private User fetchUser(FacebookLoginData loginData) {
         FacebookTemplate facebookTemplate = new FacebookTemplate(loginData.getAccessToken());
         org.springframework.social.facebook.api.User userProfile = getUserProfile(facebookTemplate);
         String userId = idProvider.provideNewId();
@@ -38,18 +52,18 @@ public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> 
                 .setLoginData(updateLoginData(loginData, userId));
     }
 
-    private LoginData updateLoginData(FacebookLoginData loginData, String userId){
+    private LoginData updateLoginData(FacebookLoginData loginData, String userId) {
         setLoginDataUserId(loginData, userId);
         return loginData;
     }
 
     private void setLoginDataUserId(FacebookLoginData loginData, String userId) {
-        if(loginData.getUserId() == null || loginData.getUserId().isBlank())
+        if (loginData.getUserId() == null || loginData.getUserId().isBlank())
             loginData.setUserId(userId);
     }
 
     private org.springframework.social.facebook.api.User getUserProfile(FacebookTemplate facebookTemplate) {
-        return facebookTemplate.fetchObject("me", org.springframework.social.facebook.api.User.class,FETCHED_DATA);
+        return facebookTemplate.fetchObject("me", org.springframework.social.facebook.api.User.class, FETCHED_DATA);
     }
 
 
