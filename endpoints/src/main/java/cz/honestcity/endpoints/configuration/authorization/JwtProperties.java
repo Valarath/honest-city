@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class JwtProperties {
 
     private String secret;
+    private String issuer;
     private long expirationAtMilliseconds;
 
     public String getSecret() {
@@ -23,6 +24,14 @@ public class JwtProperties {
 
     public long getExpirationAtMilliseconds() {
         return expirationAtMilliseconds;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
     }
 
     public void setExpirationAtMilliseconds(long expirationAtMilliseconds) {
