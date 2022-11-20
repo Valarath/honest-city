@@ -20,7 +20,7 @@
     <changeSet author="michal_keder" id="insert-czech-currency-as-main-currency">
         <insert tableName="currency_settings">
             <column name="currency_settings_id" value="cze"/>
-            <column name="currency" value="CZE"/>
+            <column name="currency" value="CZK"/>
             <column name="main_country_currency" value="true"/>
         </insert>
     </changeSet>
