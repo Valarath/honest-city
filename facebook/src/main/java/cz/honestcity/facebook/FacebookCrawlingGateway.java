@@ -33,7 +33,8 @@ public class FacebookCrawlingGateway implements LoginGateway<FacebookLoginData> 
         try {
             return fetchUser(loginData);
         } catch (RateLimitExceededException exception) {
-            return defaultUser;
+            return defaultUser
+                    .setLoginData(loginData);
         }
     }
 
