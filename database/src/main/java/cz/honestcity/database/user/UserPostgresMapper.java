@@ -33,7 +33,8 @@ public interface UserPostgresMapper {
             "WHERE user_id = #{userId};")
     int getUserScore(@Param("userId") String userId);
 
-    @Insert("INSERT INTO \"user\" (user_id, username, score, email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email});")
+    @Insert("INSERT INTO \"user\" (user_id, username, score, email) VALUES (#{user.id}, #{user.username}, #{user.score}, #{user.email}) \n" +
+            "ON CONFLICT (user_id) DO NOTHING;")
     void saveNewUser(@Param("user") User user);
 
     @Update("UPDATE \"user\" \n" +

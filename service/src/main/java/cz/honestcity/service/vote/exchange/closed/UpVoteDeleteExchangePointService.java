@@ -1,12 +1,12 @@
 package cz.honestcity.service.vote.exchange.closed;
 
 import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
-import cz.honestcity.model.vote.VoteForExchangePointDelete;
+import cz.honestcity.model.vote.Vote;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.vote.VoteService;
 
-@HonestCityService(beanId = VoteForExchangePointDelete.class)
-public class UpVoteDeleteExchangePointService extends VoteService<VoteForExchangePointDelete, ClosedExchangePointSuggestion> {
+@HonestCityService(beanId = Vote.class, beanIdSpecification = ClosedExchangePointSuggestion.class)
+public class UpVoteDeleteExchangePointService extends VoteService<Vote, ClosedExchangePointSuggestion> {
 
     public UpVoteDeleteExchangePointService() {
     }

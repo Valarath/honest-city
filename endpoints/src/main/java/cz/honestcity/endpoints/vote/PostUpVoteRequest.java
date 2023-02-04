@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class PostUpVoteRequest {
-    private List<? extends Vote> votes;
+    private List<Vote> votes;
     private String userId;
 }

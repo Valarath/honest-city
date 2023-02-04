@@ -23,7 +23,8 @@ public interface ExchangePointMapper {
 	List<ExchangePoint> getExchangePoints();
 
 	@Insert("INSERT into exchange_point(exchange_point_id, honesty_status, latitude, longitude)\n" +
-			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.position.latitude},#{exchangePoint.position.longitude});")
+			"values (#{exchangePoint.id},#{exchangePoint.honestyStatus},#{exchangePoint.position.latitude},#{exchangePoint.position.longitude})\n" +
+			"ON CONFLICT (exchange_point_id) DO NOTHING;")
 	void createNewExchange(@Param("exchangePoint") ExchangePoint newExchangePoint);
 
 	@Update("UPDATE exchange_point_rate\n" +

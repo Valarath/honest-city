@@ -19,7 +19,9 @@ public class VoteController extends BaseController {
 
     @PostMapping(VoteEndpointsUrl.UP_VOTE)
     public void upVote(@RequestBody PostUpVoteRequest request) {
-        request.getVotes().forEach(vote -> voteServices.get(vote.getClass().getSimpleName()).upVote(vote.getSuggestion(), request.getUserId()));
+        request.getVotes()
+                .forEach(vote -> voteServices.get(vote.getClass().getSimpleName()+ vote.getSuggestion().getClass().getSimpleName())
+                .upVote(vote.getSuggestion(), request.getUserId()));
     }
 
 }

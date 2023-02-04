@@ -17,7 +17,8 @@ public interface FacebookLoginDataMapper {
     FacebookLoginData get(@Param("userId") String userId);
 
     @Insert("INSERT into facebook_login_data(user_id,facebook_user_id) \n" +
-            "values(#{facebookLoginData.userId},#{facebookLoginData.facebookUserId})")
+            "values(#{facebookLoginData.userId},#{facebookLoginData.facebookUserId}) \n" +
+            "ON CONFLICT (facebook_user_id) DO NOTHING;")
     void insert(@Param("facebookLoginData") FacebookLoginData facebookLoginData);
 
     @Select("SELECT user_id from facebook_login_data WHERE facebook_user_id = #{facebookLoginData.facebookUserId}")

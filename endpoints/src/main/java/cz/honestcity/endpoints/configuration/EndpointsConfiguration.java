@@ -30,7 +30,7 @@ public class EndpointsConfiguration {
     private SimpleModule getFacebookLoginDataModule(ObjectMapper objectMapper){
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addDeserializer(LoginData.class,new LoginDataDeserializer(objectMapper));
-        simpleModule.addDeserializer(Vote.class,new VoteDeserializer(objectMapper));
+        //simpleModule.addDeserializer(Vote.class,new VoteDeserializer(objectMapper));
         simpleModule.addDeserializer(Suggestion.class,new SuggestionDeserializer(objectMapper));
         simpleModule.addDeserializer(WatchedSubject.class,new WatchedSubjectDeserializer(objectMapper));
         simpleModule.addDeserializer(LocalDate.class,new LocalDateDeserializer(objectMapper));
