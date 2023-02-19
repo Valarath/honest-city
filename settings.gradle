@@ -12,7 +12,7 @@ include 'service'
 
 project(':database').projectDir = "$rootDir/database" as File
 project(':endpoints').projectDir = "$rootDir/endpoints" as File
-include 'crawling'
 include 'facebook'
 include 'calculation'
+include 'authority'
 

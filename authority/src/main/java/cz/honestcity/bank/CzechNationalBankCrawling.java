@@ -1,4 +1,4 @@
-package cz.honestcity.crawling.bank;
+package cz.honestcity.bank;
 
 import cz.honestcity.model.exchange.*;
 import cz.honestcity.service.configuration.IdProvider;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import cz.honestcity.service.rate.RateGatewayType;
 import org.springframework.stereotype.Service;
-import static cz.honestcity.crawling.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
+import static cz.honestcity.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
 
 @Service(RateGatewayType.RateGatewayConstants.RATE_CRAWLING_GATEWAY)
 public class CzechNationalBankCrawling implements RateCrawlingGateway {

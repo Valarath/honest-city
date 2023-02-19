@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-ext.moduleName = 'cz.honestcity.crawling'
+ext.moduleName = 'cz.honestcity.authority'
 
 compileJava {
     inputs.property("moduleName", moduleName)

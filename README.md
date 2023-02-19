@@ -17,7 +17,7 @@ Principles of this architecture are:
 - services in module Service use gateways (java interfaces) in order to communicate outside of it's module.
 - services in modules Database and Crawling implement gateways from module Service.
 - module Database handle communication with database.
-- module Crawling handle communication with services outside of this project.
+- module Authority handle communication with subject providing main exchange rate for country. Default is Czech and it's Czech national bank.
 - module Endpoints represents public api of backend. 
 - comunication with backend use REST architecture.
 - for every incomming request to endpoints contollers exists class representing its parameters.
