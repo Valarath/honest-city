@@ -6,7 +6,6 @@ import cz.honestcity.model.user.User;
 import cz.honestcity.service.login.LoginDataService;
 import cz.honestcity.service.login.LoginGateway;
 import cz.honestcity.service.suggestion.SuggestionService;
-import cz.honestcity.service.suggestion.SuggestionServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -46,8 +45,7 @@ public class UserService {
     public Map<String, List<? extends Suggestion>> getUserSuggestions(String userId) {
         var userSuggestions = new HashMap<String, List<? extends Suggestion>>();
         suggestionServices.entrySet().forEach(entry -> {
-            if (!entry.getKey().equals(SuggestionServiceType.SuggestionServiceTypeNames.BASE_SERVICE))
-                userSuggestions.putAll(addUserSuggestions(userId, entry));
+            userSuggestions.putAll(addUserSuggestions(userId, entry));
         });
         return userSuggestions;
     }
@@ -80,7 +78,7 @@ public class UserService {
     public User register(LoginData loginData) {
         String userId = loginDataService.getUserIdIfAlreadyExist(loginData);
         loginData.setUserId(userId);
-        return userId == null ? performRegistration(loginData) : login(getUser(userId),loginData);
+        return userId == null ? performRegistration(loginData) : login(getUser(userId), loginData);
     }
 
     private User performRegistration(LoginData loginData) {
@@ -90,9 +88,10 @@ public class UserService {
     }
 
     public User login(User user) {
-        return login(user,user.getLoginData());
+        return login(user, user.getLoginData());
     }
-    public User login(User user,LoginData loginData) {
+
+    public User login(User user, LoginData loginData) {
         User updatedUserData = getLoginGateway(loginData).getUser(loginData, getUser(user.getId()));
         User updatedUser = updateUser(getUser(user.getId()), updatedUserData);
         updateUserData(updatedUser);

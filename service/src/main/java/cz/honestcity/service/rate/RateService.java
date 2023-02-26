@@ -1,6 +1,5 @@
 package cz.honestcity.service.rate;
 
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import cz.honestcity.model.exchange.ExchangeRate;
 import org.springframework.context.event.EventListener;
@@ -26,7 +25,7 @@ public class RateService {
     }
 
     private void getAuthorityRate() {
-        getRateDatabaseGateway().saveCentralAuthorityRate(getRateCrawlerGateway().getRate(LocalDate.now()));
+        getRateDatabaseGateway().saveCentralAuthorityRate(getRateAuthorityGateway().getRate(LocalDate.now()));
     }
 
     public ExchangeRate getExchangePointRate(String exchangePointId) {
@@ -42,10 +41,10 @@ public class RateService {
     }
 
     private RateDatabaseGateway getRateDatabaseGateway() {
-        return (RateDatabaseGateway) rateGateways.get(RateGatewayType.RATE_DATABASE_GATEWAY.name);
+        return (RateDatabaseGateway) rateGateways.get(RateDatabaseGateway.class.getSimpleName());
     }
 
-    private RateCrawlingGateway getRateCrawlerGateway() {
-        return (RateCrawlingGateway) rateGateways.get(RateGatewayType.RATE_CRAWLING_GATEWAY.name);
+    private RateAuthorityGateway getRateAuthorityGateway() {
+        return (RateAuthorityGateway) rateGateways.get(RateAuthorityGateway.class.getSimpleName());
     }
 }

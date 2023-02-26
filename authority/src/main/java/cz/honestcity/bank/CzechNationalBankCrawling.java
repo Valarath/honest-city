@@ -1,22 +1,23 @@
 package cz.honestcity.bank;
 
 import cz.honestcity.model.exchange.*;
+import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
-import cz.honestcity.service.rate.RateCrawlingGateway;
+import cz.honestcity.service.rate.RateAuthorityGateway;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import cz.honestcity.service.rate.RateGatewayType;
-import org.springframework.stereotype.Service;
 import static cz.honestcity.bank.BankCsvValuesPosition.CZECH_NATIONAL_BANK;
 
-@Service(RateGatewayType.RateGatewayConstants.RATE_CRAWLING_GATEWAY)
-public class CzechNationalBankCrawling implements RateCrawlingGateway {
+@HonestCityService(beanId = RateAuthorityGateway.class)
+public class CzechNationalBankCrawling implements RateAuthorityGateway {
     private static final String SPLIT_BY="\\|";
     private static final String BASE_URL_FOR_NATIONAL_BANK_CRAWLING = "https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt";
     private static final int NUMBER_OF_LINES_TO_SKIP= 2;

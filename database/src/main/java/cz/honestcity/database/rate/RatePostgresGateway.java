@@ -1,15 +1,13 @@
 package cz.honestcity.database.rate;
 
 import cz.honestcity.model.exchange.ExchangeRate;
-import cz.honestcity.model.suggestion.ExchangeRateSuggestion;
+import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
 import cz.honestcity.service.rate.RateDatabaseGateway;
-import cz.honestcity.service.rate.RateGatewayType;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Service(RateGatewayType.RateGatewayConstants.RATE_DATABASE_GATEWAY)
+@HonestCityService(beanId = RateDatabaseGateway.class)
 public class RatePostgresGateway implements RateDatabaseGateway {
 
     private final RatePostgresMapper ratePostgresMapper;
