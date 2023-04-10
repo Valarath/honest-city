@@ -31,6 +31,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
+            "  created_at,\n" +
             "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +
@@ -46,6 +47,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             @Result(property = "suggestedBy.score",column = "score"),
             @Result(property = "suggestedBy.email",column = "email"),
             @Result(property = "suggestedExchangeRate.id",column = "exchange_rates_id"),
+            @Result(property = "createdAt",column = "created_at"),
             @Result(property = "subjectId",column = "exchange_point_id"),
     })
     ExchangeRateSuggestion getExchangeRateSuggestion(@Param("suggestionId")String suggestionId);
@@ -59,6 +61,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
+            "  created_at,\n" +
             "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +
@@ -87,6 +90,7 @@ public interface ExchangeRateSuggestionPostgresMapper {
             "  status,\n" +
             "  votes,\n" +
             "  score,\n" +
+            "  created_at,\n" +
             "  exchange_rates_id \n" +
             "FROM suggestion\n" +
             "  JOIN exchange_rate_suggestion suggestion2 on suggestion.suggestion_id = suggestion2.suggestion_id\n" +

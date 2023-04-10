@@ -9,4 +9,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class NewExchangePointSuggestion extends Suggestion{
     private Position position;
+    private String image;
 }

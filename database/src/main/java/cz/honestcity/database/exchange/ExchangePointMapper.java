@@ -11,14 +11,15 @@ public interface ExchangePointMapper {
 
 	String TO_EXCHANGE_POINT ="toExchangePoint";
 
-	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status \n" +
+	@Select("SELECT exchange_point_id, active_to, longitude, latitude, image, honesty_status \n" +
 			"FROM exchange_point;")
 	@Results(id = TO_EXCHANGE_POINT,value = {
 			@Result(property = "id",column = "exchange_point_id"),
 			@Result(property = "honestyStatus",column = "honesty_status"),
 			@Result(property = "watchedTo",column = "active_to"),
 			@Result(property = "position.longitude",column = "longitude"),
-			@Result(property = "position.latitude",column = "latitude")
+			@Result(property = "position.latitude",column = "latitude"),
+			@Result(property = "image",column = "image")
 	})
 	List<ExchangePoint> getExchangePoints();
 
@@ -54,7 +55,7 @@ public interface ExchangePointMapper {
 			"WHERE exchange_point_id = #{exchangePointId};")
     void setHonestyStatus(@Param("exchangePointId") String exchangePointId, @Param("honestyStatus") HonestyStatus honestyStatus);
 
-	@Select("SELECT exchange_point_id, active_to, longitude, latitude, honesty_status \n" +
+	@Select("SELECT exchange_point_id, active_to, longitude, latitude, image, honesty_status \n" +
 			"FROM exchange_point where exchange_point_id = #{exchangePointId};")
 	@ResultMap(TO_EXCHANGE_POINT)
 	ExchangePoint getExchangePoint(@Param("exchangePointId")String exchangePointId);

@@ -22,6 +22,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       score,\n" +
             "       email,\n" +
+            "       createdAt,\n" +
             "       exchange_point_id \n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -36,6 +37,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             @Result(property = "suggestedBy.score",column = "score"),
             @Result(property = "suggestedBy.email",column = "email"),
             @Result(property = "subjectId",column = "exchange_point_id"),
+            @Result(property = "createdAt",column = "created_at"),
     })
     ClosedExchangePointSuggestion getClosedExchangePointSuggestion(@Param("suggestionId") String suggestionId);
 
@@ -46,6 +48,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       email,\n" +
             "       score,\n" +
+            "       createdAt,\n" +
             "       exchange_point_id \n" +
             " FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -61,6 +64,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       email,\n" +
             "       score,\n" +
+            "       createdAt,\n" +
             "       exchange_point_id \n" +
             " FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +

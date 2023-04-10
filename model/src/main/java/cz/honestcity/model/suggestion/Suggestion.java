@@ -5,6 +5,8 @@ import cz.honestcity.model.user.User;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.time.Instant;
+
 @Data
 @Accessors(chain = true)
 public class Suggestion extends HonestCitySerializable {
@@ -13,4 +15,5 @@ public class Suggestion extends HonestCitySerializable {
     private String subjectId;
     private State state;
     private int votes;
+    private Instant createdAt;
 }

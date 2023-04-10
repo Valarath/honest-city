@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface SuggestionPostgresMapper {
 
-    @Insert("INSERT INTO suggestion(suggestion_id,user_id, status, votes)\n" +
-            "values (#{suggestion.id},#{suggestion.suggestedBy.id},#{suggestion.state},0)\n" +
+    @Insert("INSERT INTO suggestion(suggestion_id,user_id, status, votes, created_at)\n" +
+            "values (#{suggestion.id},#{suggestion.suggestedBy.id},#{suggestion.state},0,#{suggestion.createdAt})\n" +
             "ON CONFLICT (suggestion_id) DO NOTHING;")
     void suggest(@Param("suggestion") Suggestion suggestion);
 
@@ -33,12 +33,14 @@ public interface SuggestionPostgresMapper {
     @Select("SELECT " +
             "suggestion_id, " +
             "status, " +
-            "votes " +
+            "votes, " +
+            "created_at " +
             "FROM suggestion WHERE suggestion_id = #{suggestionId}")
     @Results(value = {
             @Result(property = "id",column = "suggestion_id"),
             @Result(property = "state",column = "status"),
-            @Result(property = "votes",column = "votes")
+            @Result(property = "votes",column = "votes"),
+            @Result(property = "createdAt",column = "created_at")
     })
     Suggestion get(@Param("suggestionId")String suggestionId);
 }

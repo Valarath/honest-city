@@ -25,3 +25,5 @@ databaseChangeLog:
       file: classpath:db/changelog/vote_calculation_metric_changelist.xml
   - include:
       file: classpath:db/changelog/distance_calculation_metric_changelist.xml
+  - include:
+      file: classpath:db/changelog/analyze_text_settings.xml

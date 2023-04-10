@@ -9,5 +9,6 @@ public class SubjectEndpointsUrl {
 
     private static final String SUBJECT_PREFIX = EndpointsUrl.PUBLIC+"/subject";
     public static final String SUBJECT_IN_AREA = SUBJECT_PREFIX+"/subject-in-area";
+    public static final String SUBJECT_SETTINGS = SUBJECT_PREFIX+"/settings/get";
 
 }

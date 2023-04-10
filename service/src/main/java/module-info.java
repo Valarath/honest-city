@@ -3,6 +3,7 @@ module cz.honestcity.service {
     requires spring.beans;
     requires spring.context;
     requires spring.boot;
+    requires spring.security.core;
 
     exports cz.honestcity.service.subject.exchange;
     exports cz.honestcity.service.suggestion;
@@ -21,4 +22,5 @@ module cz.honestcity.service {
     exports cz.honestcity.service.login;
     exports cz.honestcity.service.currency.settings;
     exports cz.honestcity.service.distance;
+    exports cz.honestcity.service.security;
 }

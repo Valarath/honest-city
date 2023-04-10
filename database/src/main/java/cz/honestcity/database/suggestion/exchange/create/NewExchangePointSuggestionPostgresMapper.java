@@ -22,6 +22,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
+            "       created_at,\n" +
+            "       image,\n" +
             "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
@@ -39,6 +41,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
+            "       created_at,\n" +
+            "       image,\n" +
             "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
@@ -56,6 +60,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       email,\n" +
             "       score,\n" +
             "       latitude,\n" +
+            "       created_at,\n" +
+            "       image,\n" +
             "       longitude,\n" +
             "       exchange_point_id\n" +
             "FROM suggestion\n" +
@@ -71,6 +77,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             @Result(property = "suggestedBy.email",column = "email"),
             @Result(property = "position.latitude",column = "latitude"),
             @Result(property = "position.longitude",column = "longitude"),
+            @Result(property = "createdAt",column = "created_at"),
+            @Result(property = "image",column = "image"),
             @Result(property = "subjectId",column = "exchange_point_id")
     })
     List<NewExchangePointSuggestion> getAllNewExchangePointSuggestions();
@@ -82,6 +90,8 @@ public interface NewExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       email,\n" +
             "       score,\n" +
+            "       created_at,\n" +
+            "       image,\n" +
             "       latitude,\n" +
             "       longitude,\n" +
             "       exchange_point_id\n" +
