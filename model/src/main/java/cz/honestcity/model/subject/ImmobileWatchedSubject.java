@@ -7,5 +7,4 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ImmobileWatchedSubject extends WatchedSubject {
     private Position position;
-    private String image;
 }

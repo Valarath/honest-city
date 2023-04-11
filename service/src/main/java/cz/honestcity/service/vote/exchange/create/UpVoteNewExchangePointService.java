@@ -42,7 +42,8 @@ public class UpVoteNewExchangePointService extends VoteService<Vote,NewExchangeP
         return (ExchangePoint) new ExchangePoint()
                 .setPosition(suggestion.getPosition())
                 .setId(id)
-                .setHonestyStatus(HonestyStatus.UNKNOWN);
+                .setHonestyStatus(HonestyStatus.UNKNOWN)
+                .setImage(suggestion.getImage());
     }
 
 }

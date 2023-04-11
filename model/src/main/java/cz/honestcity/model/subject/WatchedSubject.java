@@ -13,4 +13,5 @@ public class WatchedSubject extends HonestCitySerializable {
     private String id;
     private LocalDate watchedTo;
     private HonestyStatus honestyStatus;
+    private String image;
 }
