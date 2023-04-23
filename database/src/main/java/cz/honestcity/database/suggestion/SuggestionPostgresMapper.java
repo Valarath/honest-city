@@ -9,7 +9,7 @@ import java.util.List;
 public interface SuggestionPostgresMapper {
 
     @Insert("INSERT INTO suggestion(suggestion_id,user_id, status, votes, created_at)\n" +
-            "values (#{suggestion.id},#{suggestion.suggestedBy.id},#{suggestion.state},0,#{suggestion.createdAt})\n" +
+            "values (#{suggestion.id},#{suggestion.suggestedBy.id},#{suggestion.state},0,#{suggestion.created_at})\n" +
             "ON CONFLICT (suggestion_id) DO NOTHING;")
     void suggest(@Param("suggestion") Suggestion suggestion);
 

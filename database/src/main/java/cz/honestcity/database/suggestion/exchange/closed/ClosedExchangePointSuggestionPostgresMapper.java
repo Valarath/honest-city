@@ -22,7 +22,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       score,\n" +
             "       email,\n" +
-            "       createdAt,\n" +
+            "       created_at,\n" +
             "       exchange_point_id \n" +
             "FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -48,7 +48,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       email,\n" +
             "       score,\n" +
-            "       createdAt,\n" +
+            "       created_at,\n" +
             "       exchange_point_id \n" +
             " FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
@@ -64,7 +64,7 @@ public interface ClosedExchangePointSuggestionPostgresMapper {
             "       username,\n" +
             "       email,\n" +
             "       score,\n" +
-            "       createdAt,\n" +
+            "       created_at,\n" +
             "       exchange_point_id \n" +
             " FROM suggestion\n" +
             "         join \"user\" u on suggestion.user_id = u.user_id\n" +
