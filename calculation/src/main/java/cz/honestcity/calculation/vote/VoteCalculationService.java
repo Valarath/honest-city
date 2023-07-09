@@ -18,11 +18,11 @@ public class VoteCalculationService implements VoteCalculationGateway {
 	@Override
 	public boolean isAcceptable(int userScore, int suggestionVotes) {
 		VoteCalculationMetric calculationData = getCalculationData();
-		return suggestionVotes * calculateUserTrustworthiness(userScore, calculationData) > calculationData.getLowestValueForAcceptance();
+		return suggestionVotes + calculateUserTrustworthiness(userScore,calculationData) >= calculationData.getLowestValueForAcceptance();
 	}
 
-	private double calculateUserTrustworthiness(int userScore, VoteCalculationMetric calculationData) {
-		return Math.atan(userScore) + calculationData.getScoreModificator();
+	private double calculateUserTrustworthiness(double userScore, VoteCalculationMetric calculationData) {
+		return 2*Math.atan(userScore/calculationData.getScoreModificator());
 	}
 
 	private VoteCalculationMetric getCalculationData() {

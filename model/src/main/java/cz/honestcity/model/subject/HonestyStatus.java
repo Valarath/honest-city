@@ -5,8 +5,7 @@ import lombok.Getter;
 @Getter
 public enum HonestyStatus {
     HONEST(null),
-    HONEST_WITH_RESERVE(HONEST),
-    BE_CAUTION(HONEST_WITH_RESERVE),
+    BE_CAUTION(HONEST),
     DISHONEST(BE_CAUTION),
     UNKNOWN(null);
 
