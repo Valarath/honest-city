@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan("cz.honestcity.authority")
-public class CrwalingConfiguration {
+public class AuthorityConfiguration {
 }
