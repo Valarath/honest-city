@@ -1,6 +1,5 @@
 package cz.honestcity.service.suggestion;
 
-import cz.honestcity.model.suggestion.ClosedExchangePointSuggestion;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.login.LoginDataService;

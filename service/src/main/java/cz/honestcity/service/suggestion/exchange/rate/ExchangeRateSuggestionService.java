@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Lazy;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service(SuggestionServiceType.SuggestionServiceTypeNames.EXCHANGE_RATE_CHANGE)
 @HonestCityService(beanId = ExchangeRateSuggestion.class)
 public class ExchangeRateSuggestionService extends SuggestionService<ExchangeRateSuggestion> {
 

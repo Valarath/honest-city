@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service(SuggestionServiceType.SuggestionServiceTypeNames.CLOSED_EXCHANGE_POINT)
 @HonestCityService(beanId = ClosedExchangePointSuggestion.class)
 public class ClosedExchangePointSuggestionService extends SuggestionService<ClosedExchangePointSuggestion> {
 
