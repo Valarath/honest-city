@@ -6,7 +6,7 @@ import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.vote.VoteService;
 
 @HonestCityService(beanId = Vote.class, beanIdSpecification = ClosedExchangePointSuggestion.class)
-public class UpVoteDeleteExchangePointService extends VoteService<Vote, ClosedExchangePointSuggestion> {
+public class UpVoteDeleteExchangePointService extends VoteService<ClosedExchangePointSuggestion> {
 
     public UpVoteDeleteExchangePointService() {
     }

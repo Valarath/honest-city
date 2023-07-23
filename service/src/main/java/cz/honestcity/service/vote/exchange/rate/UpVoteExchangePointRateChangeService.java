@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @HonestCityService(beanId = Vote.class, beanIdSpecification = ExchangeRateSuggestion.class)
-public class UpVoteExchangePointRateChangeService extends VoteService<Vote, ExchangeRateSuggestion> {
+public class UpVoteExchangePointRateChangeService extends VoteService<ExchangeRateSuggestion> {
 
     private final ExchangeRateSuggestionService exchangeRateSuggestionService;
 

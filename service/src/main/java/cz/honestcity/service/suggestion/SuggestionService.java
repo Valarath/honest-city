@@ -15,12 +15,8 @@ import java.util.stream.Collectors;
 public abstract class SuggestionService<SUGGESTION extends Suggestion> {
 
     protected LoginDataService loginDataService;
+    protected BaseSuggestionGateway suggestionGateway;
 
-    protected final BaseSuggestionGateway suggestionGateway;
-
-    public SuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway) {
-        this.suggestionGateway = suggestionGateway;
-    }
     public abstract List<SUGGESTION> getScoredSuggestions(String exchangePointId);
 
     public abstract void suggest(List<SUGGESTION> suggestions);
@@ -63,6 +59,11 @@ public abstract class SuggestionService<SUGGESTION extends Suggestion> {
     @Autowired
     public void setLoginDataService(LoginDataService loginDataService) {
         this.loginDataService = loginDataService;
+    }
+
+    @Autowired
+    public void setSuggestionGateway(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway) {
+        this.suggestionGateway = suggestionGateway;
     }
 
     public void update(SUGGESTION suggestion) {

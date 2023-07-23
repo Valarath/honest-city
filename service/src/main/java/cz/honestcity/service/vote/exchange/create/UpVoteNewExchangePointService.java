@@ -4,13 +4,12 @@ import cz.honestcity.model.exchange.ExchangePoint;
 import cz.honestcity.model.subject.HonestyStatus;
 import cz.honestcity.model.suggestion.NewExchangePointSuggestion;
 import cz.honestcity.model.vote.Vote;
-import cz.honestcity.model.vote.VoteForNewExchangePoint;
 import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.configuration.IdProvider;
 import cz.honestcity.service.vote.VoteService;
 
 @HonestCityService(beanId = Vote.class, beanIdSpecification = NewExchangePointSuggestion.class)
-public class UpVoteNewExchangePointService extends VoteService<Vote,NewExchangePointSuggestion> {
+public class UpVoteNewExchangePointService extends VoteService<NewExchangePointSuggestion> {
 
     private final IdProvider idProvider;
 

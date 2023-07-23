@@ -3,7 +3,6 @@ package cz.honestcity.service.vote;
 import cz.honestcity.model.suggestion.State;
 import cz.honestcity.model.suggestion.Suggestion;
 import cz.honestcity.model.user.User;
-import cz.honestcity.model.vote.Vote;
 import cz.honestcity.service.subject.exchange.ExchangePointService;
 import cz.honestcity.service.suggestion.SuggestionService;
 import cz.honestcity.service.user.UserService;
@@ -12,7 +11,7 @@ import org.springframework.context.annotation.Lazy;
 
 import java.util.Map;
 
-public abstract class VoteService<VOTE extends Vote,SUGGESTION extends Suggestion> {
+public abstract class VoteService<SUGGESTION extends Suggestion> {
 
     @Autowired
     protected VoteGateway voteGateway;

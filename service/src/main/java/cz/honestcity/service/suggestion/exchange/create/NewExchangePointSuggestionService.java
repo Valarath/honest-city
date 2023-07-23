@@ -7,9 +7,7 @@ import cz.honestcity.service.configuration.HonestCityService;
 import cz.honestcity.service.distance.DistanceCalculatorGateway;
 import cz.honestcity.service.suggestion.NewSubjectSuggestionService;
 import cz.honestcity.service.suggestion.SuggestionService;
-import cz.honestcity.service.suggestion.base.BaseSuggestionGateway;
 import cz.honestcity.service.vote.exchange.create.UpVoteNewExchangePointService;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +19,7 @@ public class NewExchangePointSuggestionService extends SuggestionService<NewExch
     private final NewExchangePointSuggestionGateway gateway;
     private final UpVoteNewExchangePointService upVoteNewExchangePointService;
 
-    public NewExchangePointSuggestionService(@Qualifier("SuggestionPostgresGateway") BaseSuggestionGateway suggestionGateway, DistanceCalculatorGateway distanceCalculator, NewExchangePointSuggestionGateway gateway, UpVoteNewExchangePointService upVoteNewExchangePointService) {
-        super(suggestionGateway);
+    public NewExchangePointSuggestionService(DistanceCalculatorGateway distanceCalculator, NewExchangePointSuggestionGateway gateway, UpVoteNewExchangePointService upVoteNewExchangePointService) {
         this.distanceCalculator = distanceCalculator;
         this.gateway = gateway;
         this.upVoteNewExchangePointService = upVoteNewExchangePointService;
