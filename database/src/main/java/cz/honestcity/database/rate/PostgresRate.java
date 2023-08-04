@@ -8,6 +8,7 @@ public class PostgresRate extends Rate {
 
     public PostgresRate(Currency currency, Integer buy) {
         setCurrency(currency);
+        //TODO zkus tohle upravit primo v maperu
         setRateValues(new ExchangeRateValues().setBuy(buy));
     }
 }
